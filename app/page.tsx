@@ -43,10 +43,11 @@ export default function LandingPage() {
           className="relative z-10 w-full max-w-6xl px-6 flex flex-col items-center text-center"
           style={{ transformStyle: "preserve-3d" }}
         >
+          {/* تم استخدام as const لحل مشكلة النوع في TypeScript */}
           <motion.h1 
             initial={{ y: 25, opacity: 0, filter: "blur(10px)" }}
             animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-            transition={{ type: "spring", damping: 14, stiffness: 100 }}
+            transition={{ type: "spring" as const, damping: 14, stiffness: 100 }}
             className="text-5xl md:text-[80px] font-black text-white mb-6 leading-tight drop-shadow-xl"
             style={{ fontStyle: "normal" }}
           >
@@ -66,10 +67,11 @@ export default function LandingPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-4xl z-20">
+            {/* الكارت الأول */}
             <motion.div 
               initial={{ z: -100, opacity: 0 }}
               animate={{ z: 0, opacity: 1 }}
-              transition={{ type: "spring", damping: 15, stiffness: 80 }}
+              transition={{ type: "spring" as const, damping: 15, stiffness: 80 }}
               className="w-full"
             >
               <TiltedCard className="w-full">
@@ -91,10 +93,11 @@ export default function LandingPage() {
               </TiltedCard>
             </motion.div>
 
+            {/* الكارت الثاني */}
             <motion.div 
               initial={{ z: -100, opacity: 0 }}
               animate={{ z: 0, opacity: 1 }}
-              transition={{ type: "spring", damping: 15, stiffness: 80, delay: 0.2 }}
+              transition={{ type: "spring" as const, damping: 15, stiffness: 80, delay: 0.2 }}
               className="w-full"
             >
               <TiltedCard className="w-full">
