@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, Variants, Transition } from "framer-motion"; 
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, Gamepad2, ShieldCheck, BookOpen, HeartPulse, Globe2, Users } from "lucide-react";
@@ -26,39 +26,30 @@ export default function LandingPage() {
     return () => video.removeEventListener("ended", handleEnded);
   }, []);
 
-  // 🌟 تعريف الـ Transitions بشكل Reusable ومعها as const للضمان 🌟
-  const springTransition: Transition = {
-    type: "spring" as const,
-    damping: 14,
-    stiffness: 100,
-  };
-
-  const cardTransition: Transition = {
-    type: "spring" as const,
-    damping: 15,
-    stiffness: 80,
-    duration: 1,
-  };
-
-  const containerVariants: Variants = {
+  // 🌟 استخدام satisfies هو الحل النهائي لمشكلة تضارب الأنواع 🌟
+  const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1, 
       transition: { staggerChildren: 0.3, delayChildren: 0.1 } 
     },
-  };
+  } satisfies import("framer-motion").Variants;
 
-  const textVariants: Variants = {
+  const textVariants = {
     hidden: { y: 25, opacity: 0, filter: "blur(10px)" },
     visible: { 
       y: 0, 
       opacity: 1, 
       filter: "blur(0px)", 
-      transition: springTransition 
+      transition: { 
+        type: "spring", 
+        damping: 14, 
+        stiffness: 100 
+      } 
     },
-  };
+  } satisfies import("framer-motion").Variants;
 
-  const card3DVariants: Variants = {
+  const card3DVariants = {
     hidden: { 
       z: -500,
       rotateX: 45,
@@ -70,9 +61,14 @@ export default function LandingPage() {
       rotateX: 0, 
       opacity: 1, 
       filter: "blur(0px)", 
-      transition: cardTransition 
+      transition: { 
+        type: "spring", 
+        damping: 15, 
+        stiffness: 80, 
+        duration: 1 
+      } 
     },
-  };
+  } satisfies import("framer-motion").Variants;
 
   if (!mounted) return null;
 
@@ -127,10 +123,10 @@ export default function LandingPage() {
                     <div className="absolute top-6 right-6 z-10 bg-white/20 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-white/30">
                       <Gamepad2 className="w-8 h-8 text-white drop-shadow-md" />
                     </div>
-                    <div className="absolute bottom-0 inset-x-0 bg-white/95 dark:bg-slate-950/85 backdrop-blur-xl p-8 border-t border-slate-200 dark:border-white/10 flex flex-col text-right">
+                    <div className="absolute bottom-0 inset-x-0 bg-white/95 dark:bg-slate-950/85 backdrop-blur-xl p-8 border-t border-slate-200 dark:border-white/10 flex flex-col text-right transition-colors duration-500">
                       <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-2 transition-colors">عالم الأطفال</h2>
                       <p className="text-slate-600 dark:text-slate-300 font-medium mb-6 text-sm leading-relaxed transition-colors">ألعاب، فيديوهات، وقصص سحرية حول قارات العالم!</p>
-                      <button className="w-full bg-emerald-500 text-white text-lg font-black py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-emerald-400 hover:scale-[1.02] transition-all">
+                      <button className="w-full bg-emerald-500 text-white text-lg font-black py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-emerald-400 hover:scale-[1.02] transition-all shadow-[0_8px_16px_rgba(0,0,0,0.4)] border border-emerald-400/50">
                         دخول الأبطال <ArrowLeft className="w-5 h-5 group-hover:-translate-x-2 transition-transform" />
                       </button>
                     </div>
@@ -150,10 +146,10 @@ export default function LandingPage() {
                     <div className="absolute top-6 right-6 z-10 bg-white/20 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-white/30">
                       <ShieldCheck className="w-8 h-8 text-white drop-shadow-md" />
                     </div>
-                    <div className="absolute bottom-0 inset-x-0 bg-white/95 dark:bg-slate-950/85 backdrop-blur-xl p-8 border-t border-slate-200 dark:border-white/10 flex flex-col text-right">
+                    <div className="absolute bottom-0 inset-x-0 bg-white/95 dark:bg-slate-950/85 backdrop-blur-xl p-8 border-t border-slate-200 dark:border-white/10 flex flex-col text-right transition-colors duration-500">
                       <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-2 transition-colors">بوابة الآباء</h2>
                       <p className="text-slate-600 dark:text-slate-300 font-medium mb-6 text-sm leading-relaxed transition-colors">تابع تقدم طفلك، تحكم في وقت اللعب، واكتشف التقارير بسهولة.</p>
-                      <button className="w-full bg-sky-500 text-white text-lg font-black py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-sky-400 hover:scale-[1.02] transition-all">
+                      <button className="w-full bg-sky-500 text-white text-lg font-black py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-sky-400 hover:scale-[1.02] transition-all shadow-[0_8px_16px_rgba(0,0,0,0.4)] border border-sky-400/50">
                         دخول الآباء <ArrowLeft className="w-5 h-5 group-hover:-translate-x-2 transition-transform" />
                       </button>
                     </div>
@@ -168,23 +164,28 @@ export default function LandingPage() {
 
       <section className="relative z-10 w-full bg-background py-24 border-t border-border overflow-hidden transition-colors duration-500">
         <div className="max-w-[1400px] mx-auto px-6 relative">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants}>
+          <motion.div 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true, margin: "-100px" }}
+            variants={containerVariants}
+          >
             <motion.div variants={textVariants} className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4 transition-colors">مجتمع <span className="text-sky-500">مكتشف العوالم</span></h2>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                { icon: <Users />, color: "text-sky-500", bg: "bg-sky-500/10", label: "أب وأم يثقون بنا", count: 5000 },
-                { icon: <HeartPulse />, color: "text-emerald-500", bg: "bg-emerald-500/10", label: "طفل سعيد يتعلم", count: 12000 },
-                { icon: <BookOpen />, color: "text-purple-500", bg: "bg-purple-500/10", label: "درس تفاعلي وقصة", count: 150 },
-                { icon: <Globe2 />, color: "text-yellow-500", bg: "bg-yellow-500/10", label: "قارات للاستكشاف", count: 7 }
+                { icon: <Users />, color: "text-sky-500", label: "أب وأم يثقون بنا", count: 5000 },
+                { icon: <HeartPulse />, color: "text-emerald-500", label: "طفل سعيد يتعلم", count: 12000 },
+                { icon: <BookOpen />, color: "text-purple-500", label: "درس تفاعلي وقصة", count: 150 },
+                { icon: <Globe2 />, color: "text-yellow-500", label: "قارات للاستكشاف", count: 7 }
               ].map((item, i) => (
-                <motion.div key={i} variants={textVariants} className="flex flex-col items-center p-8 bg-card border border-border shadow-sm rounded-3xl hover:border-ring transition-all duration-300">
-                   <div className={`${item.bg} p-4 rounded-2xl mb-4 ${item.color}`}>{item.icon}</div>
+                <motion.div key={i} variants={textVariants} className="flex flex-col items-center p-8 bg-card border border-border rounded-3xl transition-all duration-300">
+                   <div className={`p-4 rounded-2xl mb-4 ${item.color} bg-slate-500/10`}>{item.icon}</div>
                    <div className="text-4xl font-black mb-2 flex items-center gap-1 transition-colors">
                      <span>+</span>
-                     <CountUp to={item.count} duration={2 + i * 0.5} />
+                     <CountUp to={item.count} duration={2} />
                    </div>
                    <p className="text-muted-foreground font-medium transition-colors">{item.label}</p>
                 </motion.div>
