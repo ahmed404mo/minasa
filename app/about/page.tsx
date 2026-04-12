@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import Link from "next/link";
 import { 
   ShieldCheck, 
@@ -11,7 +11,7 @@ import {
   ArrowLeft
 } from "lucide-react";
 import { ReactNode } from "react";
-
+import { motion, Variants } from "framer-motion";
 import LightRays from "@/components/react-bits/LightRays";
 
 // ==========================================
@@ -27,7 +27,7 @@ const gridVariants = {
   }
 };
 
-const cardVariants = {
+const cardVariants :Variants= {
   hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
   visible: { 
     opacity: 1, 
