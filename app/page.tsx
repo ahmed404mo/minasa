@@ -39,14 +39,13 @@ export default function LandingPage() {
     };
   }, []);
 
-  // 🌟 الحل النهائي لمشكلة TypeScript في Vercel: استخدام (as any) 🌟
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1, 
       transition: { staggerChildren: 0.3, delayChildren: 0.1 } 
     },
-  } as any;
+  };
 
   const textVariants = {
     hidden: { y: 25, opacity: 0, filter: "blur(10px)" },
@@ -56,7 +55,7 @@ export default function LandingPage() {
       filter: "blur(0px)", 
       transition: { type: "spring", damping: 14, stiffness: 100 } 
     },
-  } as any;
+  };
 
   const card3DVariants = {
     hidden: { 
@@ -77,7 +76,7 @@ export default function LandingPage() {
         duration: 1 
       } 
     },
-  } as any;
+  };
 
   return (
     <div className="relative min-h-screen w-full flex flex-col bg-background text-foreground transition-colors duration-500 perspective-[1500px]">
@@ -99,14 +98,14 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px]"></div>
 
         <motion.div 
-          variants={containerVariants}
+          variants={containerVariants as any} // 🌟 التعديل السحري هنا
           initial="hidden"
           animate="visible"
           className="relative z-10 w-full max-w-6xl px-6 flex flex-col items-center text-center"
           style={{ transformStyle: "preserve-3d" }}
         >
           <motion.h1 
-            variants={textVariants} 
+            variants={textVariants as any} // 🌟 التعديل السحري هنا
             className="text-5xl md:text-[80px] font-black text-white mb-6 leading-tight drop-shadow-xl"
             style={{ fontStyle: "normal", transform: "none" }}
           >
@@ -123,7 +122,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-4xl z-20">
             
             {/* Child Card */}
-            <motion.div variants={card3DVariants} className="w-full">
+            <motion.div variants={card3DVariants as any} className="w-full">
               <TiltedCard className="w-full">
                 <Link href="/login" className="block group w-full outline-none">
                   <div className="relative rounded-[2.5rem] shadow-lg transition-all duration-500 transform-gpu overflow-hidden h-[450px] flex flex-col border border-border hover:border-ring">
@@ -151,7 +150,7 @@ export default function LandingPage() {
             </motion.div>
 
             {/* Parent Card */}
-            <motion.div variants={card3DVariants} className="w-full">
+            <motion.div variants={card3DVariants as any} className="w-full">
               <TiltedCard className="w-full">
                 <Link href="/login" className="block group w-full outline-none">
                   <div className="relative rounded-[2.5rem] shadow-lg transition-all duration-500 transform-gpu overflow-hidden h-[450px] flex flex-col border border-border hover:border-ring">
@@ -195,9 +194,9 @@ export default function LandingPage() {
             initial="hidden" 
             whileInView="visible" 
             viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
+            variants={containerVariants as any} // 🌟 التعديل السحري هنا
           >
-            <motion.div variants={textVariants} className="text-center mb-16">
+            <motion.div variants={textVariants as any} className="text-center mb-16"> {/* 🌟 وهنا */}
               <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4 transition-colors">مجتمع <span className="text-sky-500">مكتشف العوالم</span></h2>
               <p className="text-muted-foreground font-medium text-lg transition-colors">نكبر كل يوم بثقتكم، ونبني معاً مستقبلاً أفضل لأطفالنا.</p>
             </motion.div>
@@ -209,7 +208,7 @@ export default function LandingPage() {
                 { icon: <BookOpen />, color: "text-purple-500", bg: "bg-purple-500/10", label: "درس تفاعلي وقصة", count: 150 },
                 { icon: <Globe2 />, color: "text-yellow-500", bg: "bg-yellow-500/10", label: "قارات متاحة للاستكشاف", count: 7 }
               ].map((item, i) => (
-                <motion.div key={i} variants={textVariants} className="flex flex-col items-center p-8 bg-card text-card-foreground border border-border shadow-sm rounded-3xl hover:border-ring transition-all duration-300">
+                <motion.div key={i} variants={textVariants as any} className="flex flex-col items-center p-8 bg-card text-card-foreground border border-border shadow-sm rounded-3xl hover:border-ring transition-all duration-300"> {/* 🌟 وهنا */}
                    <div className={`${item.bg} p-4 rounded-2xl mb-4 ${item.color}`}>{item.icon}</div>
                    <div className="text-4xl font-black mb-2 flex items-center gap-1 transition-colors">
                      {item.count > 10 && <span>+</span>}
