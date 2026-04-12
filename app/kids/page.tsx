@@ -2,8 +2,9 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Sparkles, X } from "lucide-react";
+import { ArrowRight, Sparkles, X, Sun, Moon } from "lucide-react"; // 🌟 إضافة Sun و Moon
 import { useEffect, useRef, useState } from "react";
+import { useTheme } from "next-themes"; // 🌟 إضافة useTheme
 
 export default function KidsContinentsHub() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -12,8 +13,12 @@ export default function KidsContinentsHub() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  // إعدادات الفيديو
+  // 🌟 إعدادات الثيم 🌟
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
+    setMounted(true);
     if (videoRef.current) videoRef.current.playbackRate = 0.5;
 
     return () => {
@@ -41,7 +46,6 @@ export default function KidsContinentsHub() {
     }
   };
 
-  // المصفوفة المحدثة بلينكات Cloudinary
   const continents = [
     { 
       id: "north-america", name: "أمريكا الشمالية", 
@@ -97,24 +101,36 @@ export default function KidsContinentsHub() {
   const selectedContinent = continents.find(c => c.id === selectedId);
 
   return (
-    <div className="relative min-h-screen w-full overflow-x-hidden overflow-y-auto lg:overflow-hidden flex flex-col items-center select-none bg-black pb-20 lg:pb-0" dir="rtl">
+    // 🌟 دعم اللايت والدارك مود في الخلفية الرئيسية
+    <div className="relative min-h-screen w-full overflow-x-hidden overflow-y-auto lg:overflow-hidden flex flex-col items-center select-none bg-slate-50 dark:bg-black pb-20 lg:pb-0 transition-colors duration-500" dir="rtl">
       
-      {/* الخلفية: فيديو متحرك مع رابط Cloudinary */}
+      {/* الخلفية: فيديو متحرك */}
       <div className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none">
         <video ref={videoRef} autoPlay loop muted playsInline className="w-full h-full object-cover">
           <source src="https://res.cloudinary.com/dhvuw8yog/video/upload/v1776018584/background_yprel9.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-[#020617]/50" />
+        {/* 🌟 طبقة تعتيم تتغير مع اللايت والدارك */}
+        <div className="absolute inset-0 bg-slate-100/60 dark:bg-[#020617]/60 transition-colors duration-500" />
       </div>
 
-      {/* زر العودة العلوي */}
-      <div className="relative w-full max-w-7xl flex justify-start py-8 px-6 z-20">
+      {/* الهيدر: زر العودة + زر التبديل */}
+      <div className="relative w-full max-w-7xl flex justify-between items-center py-8 px-6 z-20">
         <Link href="/">
-          <button className="bg-white/10 backdrop-blur-2xl text-white/90 px-6 py-4 md:px-8 md:py-4 rounded-3xl border border-white/20 hover:bg-white hover:text-black transition-all duration-500 font-black flex items-center gap-3 shadow-xl active:scale-95">
+          <button className="bg-white/60 dark:bg-white/10 backdrop-blur-2xl text-slate-800 dark:text-white/90 px-6 py-4 md:px-8 md:py-4 rounded-3xl border border-slate-300 dark:border-white/20 hover:bg-white dark:hover:bg-white hover:text-sky-600 dark:hover:text-black transition-all duration-500 font-black flex items-center gap-3 shadow-xl active:scale-95">
             <ArrowRight className="w-6 h-6 rotate-180" />
             العودة للرئيسية
           </button>
         </Link>
+
+        {/* 🌟 زرار اللايت / الدارك مود 🌟 */}
+        {mounted && (
+          <button
+            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+            className="p-3 md:p-4 rounded-full bg-white/60 dark:bg-white/10 backdrop-blur-2xl border border-slate-300 dark:border-white/20 text-slate-800 dark:text-white hover:scale-110 transition-all shadow-xl"
+          >
+            {resolvedTheme === "dark" ? <Sun size={26} className="text-sky-400" /> : <Moon size={26} className="text-sky-600" />}
+          </button>
+        )}
       </div>
 
       {/* 1. تصميم الموبايل */}
@@ -138,7 +154,8 @@ export default function KidsContinentsHub() {
               alt={continent.name}
               className="w-[280px] h-auto drop-shadow-[0_15px_30px_rgba(56,189,248,0.4)] filter brightness-110"
             />
-            <div className="bg-white px-10 py-4 rounded-[2rem] text-sky-900 font-black text-3xl shadow-2xl border-[5px] border-sky-400 absolute -bottom-10 z-20 whitespace-nowrap">
+            {/* 🌟 تغيير ألوان العنوان في الموبايل */}
+            <div className="bg-white dark:bg-slate-800 px-10 py-4 rounded-[2rem] text-sky-700 dark:text-sky-300 font-black text-3xl shadow-2xl border-[5px] border-sky-400 dark:border-sky-600 absolute -bottom-10 z-20 whitespace-nowrap transition-colors duration-500">
               {continent.name}
             </div>
           </motion.div>
@@ -187,8 +204,9 @@ export default function KidsContinentsHub() {
                   }}
                 />
 
+                {/* 🌟 تغيير ألوان التلميح (Tooltip) */}
                 <span 
-                  className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-8 py-3 rounded-2xl text-sky-900 font-black text-3xl transition-all duration-300 shadow-2xl border-4 border-sky-400 pointer-events-none whitespace-nowrap z-40
+                  className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-slate-800 px-8 py-3 rounded-2xl text-sky-700 dark:text-sky-300 font-black text-3xl transition-all duration-300 shadow-2xl border-4 border-sky-400 dark:border-sky-600 pointer-events-none whitespace-nowrap z-40
                     ${isHovered ? "opacity-100 scale-100 -translate-y-[80%]" : "opacity-0 scale-50"}
                   `}
                 >
@@ -200,16 +218,17 @@ export default function KidsContinentsHub() {
         })}
       </div>
 
-      {/* Modal Popup */}
+      {/* النافذة المنبثقة (Modal) */}
       <AnimatePresence mode="wait">
         {selectedId && selectedContinent && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-20 overflow-y-auto">
+            {/* 🌟 خلفية النافذة */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={closePopup}
-              className="fixed inset-0 bg-[#020617]/95 backdrop-blur-3xl cursor-pointer"
+              className="fixed inset-0 bg-white/80 dark:bg-[#020617]/95 backdrop-blur-3xl cursor-pointer transition-colors duration-500"
             />
 
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full max-w-7xl gap-10 my-auto py-10 md:py-0">
@@ -223,20 +242,22 @@ export default function KidsContinentsHub() {
                 <div className="relative w-full max-w-2xl">
                   <div className="absolute -inset-10 bg-sky-500/10 blur-[120px] rounded-full -z-10 hidden md:block" />
                   <div className="flex flex-col items-center md:items-start space-y-6 md:space-y-8">
+                    
                     <motion.div 
                       initial={{ scale: 0 }} animate={{ scale: 1 }}
-                      className="px-6 py-2 bg-sky-500/20 border border-sky-400/30 rounded-full backdrop-blur-md inline-block"
+                      className="px-6 py-2 bg-sky-100 dark:bg-sky-500/20 border border-sky-300 dark:border-sky-400/30 rounded-full backdrop-blur-md inline-block transition-colors"
                     >
-                      <span className="text-sky-300 font-black tracking-widest text-sm md:text-base uppercase flex items-center justify-center gap-3">
-                        <Sparkles className="w-5 h-5 text-yellow-400" /> وجهتك القادمة
+                      <span className="text-sky-600 dark:text-sky-300 font-black tracking-widest text-sm md:text-base uppercase flex items-center justify-center gap-3">
+                        <Sparkles className="w-5 h-5 text-yellow-500 dark:text-yellow-400" /> وجهتك القادمة
                       </span>
                     </motion.div>
 
-                    <h2 className="text-5xl md:text-8xl font-black text-white leading-tight tracking-tighter drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+                    {/* 🌟 دعم الألوان للنصوص */}
+                    <h2 className="text-5xl md:text-8xl font-black text-slate-900 dark:text-white leading-tight tracking-tighter drop-shadow-lg dark:drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] transition-colors">
                       {selectedContinent.detailsTitle}
                     </h2>
                     
-                    <p className="text-xl md:text-3xl font-bold text-slate-200 leading-relaxed max-w-2xl border-t-4 md:border-t-0 md:border-r-8 border-sky-500 pt-4 md:pt-0 md:pr-8">
+                    <p className="text-xl md:text-3xl font-bold text-slate-700 dark:text-slate-200 leading-relaxed max-w-2xl border-t-4 md:border-t-0 md:border-r-8 border-sky-500 pt-4 md:pt-0 md:pr-8 transition-colors">
                       {selectedContinent.detailsDesc}
                     </p>
 
@@ -253,7 +274,7 @@ export default function KidsContinentsHub() {
 
                       <button 
                         onClick={closePopup}
-                        className="px-8 py-5 md:px-10 md:py-6 rounded-3xl md:rounded-[2rem] font-black text-xl text-white/60 hover:text-white hover:bg-white/10 transition-all border border-white/20 backdrop-blur-sm"
+                        className="px-8 py-5 md:px-10 md:py-6 rounded-3xl md:rounded-[2rem] font-black text-xl text-slate-700 dark:text-white/60 bg-slate-200/50 dark:bg-transparent hover:text-slate-900 dark:hover:text-white hover:bg-slate-300 dark:hover:bg-white/10 transition-all border border-slate-300 dark:border-white/20 backdrop-blur-sm"
                       >
                         العودة للخريطة
                       </button>
@@ -273,15 +294,16 @@ export default function KidsContinentsHub() {
                   <motion.img
                     src={selectedContinent.img}
                     alt={selectedContinent.name}
-                    className="w-[280px] md:w-[600px] lg:w-[750px] h-auto drop-shadow-[0_0_100px_rgba(56,189,248,0.6)] filter brightness-125 transition-all"
+                    className="w-[280px] md:w-[600px] lg:w-[750px] h-auto drop-shadow-[0_0_100px_rgba(56,189,248,0.6)] filter brightness-110 dark:brightness-125 transition-all"
                   />
                 </motion.div>
               </div>
             </div>
 
+            {/* 🌟 زر الإغلاق */}
             <button 
               onClick={closePopup}
-              className="absolute top-6 left-6 md:top-10 md:left-10 p-3 md:p-4 bg-white/10 text-white/80 hover:text-white hover:bg-red-500 rounded-full transition-all border border-white/20 z-50 backdrop-blur-md shadow-2xl"
+              className="absolute top-6 left-6 md:top-10 md:left-10 p-3 md:p-4 bg-slate-200 dark:bg-white/10 text-slate-800 dark:text-white/80 hover:text-white hover:bg-red-500 dark:hover:bg-red-500 rounded-full transition-all border border-slate-300 dark:border-white/20 z-50 backdrop-blur-md shadow-2xl"
             >
               <X className="w-8 h-8 md:w-10 md:h-10" />
             </button>

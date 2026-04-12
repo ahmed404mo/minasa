@@ -5,19 +5,20 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight, Gamepad2, Tv, Sparkles, Trophy,
-  MapPin, Utensils, Camera, CheckCircle2, X
+  MapPin, Utensils, Camera, CheckCircle2, X, Sun, Moon
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import { useTheme } from "next-themes";
 
 // ==========================================
-// 1. قاعدة البيانات 
+// 1. قاعدة البيانات (تم تحديث روابط الصور لـ Cloudinary)
 // ==========================================
 const countryData: Record<string, any> = {
   "north-america": {
     countryName: "الولايات المتحدة الأمريكية 🇺🇸",
     continentName: "أمريكا الشمالية",
     theme: "from-blue-900 via-indigo-900 to-violet-950",
-    img: "/map/NorthAmerica.png",
+    img: "https://res.cloudinary.com/dhvuw8yog/image/upload/v1776018585/NorthAmerica_h8mzez.png",
     explore: [
       { icon: Camera, title: "تمثال الحرية", desc: "تمثال كبير أوي في نيويورك بيهدي الناس للسلام." },
       { icon: Utensils, title: "البرجر والهوت دوج", desc: "من أشهر الأكلات اللي بيحبوها وبياكلوها هناك!" },
@@ -46,7 +47,7 @@ const countryData: Record<string, any> = {
     countryName: "البرازيل 🇧🇷",
     continentName: "أمريكا الجنوبية",
     theme: "from-green-900 via-emerald-900 to-teal-950",
-    img: "/map/SouthAmerica.png",
+    img: "https://res.cloudinary.com/dhvuw8yog/image/upload/v1776018585/SouthAmerica_l5pwcq.png",
     explore: [
       { icon: Camera, title: "غابات الأمازون", desc: "أكبر غابة في العالم، مليانة حيوانات وطيور شكلها عجيب!" },
       { icon: Trophy, title: "كرة القدم", desc: "البرازيل أكتر دولة كسبت كاس العالم، وكلهم هناك حريفة كورة!" },
@@ -71,7 +72,7 @@ const countryData: Record<string, any> = {
     countryName: "اليابان 🇯🇵",
     continentName: "آسيا",
     theme: "from-rose-900 via-pink-900 to-red-950",
-    img: "/map/asia.png",
+    img: "https://res.cloudinary.com/dhvuw8yog/image/upload/v1776018579/Asia_j9qlby.png",
     explore: [
       { icon: Camera, title: "جبل فوجي", desc: "جبل بركاني شكله تحفة والتلج مغطي قمته من فوق." },
       { icon: Sparkles, title: "الأنمي والتكنولوجيا", desc: "اليابان بتعمل أحلى مسلسلات كرتون وتكنولوجيا سابقة عصرها." },
@@ -96,7 +97,7 @@ const countryData: Record<string, any> = {
     countryName: "أستراليا 🇦🇺",
     continentName: "أستراليا",
     theme: "from-teal-900 via-cyan-900 to-sky-950",
-    img: "/map/australia.png",
+    img: "https://res.cloudinary.com/dhvuw8yog/image/upload/v1776018581/Australia_ymjfsx.png",
     explore: [
       { icon: Camera, title: "دار الأوبرا بسيدني", desc: "مبنى شكله مميز جداً وعامل زي شراع المركب بالظبط." },
       { icon: Sparkles, title: "الكنغر والكوالا", desc: "حيوانات عجيبة مش بتعيش في أي حتة تانية في العالم غير هناك." },
@@ -121,7 +122,7 @@ const countryData: Record<string, any> = {
     countryName: "أنتاركتيكا 🐧",
     continentName: "القارة القطبية",
     theme: "from-slate-800 via-sky-900 to-blue-950",
-    img: "/map/antarctica.png",
+    img: "https://res.cloudinary.com/dhvuw8yog/image/upload/v1776018579/Antarctica_lnoprt.png",
     explore: [
       { icon: Camera, title: "الجبال الجليدية", desc: "جبال ضخمة جداً من التلج عايمة في الماية." },
       { icon: Sparkles, title: "البطريق الإمبراطور", desc: "أكبر أنواع البطاريق بيعيش هناك وبيستحمل البرد القارس." },
@@ -146,7 +147,7 @@ const countryData: Record<string, any> = {
     countryName: "مصر 🇪🇬",
     continentName: "أفريقيا",
     theme: "from-orange-900 via-amber-900 to-red-950",
-    img: "/map/africa.png",
+    img: "https://res.cloudinary.com/dhvuw8yog/image/upload/v1776018578/Africa_iewsja.png",
     explore: [
       { icon: Camera, title: "أهرامات الجيزة", desc: "من عجايب الدنيا السبع، بناها الفراعنة من آلاف السنين." },
       { icon: MapPin, title: "نهر النيل", desc: "أطول نهر في العالم، وهو شريان الحياة لكل المصريين." },
@@ -162,11 +163,11 @@ const countryData: Record<string, any> = {
       },
     ],
   },
-"europe": {
+  "europe": {
     countryName: "فرنسا 🇫🇷",
     continentName: "أوروبا",
     theme: "from-sky-900 via-cyan-900 to-blue-950",
-    img: "/map/europe.png",
+    img: "https://res.cloudinary.com/dhvuw8yog/image/upload/v1776018584/Europe_d71p0w.png",
     explore: [
       { 
         icon: Camera, 
@@ -227,6 +228,9 @@ export default function CountryHub() {
   const id = params?.id as string;
   const data = countryData[id];
 
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
   const [activeTab, setActiveTab] = useState<"explore" | "videos" | "games">("explore");
   
   // States للعبة
@@ -239,7 +243,10 @@ export default function CountryHub() {
   
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  useEffect(() => { return () => stopAllAudio(); }, []);
+  useEffect(() => { 
+    setMounted(true);
+    return () => stopAllAudio(); 
+  }, []);
 
   const stopAllAudio = () => {
     if (audioRef.current) {
@@ -256,7 +263,6 @@ export default function CountryHub() {
     }
   };
 
-  // 🌟 دالة تشغيل أصوات الإجابة الصح والخطأ
   const playFeedbackSound = (type: "correct" | "wrong") => {
     const url = type === "correct" 
       ? "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776009411/u_y6jn4lst7i-benar-494211__cut_1sec_bsp1ld.mp3" 
@@ -266,15 +272,14 @@ export default function CountryHub() {
     audio.play().catch(e => console.error("Audio error:", e));
   };
 
-  // معالجة الإجابات في اللعبة
   const handleAnswer = (selectedText: string) => {
     if (!data?.eduGame) return;
     
     if (selectedText === data.eduGame[currentQuestionIndex].answer) {
-      playFeedbackSound("correct"); // 🌟 تشغيل صوت الإجابة الصح
+      playFeedbackSound("correct"); 
       setShowFactBoard(true);
     } else {
-      playFeedbackSound("wrong"); // 🌟 تشغيل صوت الإجابة الخطأ
+      playFeedbackSound("wrong"); 
       setIsWrong(true);
       setTimeout(() => setIsWrong(false), 500);
     }
@@ -289,12 +294,12 @@ export default function CountryHub() {
     }
   };
 
-  if (!data) return <div className="min-h-screen bg-slate-950 flex items-center justify-center text-white">جاري التحميل...</div>;
+  if (!data) return <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center text-slate-900 dark:text-white">جاري التحميل...</div>;
 
   return (
-    <div className={`relative min-h-screen bg-[#020617] text-white overflow-hidden`} dir="rtl">
+    <div className={`relative min-h-screen bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-white overflow-hidden transition-colors duration-500`} dir="rtl">
       
-      {/* 🌟 نافذة الفيديو المنبثقة (Modal) السينمائية 🌟 */}
+      {/* 🌟 نافذة الفيديو المنبثقة (Modal) 🌟 */}
       <AnimatePresence>
         {playingVideo && (
           <motion.div 
@@ -303,30 +308,26 @@ export default function CountryHub() {
             exit={{ opacity: 0 }} 
             className="fixed inset-0 z-[9999] flex items-center justify-center"
           >
-            {/* خلفية مغلوشة بنفس ألوان صورة الفيديو */}
             <div 
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: `url(${playingVideo.thumb})` }}
             >
-              {/* طبقة تعتيم وبلوور قوية عشان الفيديو يبرز */}
-              <div className="absolute inset-0 bg-black/60 backdrop-blur-3xl"></div>
+              <div className="absolute inset-0 bg-white/60 dark:bg-black/60 backdrop-blur-3xl transition-colors"></div>
             </div>
 
-            {/* زرار القفل */}
             <button 
               onClick={() => setPlayingVideo(null)}
-              className="absolute top-6 right-6 md:top-10 md:right-10 bg-white/10 hover:bg-red-600 text-white p-4 rounded-full backdrop-blur-md transition-all border border-white/20 hover:scale-110 z-10 shadow-2xl"
+              className="absolute top-6 right-6 md:top-10 md:right-10 bg-white/50 dark:bg-white/10 hover:bg-red-500 dark:hover:bg-red-600 text-slate-800 dark:text-white hover:text-white p-4 rounded-full backdrop-blur-md transition-all border border-slate-300 dark:border-white/20 hover:scale-110 z-10 shadow-2xl"
             >
               <X size={32} />
             </button>
 
-            {/* حاوية الـ iframe */}
             <motion.div 
               initial={{ scale: 0.8, y: 50 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.8, y: 50, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 120 }}
-              className="relative w-[95%] md:w-[85%] max-w-6xl aspect-video bg-black rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/20"
+              className="relative w-[95%] md:w-[85%] max-w-6xl aspect-video bg-black rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.3)] dark:shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-slate-300 dark:border-white/20"
             >
               <iframe 
                 src={playingVideo.url} 
@@ -340,8 +341,20 @@ export default function CountryHub() {
         )}
       </AnimatePresence>
 
-      <div className={`fixed inset-0 bg-gradient-to-br ${data.theme} opacity-70 z-0`} />
-      <div className="fixed inset-0 bg-black/40 z-0" /> 
+      {/* خلفية التدرج اللوني - خفيفة في اللايت وقوية في الدارك */}
+      <div className={`fixed inset-0 bg-gradient-to-br ${data.theme} opacity-10 dark:opacity-70 z-0 transition-opacity duration-500`} />
+      <div className="fixed inset-0 bg-white/40 dark:bg-black/40 z-0 transition-colors duration-500" /> 
+
+      {/* زرار التبديل بتاع الثيم */}
+      {mounted && (
+        <button
+          onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+          className="absolute top-8 left-6 z-50 p-3 rounded-full bg-white/50 dark:bg-black/40 backdrop-blur-md border border-slate-300 dark:border-white/20 text-slate-800 dark:text-white hover:scale-110 transition-all shadow-lg"
+          aria-label="Toggle Theme"
+        >
+          {resolvedTheme === "dark" ? <Sun size={24} className="text-sky-400" /> : <Moon size={24} className="text-sky-600" />}
+        </button>
+      )}
 
       <main className="relative z-10 max-w-7xl mx-auto px-6 py-10">
         
@@ -349,14 +362,14 @@ export default function CountryHub() {
         <header className="flex flex-col lg:flex-row items-center justify-between gap-10 mb-16 pt-20">
           <div className="flex flex-col items-start text-right">
             <Link href="/kids">
-              <motion.button whileHover={{ x: 5 }} className="flex items-center gap-2 text-white font-black mb-8 bg-black/40 backdrop-blur-xl px-6 py-3 rounded-2xl border border-white/20 shadow-xl">
+              <motion.button whileHover={{ x: 5 }} className="flex items-center gap-2 text-slate-800 dark:text-white font-black mb-8 bg-white/50 dark:bg-black/40 backdrop-blur-xl px-6 py-3 rounded-2xl border border-slate-300 dark:border-white/20 shadow-xl transition-colors">
                 <ArrowRight size={22} className="rotate-180" /> العودة للخريطة
               </motion.button>
             </Link>
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-4 tracking-tighter text-white drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)] leading-tight">
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-4 tracking-tighter text-slate-900 dark:text-white drop-shadow-lg dark:drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)] leading-tight transition-colors">
               {data.countryName}
             </h1>
-            <p className="text-2xl md:text-3xl font-bold text-sky-300 drop-shadow-md bg-black/30 px-6 py-2 rounded-2xl inline-block border border-white/5">
+            <p className="text-2xl md:text-3xl font-bold text-sky-600 dark:text-sky-300 drop-shadow-md bg-white/50 dark:bg-black/30 px-6 py-2 rounded-2xl inline-block border border-slate-300 dark:border-white/5 transition-colors">
                استكشاف {data.continentName} 🚀
             </p>
           </div>
@@ -365,10 +378,10 @@ export default function CountryHub() {
 
         {/* Tabs */}
         <nav className="flex justify-center mb-16">
-          <div className="bg-slate-950/80 backdrop-blur-3xl p-3 rounded-[3rem] border border-white/10 flex gap-4 w-full max-w-3xl shadow-2xl">
+          <div className="bg-white/80 dark:bg-slate-950/80 backdrop-blur-3xl p-3 rounded-[3rem] border border-slate-300 dark:border-white/10 flex gap-4 w-full max-w-3xl shadow-2xl transition-colors">
             {["explore", "videos", "games"].map((tab) => (
-              <button key={tab} onClick={() => { setActiveTab(tab as any); stopAllAudio(); }} className={`relative flex-1 flex items-center justify-center gap-3 py-5 rounded-[2.5rem] font-black text-2xl transition-all ${activeTab === tab ? "text-white" : "text-slate-400 hover:text-slate-200"}`}>
-                {activeTab === tab && <motion.div layoutId="navTabActive" className="absolute inset-0 bg-gradient-to-r from-sky-600 to-indigo-700 rounded-[2.5rem] -z-10 shadow-lg border border-white/20" />}
+              <button key={tab} onClick={() => { setActiveTab(tab as any); stopAllAudio(); }} className={`relative flex-1 flex items-center justify-center gap-3 py-5 rounded-[2.5rem] font-black text-2xl transition-all ${activeTab === tab ? "text-white" : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"}`}>
+                {activeTab === tab && <motion.div layoutId="navTabActive" className="absolute inset-0 bg-gradient-to-r from-sky-500 to-indigo-600 dark:from-sky-600 dark:to-indigo-700 rounded-[2.5rem] -z-10 shadow-lg border border-white/20" />}
                 <span className="capitalize">{tab === "explore" ? "اكتشف" : tab === "videos" ? "فيديوهات" : "ألعاب"}</span>
               </button>
             ))}
@@ -383,10 +396,10 @@ export default function CountryHub() {
             {activeTab === "explore" && (
               <motion.div key="explore" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {data.explore.map((item: any, i: number) => (
-                  <motion.div key={i} onMouseEnter={() => playInteractiveAudio(item.audio)} className="bg-slate-900/60 backdrop-blur-2xl p-10 rounded-[3rem] border border-white/10 hover:border-sky-400 transition-all cursor-pointer">
-                    <div className="w-20 h-20 bg-sky-500/20 rounded-2xl flex items-center justify-center mb-8"><item.icon size={40} className="text-sky-400" /></div>
-                    <h3 className="text-3xl font-black text-white mb-4">{item.title}</h3>
-                    <p className="text-xl font-bold text-slate-300 leading-relaxed">{item.desc}</p>
+                  <motion.div key={i} onMouseEnter={() => playInteractiveAudio(item.audio)} className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl p-10 rounded-[3rem] border border-slate-200 dark:border-white/10 hover:border-sky-400 transition-all cursor-pointer">
+                    <div className="w-20 h-20 bg-sky-100 dark:bg-sky-500/20 rounded-2xl flex items-center justify-center mb-8"><item.icon size={40} className="text-sky-500 dark:text-sky-400" /></div>
+                    <h3 className="text-3xl font-black text-slate-900 dark:text-white mb-4 transition-colors">{item.title}</h3>
+                    <p className="text-xl font-bold text-slate-600 dark:text-slate-300 leading-relaxed transition-colors">{item.desc}</p>
                   </motion.div>
                 ))}
               </motion.div>
@@ -398,8 +411,7 @@ export default function CountryHub() {
                 {data.videos && data.videos.length > 0 ? (
                   data.videos.map((vid: any, i: number) => (
                     <div key={i} className="flex flex-col gap-4">
-                      {/* حاوية الـ iframe المباشرة */}
-                      <div className="relative aspect-video w-full rounded-[2rem] overflow-hidden border-2 border-white/10 shadow-2xl bg-black">
+                      <div className="relative aspect-video w-full rounded-[2rem] overflow-hidden border-2 border-slate-300 dark:border-white/10 shadow-2xl bg-slate-100 dark:bg-black transition-colors">
                         <iframe 
                           src={vid.url} 
                           className="absolute top-0 left-0 w-full h-full" 
@@ -408,13 +420,13 @@ export default function CountryHub() {
                           frameBorder="0"
                         ></iframe>
                       </div>
-                      <h3 className="text-2xl font-black text-white px-2">{vid.title}</h3>
+                      <h3 className="text-2xl font-black text-slate-900 dark:text-white px-2 transition-colors">{vid.title}</h3>
                     </div>
                   ))
                 ) : (
                   <div className="col-span-1 md:col-span-2 text-center py-20">
-                    <Tv className="w-20 h-20 text-slate-500 mx-auto mb-4" />
-                    <h3 className="text-3xl font-bold text-slate-400">قريباً فيديوهات ممتعة لهذه القارة!</h3>
+                    <Tv className="w-20 h-20 text-slate-400 dark:text-slate-500 mx-auto mb-4" />
+                    <h3 className="text-3xl font-bold text-slate-500 dark:text-slate-400">قريباً فيديوهات ممتعة لهذه القارة!</h3>
                   </div>
                 )}
               </motion.div>
@@ -424,27 +436,27 @@ export default function CountryHub() {
             {activeTab === "games" && data.eduGame && data.eduGame.length > 0 && (
               <motion.div key="games" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="flex flex-col items-center">
                  {!gameOver ? (
-                    <div className="bg-slate-900/80 backdrop-blur-3xl rounded-[4rem] p-12 border border-white/10 w-full max-w-4xl text-center shadow-2xl">
+                    <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-3xl rounded-[4rem] p-12 border border-slate-300 dark:border-white/10 w-full max-w-4xl text-center shadow-2xl transition-colors">
                        
                        {/* عرض المعلومة لو جاوب صح */}
                        {showFactBoard ? (
                          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
-                           <CheckCircle2 className="w-24 h-24 text-emerald-400 mx-auto mb-6" />
-                           <h3 className="text-4xl font-black text-emerald-400 mb-6">إجابة صحيحة! 🌟</h3>
-                           <div className="bg-white/5 border border-white/10 p-8 rounded-[2rem] mb-8">
-                             <p className="text-2xl font-bold text-white leading-relaxed">{data.eduGame[currentQuestionIndex].fact}</p>
+                           <CheckCircle2 className="w-24 h-24 text-emerald-500 dark:text-emerald-400 mx-auto mb-6" />
+                           <h3 className="text-4xl font-black text-emerald-600 dark:text-emerald-400 mb-6">إجابة صحيحة! 🌟</h3>
+                           <div className="bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/10 p-8 rounded-[2rem] mb-8 transition-colors">
+                             <p className="text-2xl font-bold text-slate-800 dark:text-white leading-relaxed">{data.eduGame[currentQuestionIndex].fact}</p>
                            </div>
-                           <button onClick={nextQuestion} className="bg-sky-500 hover:bg-sky-400 text-white px-12 py-4 rounded-full font-black text-2xl transition-all">
+                           <button onClick={nextQuestion} className="bg-sky-500 hover:bg-sky-600 dark:hover:bg-sky-400 text-white px-12 py-4 rounded-full font-black text-2xl transition-all shadow-lg">
                              {currentQuestionIndex + 1 < data.eduGame.length ? "السؤال اللي بعده ➡️" : "إنهاء اللعبة 🏆"}
                            </button>
                          </motion.div>
                        ) : (
                          // عرض السؤال والاختيارات
                          <>
-                           <div className="bg-sky-500/20 text-sky-400 font-black py-2 px-6 rounded-full inline-block mb-8 border border-sky-500/30">
+                           <div className="bg-sky-100 dark:bg-sky-500/20 text-sky-600 dark:text-sky-400 font-black py-2 px-6 rounded-full inline-block mb-8 border border-sky-300 dark:border-sky-500/30 transition-colors">
                              لغز {currentQuestionIndex + 1} من {data.eduGame.length}
                            </div>
-                           <h2 className="text-3xl md:text-5xl font-black mb-12 text-white leading-tight">
+                           <h2 className="text-3xl md:text-5xl font-black mb-12 text-slate-900 dark:text-white leading-tight transition-colors">
                              {data.eduGame[currentQuestionIndex].riddle}
                            </h2>
                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -452,7 +464,7 @@ export default function CountryHub() {
                                 <button 
                                   key={i} 
                                   onClick={() => handleAnswer(opt.text)} 
-                                  className={`bg-white/5 border border-white/10 p-8 rounded-[2.5rem] hover:bg-sky-500 hover:border-sky-400 transition-all font-bold text-xl group ${isWrong ? 'animate-shake border-red-500/50' : ''}`}
+                                  className={`bg-slate-50 dark:bg-white/5 border border-slate-300 dark:border-white/10 p-8 rounded-[2.5rem] hover:bg-sky-100 dark:hover:bg-sky-500 hover:border-sky-400 transition-all font-bold text-xl text-slate-800 dark:text-white group shadow-sm dark:shadow-none ${isWrong ? 'animate-shake border-red-500/50 bg-red-50 dark:bg-red-900/20' : ''}`}
                                 >
                                   <span className="block text-6xl mb-4 group-hover:scale-110 transition-transform">{opt.icon}</span>
                                   {opt.text}
@@ -464,11 +476,11 @@ export default function CountryHub() {
                     </div>
                  ) : (
                    // شاشة الفوز
-                   <div className="text-center bg-emerald-500/20 p-20 rounded-[4rem] border border-emerald-500/30 w-full max-w-4xl shadow-2xl">
-                      <Trophy size={120} className="text-yellow-400 mx-auto mb-10" />
-                      <h2 className="text-6xl font-black mb-6">أنت بطل رائع! 🏆</h2>
-                      <p className="text-2xl text-emerald-100 mb-10">لقد أكملت جميع الألغاز بنجاح.</p>
-                      <button onClick={() => { setGameOver(false); setCurrentQuestionIndex(0); }} className="bg-white text-emerald-900 px-12 py-5 rounded-full font-black text-2xl hover:scale-105 transition-all">
+                   <div className="text-center bg-emerald-100 dark:bg-emerald-500/20 p-20 rounded-[4rem] border border-emerald-300 dark:border-emerald-500/30 w-full max-w-4xl shadow-2xl transition-colors">
+                      <Trophy size={120} className="text-yellow-500 dark:text-yellow-400 mx-auto mb-10" />
+                      <h2 className="text-6xl font-black mb-6 text-emerald-800 dark:text-white">أنت بطل رائع! 🏆</h2>
+                      <p className="text-2xl text-emerald-700 dark:text-emerald-100 mb-10">لقد أكملت جميع الألغاز بنجاح.</p>
+                      <button onClick={() => { setGameOver(false); setCurrentQuestionIndex(0); }} className="bg-emerald-600 dark:bg-white text-white dark:text-emerald-900 px-12 py-5 rounded-full font-black text-2xl hover:scale-105 transition-all shadow-lg">
                         العب مجدداً 🔄
                       </button>
                    </div>
@@ -479,8 +491,8 @@ export default function CountryHub() {
             {/* في حالة عدم وجود ألعاب للقارة */}
             {activeTab === "games" && (!data.eduGame || data.eduGame.length === 0) && (
               <div className="text-center py-20">
-                <Gamepad2 className="w-20 h-20 text-slate-500 mx-auto mb-4" />
-                <h3 className="text-3xl font-bold text-slate-400">قريباً ألعاب ممتعة لهذه القارة!</h3>
+                <Gamepad2 className="w-20 h-20 text-slate-400 dark:text-slate-500 mx-auto mb-4" />
+                <h3 className="text-3xl font-bold text-slate-500 dark:text-slate-400">قريباً ألعاب ممتعة لهذه القارة!</h3>
               </div>
             )}
 
@@ -489,8 +501,8 @@ export default function CountryHub() {
       </main>
 
       {/* المؤثرات الضوئية */}
-      <div className="fixed top-1/4 -right-20 w-80 h-80 bg-sky-500/10 blur-[150px] rounded-full pointer-events-none" />
-      <div className="fixed bottom-1/4 -left-20 w-96 h-96 bg-purple-500/10 blur-[180px] rounded-full pointer-events-none" />
+      <div className="fixed top-1/4 -right-20 w-80 h-80 bg-sky-400/20 dark:bg-sky-500/10 blur-[150px] rounded-full pointer-events-none transition-colors" />
+      <div className="fixed bottom-1/4 -left-20 w-96 h-96 bg-purple-400/20 dark:bg-purple-500/10 blur-[180px] rounded-full pointer-events-none transition-colors" />
       
       {/* ستايل الهزة (Shake) للإجابة الغلط */}
       <style jsx global>{`
