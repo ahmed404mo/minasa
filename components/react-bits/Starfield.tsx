@@ -23,7 +23,8 @@ const Starfield: React.FC<StarfieldProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const starsRef = useRef<Star[]>([]);
-  const animationFrameId = useRef<number>();
+  // 🌟 التعديل هنا: ضفنا null كقيمة ابتدائية
+  const animationFrameId = useRef<number | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -63,30 +64,23 @@ const Starfield: React.FC<StarfieldProps> = ({
       const colorRGB = hexToRgb(starColor);
       
       starsRef.current.forEach(star => {
-        // تحريك النجم للأمام
         star.z -= speed;
 
-        // لو النجم خرج بره الشاشة، رجعه ورا خالص
         if (star.z < 1) {
           star.z = width;
           star.x = Math.random() * width - width / 2;
           star.y = Math.random() * height - height / 2;
         }
 
-        // تحويل الإحداثيات الـ 3D لـ 2D على الشاشة
         const perspective = width / star.z;
         const x2d = star.x * perspective;
         const y2d = star.y * perspective;
 
-        // حجم النجم بناءً على قربه (perspective)
         const size = (1 - star.z / width) * 2.5;
 
         if (star.px !== 0) {
-          // رسم النجم كنقطة ناعمة (glow effect خفيف)
           ctx.beginPath();
           ctx.arc(x2d, y2d, size, 0, Math.PI * 2);
-          
-          // جعل النجوم الأبعد أكثر شفافية
           const alpha = (1 - star.z / width);
           ctx.fillStyle = `rgba(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b}, ${alpha})`;
           ctx.fill();
@@ -100,7 +94,6 @@ const Starfield: React.FC<StarfieldProps> = ({
       animationFrameId.current = requestAnimationFrame(draw);
     };
 
-    // مساعدة لتحويل الألوان
     const hexToRgb = (hex: string) => {
       if(hex === "white") return {r: 255, g: 255, b: 255};
       const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
