@@ -39,16 +39,16 @@ export default function LandingPage() {
     };
   }, []);
 
-  // تعريف المتغيرات كـ any عشان نسكت الـ TypeScript تماماً في الملف ده
-  const containerVariants: any = {
+  // 🌟 الحل النهائي لمشكلة TypeScript في Vercel: استخدام (as any) 🌟
+  const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1, 
       transition: { staggerChildren: 0.3, delayChildren: 0.1 } 
     },
-  };
+  } as any;
 
-  const textVariants: any = {
+  const textVariants = {
     hidden: { y: 25, opacity: 0, filter: "blur(10px)" },
     visible: { 
       y: 0, 
@@ -56,9 +56,9 @@ export default function LandingPage() {
       filter: "blur(0px)", 
       transition: { type: "spring", damping: 14, stiffness: 100 } 
     },
-  };
+  } as any;
 
-  const card3DVariants: any = {
+  const card3DVariants = {
     hidden: { 
       z: -500,
       rotateX: 45,
@@ -77,7 +77,7 @@ export default function LandingPage() {
         duration: 1 
       } 
     },
-  };
+  } as any;
 
   return (
     <div className="relative min-h-screen w-full flex flex-col bg-background text-foreground transition-colors duration-500 perspective-[1500px]">
