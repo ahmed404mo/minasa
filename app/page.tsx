@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { ArrowLeft, Gamepad2, ShieldCheck, BookOpen, HeartPulse, Globe2, Users } from "lucide-react";
@@ -39,8 +39,8 @@ export default function LandingPage() {
     };
   }, []);
 
-  // متغيرات الأنيميشن
-  const containerVariants = {
+  // 🌟 تعريف الـ Variants بنوع صريح عشان TypeScript يقتنع بكلمة spring
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1, 
@@ -48,17 +48,21 @@ export default function LandingPage() {
     },
   };
 
-  const textVariants = {
+  const textVariants: Variants = {
     hidden: { y: 25, opacity: 0, filter: "blur(10px)" },
     visible: { 
       y: 0, 
       opacity: 1, 
       filter: "blur(0px)", 
-      transition: { type: "spring", damping: 14, stiffness: 100 } 
+      transition: { 
+        type: "spring", 
+        damping: 14, 
+        stiffness: 100 
+      } 
     },
   };
 
-  const card3DVariants = {
+  const card3DVariants: Variants = {
     hidden: { 
       z: -500,
       rotateX: 45,
@@ -98,7 +102,6 @@ export default function LandingPage() {
 
         <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px]"></div>
 
-        {/* @ts-ignore */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
@@ -106,7 +109,6 @@ export default function LandingPage() {
           className="relative z-10 w-full max-w-6xl px-6 flex flex-col items-center text-center"
           style={{ transformStyle: "preserve-3d" }}
         >
-          {/* @ts-ignore */}
           <motion.h1 
             variants={textVariants} 
             className="text-5xl md:text-[80px] font-black text-white mb-6 leading-tight drop-shadow-xl"
@@ -124,8 +126,6 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-4xl z-20">
             
-            {/* Child Card */}
-            {/* @ts-ignore */}
             <motion.div variants={card3DVariants} className="w-full">
               <TiltedCard className="w-full">
                 <Link href="/login" className="block group w-full outline-none">
@@ -134,15 +134,12 @@ export default function LandingPage() {
                       className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                       style={{ backgroundImage: "url('https://res.cloudinary.com/dmuuyiwtr/image/upload/q_auto/f_auto/v1775773530/Gemini_Generated_Image_bmv7yrbmv7yrbmv7_fuihqi.png')" }}
                     ></div>
-
                     <div className="absolute top-6 right-6 z-10 bg-white/20 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-white/30">
                       <Gamepad2 className="w-8 h-8 text-white drop-shadow-md" />
                     </div>
-                    
                     <div className="absolute bottom-0 inset-x-0 bg-white/95 dark:bg-slate-950/85 backdrop-blur-xl p-8 border-t border-slate-200 dark:border-white/10 flex flex-col text-right transition-colors duration-500">
                       <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-2 transition-colors">عالم الأطفال</h2>
                       <p className="text-slate-600 dark:text-slate-300 font-medium mb-6 text-sm leading-relaxed transition-colors">ألعاب، فيديوهات، وقصص سحرية حول قارات العالم!</p>
-                      
                       <button className="w-full bg-emerald-500 text-white text-lg font-black py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-emerald-400 hover:scale-[1.02] transition-all shadow-[0_8px_16px_rgba(0,0,0,0.4)] border border-emerald-400/50">
                         دخول الأبطال <ArrowLeft className="w-5 h-5 group-hover:-translate-x-2 transition-transform" />
                       </button>
@@ -152,8 +149,6 @@ export default function LandingPage() {
               </TiltedCard>
             </motion.div>
 
-            {/* Parent Card */}
-            {/* @ts-ignore */}
             <motion.div variants={card3DVariants} className="w-full">
               <TiltedCard className="w-full">
                 <Link href="/login" className="block group w-full outline-none">
@@ -162,15 +157,12 @@ export default function LandingPage() {
                       className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                       style={{ backgroundImage: "url('https://res.cloudinary.com/dmuuyiwtr/image/upload/q_auto/f_auto/v1775773549/Gemini_Generated_Image_dt0gf7dt0gf7dt0g_r1nfnx.png')" }}
                     ></div>
-
                     <div className="absolute top-6 right-6 z-10 bg-white/20 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-white/30">
                       <ShieldCheck className="w-8 h-8 text-white drop-shadow-md" />
                     </div>
-                    
                     <div className="absolute bottom-0 inset-x-0 bg-white/95 dark:bg-slate-950/85 backdrop-blur-xl p-8 border-t border-slate-200 dark:border-white/10 flex flex-col text-right transition-colors duration-500">
                       <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-2 transition-colors">بوابة الآباء</h2>
                       <p className="text-slate-600 dark:text-slate-300 font-medium mb-6 text-sm leading-relaxed transition-colors">تابع تقدم طفلك، تحكم في وقت اللعب، واكتشف التقارير بسهولة.</p>
-                      
                       <button className="w-full bg-sky-500 text-white text-lg font-black py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-sky-400 hover:scale-[1.02] transition-all shadow-[0_8px_16px_rgba(0,0,0,0.4)] border border-sky-400/50">
                         دخول الآباء <ArrowLeft className="w-5 h-5 group-hover:-translate-x-2 transition-transform" />
                       </button>
@@ -184,18 +176,15 @@ export default function LandingPage() {
         </motion.div>
       </section>
 
-      {/* Community Section */}
       <section className="relative z-10 w-full bg-background py-24 border-t border-border overflow-hidden transition-colors duration-500">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20"></div>
         <div className="max-w-[1400px] mx-auto px-6 relative">
-          {/* @ts-ignore */}
           <motion.div 
             initial="hidden" 
             whileInView="visible" 
             viewport={{ once: true, margin: "-100px" }}
             variants={containerVariants}
           >
-            {/* @ts-ignore */}
             <motion.div variants={textVariants} className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4 transition-colors">مجتمع <span className="text-sky-500">مكتشف العوالم</span></h2>
               <p className="text-muted-foreground font-medium text-lg transition-colors">نكبر كل يوم بثقتكم، ونبني معاً مستقبلاً أفضل لأطفالنا.</p>
@@ -208,7 +197,6 @@ export default function LandingPage() {
                 { icon: <BookOpen />, color: "text-purple-500", bg: "bg-purple-500/10", label: "درس تفاعلي وقصة", count: 150 },
                 { icon: <Globe2 />, color: "text-yellow-500", bg: "bg-yellow-500/10", label: "قارات متاحة للاستكشاف", count: 7 }
               ].map((item, i) => (
-                /* @ts-ignore */
                 <motion.div key={i} variants={textVariants} className="flex flex-col items-center p-8 bg-card text-card-foreground border border-border shadow-sm rounded-3xl hover:border-ring transition-all duration-300">
                    <div className={`${item.bg} p-4 rounded-2xl mb-4 ${item.color}`}>{item.icon}</div>
                    <div className="text-4xl font-black mb-2 flex items-center gap-1 transition-colors">
