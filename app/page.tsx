@@ -38,8 +38,9 @@ export default function LandingPage() {
       clearInterval(reverseInterval);
     };
   }, []);
-// استخدمنا Variants من المكتبة مع as const لكل كلمة مفتاحية
-  const containerVariants: any = {
+
+  // متغيرات الأنيميشن
+  const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1, 
@@ -47,21 +48,17 @@ export default function LandingPage() {
     },
   };
 
-  const textVariants: any = {
+  const textVariants = {
     hidden: { y: 25, opacity: 0, filter: "blur(10px)" },
     visible: { 
       y: 0, 
       opacity: 1, 
       filter: "blur(0px)", 
-      transition: { 
-        type: "spring" as const, // 🌟 دي أهم كلمة في الملف كله
-        damping: 14, 
-        stiffness: 100 
-      } 
+      transition: { type: "spring", damping: 14, stiffness: 100 } 
     },
   };
 
-  const card3DVariants: any = {
+  const card3DVariants = {
     hidden: { 
       z: -500,
       rotateX: 45,
@@ -74,13 +71,14 @@ export default function LandingPage() {
       opacity: 1, 
       filter: "blur(0px)", 
       transition: { 
-        type: "spring" as const, // 🌟 وهنا كمان
+        type: "spring", 
         damping: 15, 
         stiffness: 80, 
         duration: 1 
       } 
     },
   };
+
   return (
     <div className="relative min-h-screen w-full flex flex-col bg-background text-foreground transition-colors duration-500 perspective-[1500px]">
       
@@ -100,15 +98,17 @@ export default function LandingPage() {
 
         <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px]"></div>
 
+        {/* @ts-ignore */}
         <motion.div 
-          variants={containerVariants as any} // 🌟 التعديل السحري هنا
+          variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="relative z-10 w-full max-w-6xl px-6 flex flex-col items-center text-center"
           style={{ transformStyle: "preserve-3d" }}
         >
+          {/* @ts-ignore */}
           <motion.h1 
-            variants={textVariants as any} // 🌟 التعديل السحري هنا
+            variants={textVariants} 
             className="text-5xl md:text-[80px] font-black text-white mb-6 leading-tight drop-shadow-xl"
             style={{ fontStyle: "normal", transform: "none" }}
           >
@@ -125,11 +125,11 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-4xl z-20">
             
             {/* Child Card */}
-            <motion.div variants={card3DVariants as any} className="w-full">
+            {/* @ts-ignore */}
+            <motion.div variants={card3DVariants} className="w-full">
               <TiltedCard className="w-full">
                 <Link href="/login" className="block group w-full outline-none">
                   <div className="relative rounded-[2.5rem] shadow-lg transition-all duration-500 transform-gpu overflow-hidden h-[450px] flex flex-col border border-border hover:border-ring">
-                    
                     <div 
                       className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                       style={{ backgroundImage: "url('https://res.cloudinary.com/dmuuyiwtr/image/upload/q_auto/f_auto/v1775773530/Gemini_Generated_Image_bmv7yrbmv7yrbmv7_fuihqi.png')" }}
@@ -153,11 +153,11 @@ export default function LandingPage() {
             </motion.div>
 
             {/* Parent Card */}
-            <motion.div variants={card3DVariants as any} className="w-full">
+            {/* @ts-ignore */}
+            <motion.div variants={card3DVariants} className="w-full">
               <TiltedCard className="w-full">
                 <Link href="/login" className="block group w-full outline-none">
                   <div className="relative rounded-[2.5rem] shadow-lg transition-all duration-500 transform-gpu overflow-hidden h-[450px] flex flex-col border border-border hover:border-ring">
-                    
                     <div 
                       className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                       style={{ backgroundImage: "url('https://res.cloudinary.com/dmuuyiwtr/image/upload/q_auto/f_auto/v1775773549/Gemini_Generated_Image_dt0gf7dt0gf7dt0g_r1nfnx.png')" }}
@@ -186,20 +186,17 @@ export default function LandingPage() {
 
       {/* Community Section */}
       <section className="relative z-10 w-full bg-background py-24 border-t border-border overflow-hidden transition-colors duration-500">
-        
         <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20"></div>
-        
-        <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-[120px] -z-10"></div>
-
         <div className="max-w-[1400px] mx-auto px-6 relative">
+          {/* @ts-ignore */}
           <motion.div 
             initial="hidden" 
             whileInView="visible" 
             viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants as any} // 🌟 التعديل السحري هنا
+            variants={containerVariants}
           >
-            <motion.div variants={textVariants as any} className="text-center mb-16"> {/* 🌟 وهنا */}
+            {/* @ts-ignore */}
+            <motion.div variants={textVariants} className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4 transition-colors">مجتمع <span className="text-sky-500">مكتشف العوالم</span></h2>
               <p className="text-muted-foreground font-medium text-lg transition-colors">نكبر كل يوم بثقتكم، ونبني معاً مستقبلاً أفضل لأطفالنا.</p>
             </motion.div>
@@ -211,7 +208,8 @@ export default function LandingPage() {
                 { icon: <BookOpen />, color: "text-purple-500", bg: "bg-purple-500/10", label: "درس تفاعلي وقصة", count: 150 },
                 { icon: <Globe2 />, color: "text-yellow-500", bg: "bg-yellow-500/10", label: "قارات متاحة للاستكشاف", count: 7 }
               ].map((item, i) => (
-                <motion.div key={i} variants={textVariants as any} className="flex flex-col items-center p-8 bg-card text-card-foreground border border-border shadow-sm rounded-3xl hover:border-ring transition-all duration-300"> {/* 🌟 وهنا */}
+                /* @ts-ignore */
+                <motion.div key={i} variants={textVariants} className="flex flex-col items-center p-8 bg-card text-card-foreground border border-border shadow-sm rounded-3xl hover:border-ring transition-all duration-300">
                    <div className={`${item.bg} p-4 rounded-2xl mb-4 ${item.color}`}>{item.icon}</div>
                    <div className="text-4xl font-black mb-2 flex items-center gap-1 transition-colors">
                      {item.count > 10 && <span>+</span>}
