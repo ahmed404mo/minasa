@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion"; // 🌟 ضفنا Variants هنا
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { ArrowLeft, Gamepad2, ShieldCheck, BookOpen, HeartPulse, Globe2, Users } from "lucide-react";
@@ -39,7 +39,8 @@ export default function LandingPage() {
     };
   }, []);
 
-const containerVariants = {
+  // 🌟 خلينا المتغيرات من نوع Variants
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1, 
@@ -47,17 +48,17 @@ const containerVariants = {
     },
   };
 
-  const textVariants = {
+  const textVariants: Variants = {
     hidden: { y: 25, opacity: 0, filter: "blur(10px)" },
     visible: { 
       y: 0, 
       opacity: 1, 
       filter: "blur(0px)", 
-      transition: { type: "spring" as const, damping: 14, stiffness: 100 } // 🌟 التعديل هنا
+      transition: { type: "spring", damping: 14, stiffness: 100 } 
     },
   };
 
-  const card3DVariants = {
+  const card3DVariants: Variants = {
     hidden: { 
       z: -500,
       rotateX: 45,
@@ -70,7 +71,7 @@ const containerVariants = {
       opacity: 1, 
       filter: "blur(0px)", 
       transition: { 
-        type: "spring" as const, // 🌟 والتعديل هنا
+        type: "spring", 
         damping: 15, 
         stiffness: 80, 
         duration: 1 
@@ -83,7 +84,6 @@ const containerVariants = {
       
       <section 
         ref={containerRef}
-        // Removed fixed h-screen, added min-h-screen and padding top/bottom
         className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden pt-32 pb-24"
       >
         <video
@@ -102,7 +102,6 @@ const containerVariants = {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          // Removed pt-20, using section padding instead
           className="relative z-10 w-full max-w-6xl px-6 flex flex-col items-center text-center"
           style={{ transformStyle: "preserve-3d" }}
         >
