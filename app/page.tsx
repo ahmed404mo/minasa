@@ -38,8 +38,8 @@ export default function LandingPage() {
       clearInterval(reverseInterval);
     };
   }, []);
-
-  const containerVariants = {
+// استخدمنا Variants من المكتبة مع as const لكل كلمة مفتاحية
+  const containerVariants: any = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1, 
@@ -47,17 +47,21 @@ export default function LandingPage() {
     },
   };
 
-  const textVariants = {
+  const textVariants: any = {
     hidden: { y: 25, opacity: 0, filter: "blur(10px)" },
     visible: { 
       y: 0, 
       opacity: 1, 
       filter: "blur(0px)", 
-      transition: { type: "spring", damping: 14, stiffness: 100 } 
+      transition: { 
+        type: "spring" as const, // 🌟 دي أهم كلمة في الملف كله
+        damping: 14, 
+        stiffness: 100 
+      } 
     },
   };
 
-  const card3DVariants = {
+  const card3DVariants: any = {
     hidden: { 
       z: -500,
       rotateX: 45,
@@ -70,14 +74,13 @@ export default function LandingPage() {
       opacity: 1, 
       filter: "blur(0px)", 
       transition: { 
-        type: "spring", 
+        type: "spring" as const, // 🌟 وهنا كمان
         damping: 15, 
         stiffness: 80, 
         duration: 1 
       } 
     },
   };
-
   return (
     <div className="relative min-h-screen w-full flex flex-col bg-background text-foreground transition-colors duration-500 perspective-[1500px]">
       
