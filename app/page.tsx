@@ -39,7 +39,7 @@ export default function LandingPage() {
     };
   }, []);
 
-  const containerVariants = {
+const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1, 
@@ -53,7 +53,7 @@ export default function LandingPage() {
       y: 0, 
       opacity: 1, 
       filter: "blur(0px)", 
-      transition: { type: "spring", damping: 14, stiffness: 100 } 
+      transition: { type: "spring" as const, damping: 14, stiffness: 100 } // 🌟 التعديل هنا
     },
   };
 
@@ -70,7 +70,7 @@ export default function LandingPage() {
       opacity: 1, 
       filter: "blur(0px)", 
       transition: { 
-        type: "spring", 
+        type: "spring" as const, // 🌟 والتعديل هنا
         damping: 15, 
         stiffness: 80, 
         duration: 1 
