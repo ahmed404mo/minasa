@@ -29,18 +29,6 @@ export const countryData: Record<string, any> = {
         title: "اكتشف الولايات المتحدة 🇺🇸", 
         url: "https://player.cloudinary.com/embed/?cloud_name=da52viu5e&public_id=%D8%A7%D9%84%D9%88%D9%84%D8%A7%D9%8A%D8%A7%D8%AA_%D8%A7%D9%84%D9%85%D8%AA%D8%AD%D8%AF%D8%A9_%D8%A7%D9%84%D8%A7%D9%85%D8%B1%D9%8A%D9%83%D9%8A%D8%A9_dnzyrf"
       }
-    ],
-    eduGame: [
-      {
-        riddle: "أنا تمثال ضخم جداً، ماسك شعلة منورة في إيدي، وفرنسا أهدتني لأمريكا.. أنا مين؟",
-        options: [
-          { icon: "🗽", text: "تمثال الحرية" }, 
-          { icon: "🗼", text: "برج إيفل" }, 
-          { icon: "🗿", text: "جزيرة إيستر" }
-        ],
-        answer: "تمثال الحرية",
-        fact: "المعلومة السحرية 🌟: تعرف إن تمثال الحرية لونه الأصلي كان نحاسي زي الكوينز؟ بس لونه قلب أخضر عشان الهوا والمطر!"
-      }
     ]
   },
   "south-america": {
@@ -77,14 +65,6 @@ export const countryData: Record<string, any> = {
         title: "دولة البرازيل 🇧🇷", 
         url: "https://player.cloudinary.com/embed/?cloud_name=da52viu5e&public_id=%D8%AF%D9%88%D9%84%D8%A9_%D8%A7%D9%84%D8%A8%D8%B1%D8%A7%D8%B2%D9%8A%D9%84_nx4xii"
       }
-    ],
-    eduGame: [
-      {
-        riddle: "أنا أكبر غابة استوائية على كوكب الأرض، وبدي الأكسجين للعالم كله.. أنا مين؟",
-        options: [{ icon: "🌳", text: "غابات الأمازون" }, { icon: "🌵", text: "الصحراء الكبرى" }, { icon: "❄️", text: "الغابة الثلجية" }],
-        answer: "غابات الأمازون",
-        fact: "المعلومة السحرية 🌟: تعرف إن غابات الأمازون كبيرة جداً لدرجة إنهم بيسموها (رئة الأرض)!"
-      }
     ]
   },
   "asia": {
@@ -116,14 +96,6 @@ export const countryData: Record<string, any> = {
       { 
         title: "عالم اليابان المذهل 🇯🇵", 
         url: "https://player.cloudinary.com/embed/?cloud_name=da52viu5e&public_id=%D9%81%D9%8A%D8%AF%D9%8A%D9%88_%D8%A7%D9%84%D9%8A%D8%A7%D8%A8%D8%A7%D9%86_xkqzok"
-      }
-    ],
-    eduGame: [
-      {
-        riddle: "أنا أكل ياباني صحي جداً، بتعمل من الرز والسمك وبيلفوني بأعشاب البحر.. اسمي إيه؟",
-        options: [{ icon: "🍣", text: "السوشي" }, { icon: "🍜", text: "النودلز" }, { icon: "🌮", text: "التاكو" }],
-        answer: "السوشي",
-        fact: "المعلومة السحرية 🌟: تعرف إن اليابانيين بياكلوا السوشي بعصيان خشب اسمها (هاشي)!"
       }
     ]
   },
@@ -157,14 +129,6 @@ export const countryData: Record<string, any> = {
         title: "مغامرة في أستراليا 🇦🇺", 
         url: "https://player.cloudinary.com/embed/?cloud_name=dwxizyr3l&public_id=0401_m4rako"
       }
-    ],
-    eduGame: [
-      {
-        riddle: "أنا حيوان لطيف جداً، بنط عالي أوي، وبشيل طفلي الصغير في جيب في بطني.. أنا مين؟",
-        options: [{ icon: "🦘", text: "الكنغر" }, { icon: "🐒", text: "القرد" }, { icon: "🐘", text: "الفيل" }],
-        answer: "الكنغر",
-        fact: "المعلومة السحرية 🌟: تعرف إن الكنغر مبيعرفش يمشي لورا أبداً؟ ده بسبب شكل رجليه الخلفية القوية!"
-      }
     ]
   },
   "antarctica": {
@@ -195,14 +159,6 @@ export const countryData: Record<string, any> = {
         title: "عالم الجليد في أنتاركتيكا ❄️", 
         url: "https://player.cloudinary.com/embed/?cloud_name=da52viu5e&public_id=%D9%81%D9%8A%D8%AF%D9%8A%D9%88_%D8%B9%D9%86_%D9%82%D8%A7%D8%B1%D9%87_%D8%A7%D9%86%D8%AA%D8%B1%D9%83%D8%A7%D8%AA%D9%8A%D9%83%D8%A7_xl6kxm"
       }
-    ],
-    eduGame: [
-      {
-        riddle: "أنا طائر بس مش بطير، لابس بدلة سودة في أبيض، وبموت في العوم في التلج.. أنا مين؟",
-        options: [{ icon: "🐧", text: "البطريق" }, { icon: "🦅", text: "النسر" }, { icon: "🦉", text: "البومة" }],
-        answer: "البطريق",
-        fact: "المعلومة السحرية 🌟: تعرف إن البطريق يقدر يكتم نفسه تحت الماية لمدة توصل لـ 20 دقيقة عشان يصطاد السمك!"
-      }
     ]
   },
   "africa": {
@@ -230,15 +186,7 @@ export const countryData: Record<string, any> = {
         audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776329960/lahajati_______1776329876613_pd3hha.mp3"
       }
     ],
-    videos: [],
-    eduGame: [
-      {
-        riddle: "أنا مقابر عملاقة بناها الفراعنة زمان على شكل مثلثات عشان أكون أعجوبة الزمن.. أنا مين؟",
-        options: [{ icon: "🔺", text: "الأهرامات" }, { icon: "🏢", text: "ناطحات السحاب" }, { icon: "🏟️", text: "الملعب الروماني" }],
-        answer: "الأهرامات",
-        fact: "المعلومة السحرية 🌟: تعرف إن الهرم الأكبر متكون من أكتر من 2 مليون حجر عملاق!"
-      }
-    ]
+    videos: []
   },
   "europe": {
     countryName: "فرنسا 🇫🇷",
@@ -269,44 +217,6 @@ export const countryData: Record<string, any> = {
       { 
         title: "جولة ساحرة في فرنسا 🇫🇷", 
         url: "https://player.cloudinary.com/embed/?cloud_name=demnqufza&public_id=1775075909_merged_video_57070299_tfutff"
-      }
-    ],
-    eduGame: [
-      {
-        type: "quiz",
-        riddle: "أنا تمثال ضخم جداً، ماسك شعلة منورة في إيدي، وفرنسا أهدتني لأمريكا.. أنا مين؟",
-        options: [
-          { img: "https://images.unsplash.com/photo-1605130284535-11dd9eedc58a?q=80&w=400", text: "تمثال الحرية" }, 
-          { img: "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?q=80&w=400", text: "برج إيفل" }, 
-          { img: "https://images.unsplash.com/photo-1510526315264-b8696ec082a9?q=80&w=400", text: "جزيرة إيستر" }
-        ],
-        answer: "تمثال الحرية",
-        fact: "المعلومة السحرية 🌟: تعرف إن تمثال الحرية لونه الأصلي كان نحاسي زي الكوينز؟ بس لونه قلب أخضر عشان الهوا والمطر!"
-      },
-      {
-        type: "dragDrop",
-        riddle: "اضغط على صورة الأكلة وبعدين اضغط على الدولة بتاعتها عشان توصلهم!",
-        pairs: [
-          { item: "البرجر", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=400", match: "أمريكا 🇺🇸" },
-          { item: "السوشي", img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=400", match: "اليابان 🇯🇵" },
-          { item: "البيتزا", img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=400", match: "إيطاليا 🇮🇹" }
-        ],
-        fact: "المعلومة السحرية 🌟: البرجر اتسمى كده نسبة لمدينة هامبورج، بس أمريكا هي اللي خلته مشهور في العالم كله!"
-      },
-      {
-        type: "memory",
-        riddle: "لعبة الذاكرة! طابق كل صورة بالكلمة المناسبة ليها.",
-        cards: [
-          { id: 1, content: "https://images.unsplash.com/photo-1605130284535-11dd9eedc58a?q=80&w=400", type: "statue", isImage: true },
-          { id: 2, content: "تمثال الحرية", type: "statue", isImage: false },
-          { id: 3, content: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=400", type: "burger", isImage: true },
-          { id: 4, content: "برجر", type: "burger", isImage: false },
-          { id: 5, content: "https://images.unsplash.com/photo-1611689342806-0863700ce6e4?q=80&w=400", type: "eagle", isImage: true },
-          { id: 6, content: "النسر الأصلع", type: "eagle", isImage: false },
-          { id: 7, content: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=400", type: "cinema", isImage: true },
-          { id: 8, content: "هوليوود", type: "cinema", isImage: false }
-        ],
-        fact: "المعلومة السحرية 🌟: ذاكرتك ممتازة! النسر الأصلع هو الطائر الوطني لأمريكا ورمز القوة عندهم."
       }
     ]
   }

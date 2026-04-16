@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Sun, Moon } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
-
+import { gamesData } from "@/src/data/gamesData"; // اتأكد إن مسار الفايل صح
 // 🌟 استيراد الداتا والمكونات اللي قسمناها
 import { countryData } from "@/src/data/countries"; // غير المسار حسب مكان الفايل
 import ExploreTab from "@/components/CountryTabs/ExploreTab";
@@ -100,7 +100,8 @@ export default function CountryHub() {
           <AnimatePresence mode="wait">
             {activeTab === "explore" && <ExploreTab key="explore" explore={data.explore}/>}
             {activeTab === "videos" && <VideosTab key="videos" videosData={data.videos} />}
-            {activeTab === "games" && <GamesTab key="games" eduGame={data.eduGame} />}
+            {/* {activeTab === "games" && <GamesTab key="games" eduGame={data.eduGame} />} */}
+            {activeTab === "games" && <GamesTab key="games" eduGame={gamesData[id]} />}
           </AnimatePresence>
         </section>
 
