@@ -9,11 +9,15 @@ import { Gamepad2, CheckCircle2, Trophy, RotateCcw } from "lucide-react";
 const QuizGame = ({ question, onWin, onWrong }: any) => (
   <>
     <h2 className="text-2xl md:text-3xl font-black mb-8 text-slate-900 dark:text-white leading-tight">{question.riddle}</h2>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {question.options.map((opt: any, i: number) => (
-        <button key={i} onClick={() => opt.text === question.answer ? onWin() : onWrong()} className="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-2xl hover:bg-sky-50 dark:hover:bg-sky-900/30 hover:border-sky-300 transition-all font-bold text-lg text-slate-800 dark:text-white group shadow-sm">
-          <span className="block text-4xl mb-2 group-hover:scale-110 transition-transform">{opt.icon}</span>
-          {opt.text}
+        <button 
+          key={i} 
+          onClick={() => opt.text === question.answer ? onWin() : onWrong()} 
+          className="bg-white dark:bg-slate-800 border-4 border-slate-100 dark:border-slate-700 p-2 rounded-[2rem] hover:border-sky-500 dark:hover:border-sky-500 transition-all group overflow-hidden shadow-lg"
+        >
+          <img src={opt.img} alt={opt.text} className="w-full h-40 md:h-48 object-cover rounded-[1.5rem] mb-3 group-hover:scale-105 transition-transform duration-500" />
+          <span className="block text-xl font-bold pb-2 text-slate-800 dark:text-white">{opt.text}</span>
         </button>
       ))}
     </div>
@@ -51,17 +55,29 @@ const MatchGame = ({ question, onWin, onWrong }: any) => {
   return (
     <>
       <h2 className="text-2xl md:text-3xl font-black mb-8 text-slate-900 dark:text-white leading-tight">{question.riddle}</h2>
-      <div className="flex flex-col md:flex-row gap-8 justify-between w-full">
-        <div className="flex flex-col gap-4 w-full md:w-1/2">
+      <div className="grid grid-cols-2 gap-6 w-full max-w-2xl mx-auto">
+        {/* العمود الأول: الصور */}
+        <div className="flex flex-col gap-4">
           {leftItems.map((p, i) => (
-            <button key={`L-${i}`} onClick={() => handleLeftClick(p.item)} disabled={matchedPairs.includes(p.item)} className={`p-4 rounded-2xl font-bold text-lg border-2 transition-all ${matchedPairs.includes(p.item) ? 'bg-emerald-100 border-emerald-400 text-emerald-800 opacity-50' : selectedItem === p.item ? 'bg-sky-100 border-sky-500 text-sky-800 scale-105' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white hover:bg-slate-50'}`}>
-              {p.item}
+            <button 
+              key={`L-${i}`} 
+              onClick={() => handleLeftClick(p.item)} 
+              disabled={matchedPairs.includes(p.item)} 
+              className={`h-32 md:h-40 rounded-3xl p-0 overflow-hidden border-4 transition-all shadow-md ${matchedPairs.includes(p.item) ? 'border-emerald-400 opacity-50' : selectedItem === p.item ? 'border-sky-500 scale-105 shadow-sky-500/50' : 'border-white dark:border-slate-700'}`}
+            >
+              <img src={p.img} alt={p.item} className="w-full h-full object-cover" />
             </button>
           ))}
         </div>
-        <div className="flex flex-col gap-4 w-full md:w-1/2">
+        {/* العمود الثاني: النصوص */}
+        <div className="flex flex-col gap-4">
           {rightItems.map((p, i) => (
-            <button key={`R-${i}`} onClick={() => handleRightClick(p.match)} disabled={matchedPairs.includes(p.match)} className={`p-4 rounded-2xl font-bold text-lg border-2 transition-all ${matchedPairs.includes(p.match) ? 'bg-emerald-100 border-emerald-400 text-emerald-800 opacity-50' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white hover:bg-slate-50'}`}>
+            <button 
+              key={`R-${i}`} 
+              onClick={() => handleRightClick(p.match)} 
+              disabled={matchedPairs.includes(p.match)} 
+              className={`h-32 md:h-40 rounded-3xl font-bold text-xl md:text-2xl border-4 transition-all shadow-md flex items-center justify-center p-4 ${matchedPairs.includes(p.match) ? 'bg-emerald-500 text-white border-emerald-400 opacity-50' : 'bg-white dark:bg-slate-800 border-white dark:border-slate-700 text-slate-800 dark:text-white hover:bg-sky-50 dark:hover:bg-sky-900/30 hover:border-sky-300'}`}
+            >
               {p.match}
             </button>
           ))}
@@ -106,8 +122,20 @@ const MemoryGame = ({ question, onWin, onWrong }: any) => {
           return (
             <div key={card.id} onClick={() => handleCardClick(card.id, card.type)} className="aspect-square relative cursor-pointer perspective-1000 w-full">
               <motion.div className="w-full h-full absolute inset-0 preserve-3d" animate={{ rotateY: isFlipped ? 180 : 0 }} transition={{ duration: 0.4 }}>
-                <div className="absolute inset-0 bg-sky-500 rounded-2xl backface-hidden flex items-center justify-center border-[4px] border-white dark:border-slate-800 shadow-md"><span className="text-4xl text-white opacity-50">?</span></div>
-                <div className="absolute inset-0 bg-white dark:bg-slate-800 rounded-2xl backface-hidden rotate-y-180 flex items-center justify-center border-2 border-sky-300 shadow-lg"><span className={`font-black ${card.content.length > 2 ? 'text-lg md:text-xl' : 'text-5xl'} text-slate-800 dark:text-white`}>{card.content}</span></div>
+                {/* ظهر الكارت */}
+                <div className="absolute inset-0 bg-gradient-to-br from-sky-400 to-indigo-500 rounded-2xl backface-hidden flex items-center justify-center border-4 border-white dark:border-slate-800 shadow-xl">
+                  <Gamepad2 size={40} className="text-white opacity-80" />
+                </div>
+                {/* وش الكارت (صورة أو نص) */}
+                <div className="absolute inset-0 bg-white dark:bg-slate-800 rounded-2xl backface-hidden rotate-y-180 flex items-center justify-center border-4 border-sky-400 shadow-xl overflow-hidden">
+                  {card.content.startsWith('http') ? (
+                    <img src={card.content} className="w-full h-full object-cover" alt="memory card" />
+                  ) : (
+                    <span className={`font-black ${card.content.length > 5 ? 'text-lg md:text-xl' : 'text-2xl md:text-4xl'} text-slate-800 dark:text-white px-2 text-center`}>
+                      {card.content}
+                    </span>
+                  )}
+                </div>
               </motion.div>
             </div>
           );
@@ -136,10 +164,15 @@ const TrueFalseGame = ({ question, onWin, onWrong }: any) => (
 const OddOneOutGame = ({ question, onWin, onWrong }: any) => (
   <>
     <h2 className="text-2xl md:text-3xl font-black mb-8 text-slate-900 dark:text-white leading-tight">{question.riddle}</h2>
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-2 gap-4 md:gap-6">
       {question.options.map((opt: any, i: number) => (
-        <button key={i} onClick={() => opt.isOdd ? onWin() : onWrong()} className="bg-white dark:bg-slate-800 border-4 border-slate-100 dark:border-slate-700 p-4 md:p-6 rounded-3xl hover:border-sky-400 hover:scale-105 transition-all font-black text-lg md:text-xl text-slate-800 dark:text-white shadow-sm flex flex-col items-center justify-center">
-          <span className="block text-4xl md:text-5xl mb-2">{opt.icon}</span>{opt.text}
+        <button 
+          key={i} 
+          onClick={() => opt.isOdd ? onWin() : onWrong()} 
+          className="bg-white dark:bg-slate-800 border-4 border-slate-100 dark:border-slate-700 p-2 md:p-3 rounded-3xl hover:border-sky-400 hover:scale-105 transition-all font-black text-lg md:text-xl text-slate-800 dark:text-white shadow-sm flex flex-col items-center justify-center overflow-hidden"
+        >
+          <img src={opt.img} alt={opt.text} className="w-full h-28 md:h-40 object-cover rounded-[1.5rem] mb-2" />
+          {opt.text}
         </button>
       ))}
     </div>
@@ -178,7 +211,13 @@ const SelectImageGame = ({ question, onWin, onWrong }: any) => (
     <h2 className="text-2xl md:text-3xl font-black mb-8 text-slate-900 dark:text-white leading-tight">{question.riddle}</h2>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {question.options.map((opt: any, i: number) => (
-        <img key={i} src={opt.img} alt="option" onClick={() => opt.isCorrect ? onWin() : onWrong()} className="w-full h-48 object-cover rounded-3xl border-4 border-slate-200 dark:border-slate-700 cursor-pointer hover:border-sky-500 hover:scale-105 transition-all shadow-md" />
+        <img 
+          key={i} 
+          src={opt.img} 
+          alt="option" 
+          onClick={() => opt.isCorrect ? onWin() : onWrong()} 
+          className="w-full h-48 object-cover rounded-3xl border-4 border-slate-200 dark:border-slate-700 cursor-pointer hover:border-sky-500 hover:scale-105 transition-all shadow-md" 
+        />
       ))}
     </div>
   </>
