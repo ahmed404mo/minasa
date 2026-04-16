@@ -26,7 +26,6 @@ export default function LandingPage() {
     return () => video.removeEventListener("ended", handleEnded);
   }, []);
 
-  // 🌟 الجولة الأخيرة: كسرنا قيود TypeScript بـ (as any) عشان الـ Build يعدي 🌟
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -73,12 +72,16 @@ export default function LandingPage() {
   if (!mounted) return null;
 
   return (
-    <div className="relative min-h-screen w-full flex flex-col bg-background text-foreground transition-colors duration-500 perspective-[1500px]">
+    <div className="relative min-h-screen w-full flex flex-col bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-500 perspective-[1500px]">
+      
+      {/* ===================== HERO SECTION ===================== */}
       <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden pt-32 pb-24">
         <video ref={videoRef} autoPlay muted playsInline className="absolute inset-0 w-full h-full object-cover">
           <source src="/back.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px]"></div>
+        
+        {/* 🌟 Overlay */}
+        <div className="absolute inset-0 bg-white/60 dark:bg-slate-950/70 backdrop-blur-[2px] transition-colors duration-500"></div>
 
         <motion.div 
           variants={containerVariants}
@@ -87,35 +90,41 @@ export default function LandingPage() {
           className="relative z-10 w-full max-w-6xl px-6 flex flex-col items-center text-center"
           style={{ transformStyle: "preserve-3d" }}
         >
+          {/* Header Title */}
           <motion.h1 
             variants={textVariants} 
-            className="text-5xl md:text-[80px] font-black text-white mb-6 leading-tight drop-shadow-xl"
+            className="text-5xl md:text-[80px] font-black text-slate-900 dark:text-white mb-6 leading-tight drop-shadow-xl transition-colors duration-500"
             style={{ fontStyle: "normal" }}
           >
              <ShinyText text="منصة المكتشف الصغير " className="inline text-sky-500" />
           </motion.h1>
           
+          {/* Subtitle */}
           <div className="mb-16 max-w-2xl" style={{ fontFamily: "var(--font-cairo)" }}>
             <ArabicText 
               text="المنصة التعليمية الأولى المصممة خصيصاً لتنمية مهارات الأطفال واكتشاف العالم بأمان تام."
-              className="text-lg md:text-2xl text-slate-200 font-bold drop-shadow-md leading-relaxed"
+              className="text-lg md:text-2xl text-slate-700 dark:text-slate-200 font-bold drop-shadow-md leading-relaxed transition-colors duration-500"
             />
           </div>
 
+          {/* ===================== HERO CARDS ===================== */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-4xl z-20">
+            
+            {/* 🟢 كارت عالم الأطفال */}
             <motion.div variants={card3DVariants} className="w-full">
               <TiltedCard className="w-full">
                 <Link href="/login" className="block group w-full outline-none">
-                  <div className="relative rounded-[2.5rem] shadow-lg h-[450px] flex flex-col border border-border overflow-hidden">
+                  <div className="relative rounded-[2.5rem] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_50px_-12px_rgba(16,185,129,0.25)] dark:shadow-black/50 h-[450px] flex flex-col border border-slate-300 hover:border-emerald-400 dark:border-slate-800 overflow-hidden bg-white dark:bg-slate-900 transition-all duration-500">
                     <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                       style={{ backgroundImage: "url('https://res.cloudinary.com/dmuuyiwtr/image/upload/q_auto/f_auto/v1775773530/Gemini_Generated_Image_bmv7yrbmv7yrbmv7_fuihqi.png')" }}></div>
-                    <div className="absolute top-6 right-6 z-10 bg-white/20 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-white/30">
+                    <div className="absolute top-6 right-6 z-10 bg-white/20 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-white/30 group-hover:bg-emerald-500/30 transition-colors">
                       <Gamepad2 className="w-8 h-8 text-white drop-shadow-md" />
                     </div>
-                    <div className="absolute bottom-0 inset-x-0 bg-white/95 dark:bg-slate-950/85 backdrop-blur-xl p-8 flex flex-col text-right">
-                      <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-2 transition-colors">عالم الأطفال</h2>
+                    {/* 🌟 خلفية النص أخضر فاتح */}
+                    <div className="absolute bottom-0 inset-x-0 bg-emerald-50/95 dark:bg-slate-950/90 backdrop-blur-xl p-8 flex flex-col text-right border-t border-emerald-100 dark:border-slate-800 transition-colors duration-500">
+                      <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">عالم الأطفال</h2>
                       <p className="text-slate-600 dark:text-slate-300 font-medium mb-6 text-sm leading-relaxed transition-colors">ألعاب، فيديوهات، وقصص سحرية حول قارات العالم!</p>
-                      <button className="w-full bg-emerald-500 text-white text-lg font-black py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-emerald-400 transition-all shadow-[0_8px_16px_rgba(0,0,0,0.4)]">
+                      <button className="w-full bg-emerald-500 text-white text-lg font-black py-4 rounded-xl flex items-center justify-center gap-3 group-hover:bg-emerald-400 transition-all shadow-[0_8px_16px_rgba(16,185,129,0.3)] group-hover:shadow-[0_8px_25px_rgba(16,185,129,0.5)]">
                         دخول الأبطال <ArrowLeft className="w-5 h-5 group-hover:-translate-x-2 transition-transform" />
                       </button>
                     </div>
@@ -124,19 +133,21 @@ export default function LandingPage() {
               </TiltedCard>
             </motion.div>
 
+            {/* 🔵 كارت بوابة الآباء */}
             <motion.div variants={card3DVariants} className="w-full">
               <TiltedCard className="w-full">
                 <Link href="/login" className="block group w-full outline-none">
-                  <div className="relative rounded-[2.5rem] shadow-lg h-[450px] flex flex-col border border-border overflow-hidden">
+                  <div className="relative rounded-[2.5rem] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_50px_-12px_rgba(14,165,233,0.25)] dark:shadow-black/50 h-[450px] flex flex-col border border-slate-300 hover:border-sky-400 dark:border-slate-800 overflow-hidden bg-white dark:bg-slate-900 transition-all duration-500">
                     <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                       style={{ backgroundImage: "url('https://res.cloudinary.com/dmuuyiwtr/image/upload/q_auto/f_auto/v1775773549/Gemini_Generated_Image_dt0gf7dt0gf7dt0g_r1nfnx.png')" }}></div>
-                    <div className="absolute top-6 right-6 z-10 bg-white/20 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-white/30">
+                    <div className="absolute top-6 right-6 z-10 bg-white/20 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-white/30 group-hover:bg-sky-500/30 transition-colors">
                       <ShieldCheck className="w-8 h-8 text-white drop-shadow-md" />
                     </div>
-                    <div className="absolute bottom-0 inset-x-0 bg-white/95 dark:bg-slate-950/85 backdrop-blur-xl p-8 flex flex-col text-right">
-                      <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-2 transition-colors">بوابة الآباء</h2>
+                    {/* 🌟 خلفية النص أزرق فاتح */}
+                    <div className="absolute bottom-0 inset-x-0 bg-sky-50/95 dark:bg-slate-950/90 backdrop-blur-xl p-8 flex flex-col text-right border-t border-sky-100 dark:border-slate-800 transition-colors duration-500">
+                      <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">بوابة الآباء</h2>
                       <p className="text-slate-600 dark:text-slate-300 font-medium mb-6 text-sm leading-relaxed transition-colors">تابع تقدم طفلك، تحكم في وقت اللعب، واكتشف التقارير بسهولة.</p>
-                      <button className="w-full bg-sky-500 text-white text-lg font-black py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-sky-400 transition-all shadow-[0_8px_16px_rgba(0,0,0,0.4)]">
+                      <button className="w-full bg-sky-500 text-white text-lg font-black py-4 rounded-xl flex items-center justify-center gap-3 group-hover:bg-sky-400 transition-all shadow-[0_8px_16px_rgba(14,165,233,0.3)] group-hover:shadow-[0_8px_25px_rgba(14,165,233,0.5)]">
                         دخول الآباء <ArrowLeft className="w-5 h-5 group-hover:-translate-x-2 transition-transform" />
                       </button>
                     </div>
@@ -144,15 +155,17 @@ export default function LandingPage() {
                 </Link>
               </TiltedCard>
             </motion.div>
+
           </div>
         </motion.div>
       </section>
 
-      <section className="relative z-10 w-full bg-background py-24 border-t border-border overflow-hidden">
+      {/* ===================== COMMUNITY SECTION ===================== */}
+      <section className="relative z-10 w-full bg-slate-100 dark:bg-slate-950 py-24 border-t border-slate-200 dark:border-slate-800 overflow-hidden transition-colors duration-500">
         <div className="max-w-[1400px] mx-auto px-6 relative">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants}>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4 transition-colors">مجتمع <span className="text-sky-500">مكتشف العوالم</span></h2>
+              <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4 transition-colors">مجتمع <span className="text-sky-500">مكتشف العوالم</span></h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
@@ -161,13 +174,13 @@ export default function LandingPage() {
                 { icon: <BookOpen />, color: "text-purple-500", label: "درس تفاعلي وقصة", count: 150 },
                 { icon: <Globe2 />, color: "text-yellow-500", label: "قارات للاستكشاف", count: 7 }
               ].map((item, i) => (
-                <motion.div key={i} variants={textVariants} className="flex flex-col items-center p-8 bg-card border border-border shadow-sm rounded-3xl">
-                   <div className={`p-4 rounded-2xl mb-4 ${item.color} bg-slate-500/10`}>{item.icon}</div>
-                   <div className="text-4xl font-black mb-2 flex items-center gap-1 text-foreground">
+                <motion.div key={i} variants={textVariants} className="flex flex-col items-center p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-300/60 dark:shadow-none rounded-3xl transition-colors duration-500">
+                   <div className={`p-4 rounded-2xl mb-4 ${item.color} bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700`}>{item.icon}</div>
+                   <div className="text-4xl font-black mb-2 flex items-center gap-1 text-slate-900 dark:text-white transition-colors">
                      <span>+</span>
                      <CountUp to={item.count} duration={2} />
                    </div>
-                   <p className="text-muted-foreground font-medium transition-colors">{item.label}</p>
+                   <p className="text-slate-500 dark:text-slate-400 font-medium transition-colors">{item.label}</p>
                 </motion.div>
               ))}
             </div>

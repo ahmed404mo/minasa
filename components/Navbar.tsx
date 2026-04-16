@@ -13,12 +13,10 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // قفل القائمة أوتوماتيكياً لما نغير الصفحة
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [pathname]);
 
-  // منع السكرول لما القائمة تكون مفتوحة في الموبايل
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -42,49 +40,46 @@ export default function Navbar() {
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
         >
           <GlassSurface 
-            className="rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-white/20 shadow-2xl w-full bg-slate-900/40 dark:bg-slate-950/40"
+            // 🌟 تعديل خلفية الناف بار: أبيض شفاف في الفاتح، وكحلي شفاف في الغامق
+            className="rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-white/20 shadow-2xl w-full bg-white/80 dark:bg-slate-950/60 backdrop-blur-xl"
           >
             <div className="px-4 md:px-10 py-3 md:py-5 flex items-center justify-between w-full">
               
-              {/* 🚀 اللوجو */}
               <Link href="/" className="flex items-center gap-2 md:gap-3 group shrink-0 relative z-[110]">
                 <div className="bg-sky-500 p-2 md:p-2.5 rounded-xl md:rounded-2xl shadow-[0_0_20px_rgba(14,165,233,0.5)] group-hover:rotate-12 transition-transform">
                   <Rocket className="w-5 h-5 md:w-6 md:h-6 text-white" />
                 </div>
-                <span className="text-lg md:text-2xl font-black text-white tracking-tight drop-shadow-md">
-                  المكتشف <span className="text-sky-400">الصغير</span>
+                {/* 🌟 اللوجو: أسود في الفاتح، أبيض في الغامق */}
+                <span className="text-lg md:text-2xl font-black text-slate-900 dark:text-white tracking-tight drop-shadow-md">
+                  المكتشف <span className="text-sky-500 drop-shadow-none">الصغير</span>
                 </span>
               </Link>
 
-              {/* 💻 الروابط - للشاشات الكبيرة */}
-              <div className="hidden lg:flex items-center gap-1 bg-black/20 p-1.5 rounded-2xl border border-white/10">
+              {/* 💻 روابط الديسكتوب */}
+              <div className="hidden lg:flex items-center gap-2 p-1.5 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
                 {navLinks.map((link) => {
                   const isActive = pathname === link.href;
                   return (
                     <Link 
                       key={link.href} 
                       href={link.href}
-                      className={`relative px-6 py-2.5 rounded-xl text-base font-bold transition-all duration-300 flex items-center gap-2 ${
-                        isActive ? "text-sky-400" : "text-slate-200 hover:text-white hover:bg-white/5"
+                      className={`px-6 py-2.5 rounded-xl text-base font-bold transition-all duration-300 flex items-center gap-2 ${
+                        isActive 
+                          ? "bg-sky-500 text-white shadow-[0_0_15px_rgba(14,165,233,0.4)]" // 🌟 زرار الأكتف ثابت (أزرق وكلام أبيض)
+                          : "text-slate-600 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white" // 🌟 كلام أسود فاتح وخلفية رمادي فاتح
                       }`}
                     >
-                      {isActive && (
-                        <motion.div 
-                          layoutId="activePill"
-                          className="absolute inset-0 bg-sky-500/15 border border-sky-500/30 rounded-xl -z-10"
-                        />
-                      )}
                       {link.name}
                     </Link>
                   );
                 })}
               </div>
 
-              {/* 🔒 اليمين (دخول + توجل) للشاشات الكبيرة */}
               <div className="hidden md:flex items-center gap-3 lg:gap-5">
                 <ThemeToggle />
                 <Link href="/login">
-                  <button className="bg-white text-slate-950 px-6 lg:px-10 py-2.5 rounded-xl font-black text-base hover:bg-sky-500 hover:text-white transition-all shadow-lg active:scale-95 flex items-center gap-2">
+                  {/* 🌟 زر الدخول: أسود في الفاتح، أبيض في الغامق، ولما تقف عليه يبقى أزرق */}
+                  <button className="bg-slate-900 text-white dark:bg-white dark:text-slate-950 px-6 lg:px-10 py-2.5 rounded-xl font-black text-base hover:bg-sky-500 dark:hover:bg-sky-500 hover:text-white dark:hover:text-white transition-all shadow-lg active:scale-95 flex items-center gap-2">
                     <LogIn className="w-4 h-4" />
                     دخول
                   </button>
@@ -97,7 +92,8 @@ export default function Navbar() {
                   <ThemeToggle />
                 </div>
                 <button 
-                  className="text-white p-2 bg-white/10 rounded-xl border border-white/20 active:scale-90 transition-transform"
+                  // 🌟 زرار المنيو: لون غامق في الفاتح عشان يبان
+                  className="text-slate-900 dark:text-white p-2 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 active:scale-90 transition-transform shadow-sm"
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                   aria-label="Toggle Menu"
                 >
@@ -110,7 +106,7 @@ export default function Navbar() {
         </motion.div>
       </div>
 
-      {/* 📱 Mobile Menu Overlay - تم التعديل هنا */}
+      {/* 📱 Mobile Menu Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -119,8 +115,8 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -20 }}
             className="absolute top-[85px] left-4 right-4 lg:hidden z-[90]"
           >
-            {/* استبدلنا GlassSurface بـ div عادي مع تأثيرات Tailwind */}
-            <div className="rounded-[2rem] border border-white/20 shadow-2xl p-6 bg-slate-900/90 dark:bg-slate-950/90 backdrop-blur-xl w-full">
+            {/* 🌟 خلفية منيو الموبايل */}
+            <div className="rounded-[2rem] border border-slate-200 dark:border-slate-700 shadow-2xl p-6 bg-white dark:bg-slate-950 w-full">
               <div className="flex flex-col gap-3">
                 {navLinks.map((link, idx) => {
                   const isActive = pathname === link.href;
@@ -133,20 +129,22 @@ export default function Navbar() {
                     >
                       <Link 
                         href={link.href}
-                        className={`flex items-center gap-4 p-4 rounded-2xl text-xl font-bold transition-all ${
+                        className={`flex items-center gap-4 p-4 rounded-2xl text-xl font-bold transition-all shadow-sm ${
                           isActive 
-                            ? "bg-sky-500/20 text-sky-400 border border-sky-500/30" 
-                            : "text-slate-200 hover:text-white hover:bg-white/5 border border-transparent"
+                            ? "bg-sky-500 text-white shadow-[0_0_15px_rgba(14,165,233,0.4)]" // 🌟 زرار الأكتف ثابت
+                            : "text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-100 dark:border-transparent"
                         }`}
                       >
-                        <span className="p-3 bg-white/10 rounded-xl">{link.icon}</span>
+                        <span className={`p-3 rounded-xl ${isActive ? "bg-sky-600" : "bg-slate-200 dark:bg-slate-700"}`}>
+                          {link.icon}
+                        </span>
                         {link.name}
                       </Link>
                     </motion.div>
                   );
                 })}
                 
-                <hr className="my-4 border-white/10" />
+                <hr className="my-4 border-slate-200 dark:border-slate-700" />
                 
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
@@ -154,7 +152,7 @@ export default function Navbar() {
                   transition={{ delay: navLinks.length * 0.1 }}
                 >
                   <Link href="/login">
-                    <button className="w-full bg-sky-500 text-white py-5 rounded-2xl font-black text-xl flex items-center justify-center gap-3 shadow-xl shadow-sky-500/20 active:scale-[0.98]">
+                    <button className="w-full bg-sky-500 text-white py-5 rounded-2xl font-black text-xl flex items-center justify-center gap-3 shadow-xl shadow-sky-500/30 active:scale-[0.98]">
                       <LogIn className="w-6 h-6" />
                       بوابة الدخول للأبطال
                     </button>

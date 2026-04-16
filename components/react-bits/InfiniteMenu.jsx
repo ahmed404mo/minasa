@@ -960,7 +960,7 @@ export default function InfiniteMenu({ items = [], scale = 1.0 }) {
   };
 
 return (
-  <div style={{ 
+  <div className="bg-slate-50 dark:bg-transparent transition-colors duration-500" style={{ 
     position: 'relative', 
     width: '100%', 
     height: '100%', 
@@ -982,21 +982,21 @@ return (
     />
 
     {activeItem && (
-      /* 🌟 التعديل 1: الحاوية الرئيسية بقت flex-col-reverse في الموبايل عشان الاسم يبقى فوق والزرار تحت، وقللنا الـ padding */
-      <div className="absolute inset-0 z-20 flex flex-col-reverse md:flex-row items-center justify-end md:justify-between px-4 pb-12 md:px-24 md:pb-0 gap-6 md:gap-0 pointer-events-none">
+      /* 🌟 الحاوية الرئيسية: تم إضافة pt-28 للموبايل و md:pt-0 للديسكتوب */
+      <div className="absolute inset-0 z-20 flex flex-col-reverse md:flex-row items-center justify-end md:justify-between px-4 pt-28 pb-12 md:pt-0 md:px-24 md:pb-0 gap-[60%] md:gap-0 pointer-events-none">
         
         {/* ==================== الجانب الأيسر: كارد الوصف + الزرار ==================== */}
-        {/* 🌟 التعديل 2: items-center للموبايل، w-full عشان ياخد المساحة المتاحة */}
         <div className={`flex flex-col items-center md:items-start gap-4 md:gap-10 w-full md:w-auto transition-all duration-700 ease-out 
           ${isMoving ? 'opacity-0 md:-translate-x-20 translate-y-10 md:translate-y-0 blur-lg' : 'opacity-100 translate-x-0 translate-y-0 blur-0'}`}>
           
           {/* كارد الوصف الزجاجي */}
           <div className="relative group pointer-events-auto w-full max-w-[90vw] md:max-w-md">
-            {/* 🌟 التعديل 3: تقليل الـ padding في الموبايل، وتوسيط النص */}
-            <div className="bg-slate-900/80 backdrop-blur-3xl p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden text-center md:text-left break-words">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sky-400/50 to-transparent opacity-50" />
+            {/* 🌟 تعديل لون الخلفية والحدود لدعم الـ Theme */}
+            <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-3xl p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-slate-200/50 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden text-center md:text-left break-words transition-colors duration-500">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sky-500/50 dark:via-sky-400/50 to-transparent opacity-50" />
               
-              <p className="text-sky-100 font-bold text-base md:text-xl lg:text-2xl leading-relaxed relative z-10 drop-shadow-sm">
+              {/* 🌟 تعديل لون النص: رمادي غامق في الفاتح، أزرق فاتح في الغامق */}
+              <p className="text-slate-700 dark:text-sky-100 font-bold text-base md:text-xl lg:text-2xl leading-relaxed relative z-10 drop-shadow-none dark:drop-shadow-sm transition-colors duration-500">
                 {activeItem.description}
               </p>
             </div>
@@ -1006,8 +1006,8 @@ return (
           {/* زرار التواصل - تصميم نيون */}
           <button 
             onClick={handleButtonClick}
-            // 🌟 التعديل 4: الزرار ياخد 90% من الشاشة في الموبايل، ويكون متوسط
-            className="group relative w-full max-w-[90vw] md:w-auto px-8 md:px-10 py-4 md:py-5 bg-white text-slate-950 font-black text-lg md:text-xl rounded-[1.5rem] md:rounded-2xl shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:bg-sky-400 hover:text-white hover:shadow-sky-500/50 transition-all duration-300 flex items-center justify-center md:justify-start gap-4 pointer-events-auto active:scale-95"
+            // 🌟 تعديل الزرار: أزرق صريح في الفاتح والغامق (لأن اللون الأزرق محايد ومميز للـ CTA)
+            className="group relative w-full max-w-[90vw] md:w-auto px-8 md:px-10 py-4 md:py-5 bg-sky-500 text-white font-black text-lg md:text-xl rounded-[1.5rem] md:rounded-2xl shadow-[0_0_20px_rgba(14,165,233,0.3)] hover:bg-sky-400 hover:shadow-sky-500/50 transition-all duration-300 flex items-center justify-center md:justify-start gap-4 pointer-events-auto active:scale-95"
           >
             <span>إرسال رسالة</span>
             <svg 
@@ -1027,21 +1027,22 @@ return (
           ${isMoving ? 'opacity-0 md:translate-x-20 -translate-y-10 md:translate-y-0 blur-lg' : 'opacity-100 translate-x-0 translate-y-0 blur-0'}`}>
           
           <div className="relative pointer-events-auto group w-full max-w-[90vw] md:w-auto text-center md:text-right">
-            <div className="bg-white/[0.03] backdrop-blur-3xl p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] border border-white/10 shadow-2xl relative overflow-hidden flex flex-col items-center md:items-end">
-               {/* 🌟 التعديل 5: الخط أصغر في الموبايل (text-4xl) والكلام بيجي جنب بعضه مش تحت بعضه */}
-               <h2 className="text-4xl md:text-8xl font-black text-white tracking-tighter leading-tight md:leading-none drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] relative z-10">
+            {/* 🌟 تعديل خلفية كارد الاسم لتناسب الفاتح والغامق */}
+            <div className="bg-white/40 dark:bg-white/[0.03] backdrop-blur-3xl p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] border border-slate-200/50 dark:border-white/10 shadow-xl dark:shadow-2xl relative overflow-hidden flex flex-col items-center md:items-end transition-colors duration-500">
+               {/* 🌟 تعديل لون الاسم: أسود في الفاتح، أبيض في الغامق */}
+               <h2 className="text-4xl md:text-8xl font-black text-slate-900 dark:text-white tracking-tighter leading-tight md:leading-none drop-shadow-md dark:drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] relative z-10 transition-colors duration-500">
                  {activeItem.title.split(' ').map((word, i) => (
-                   <span key={i} className={i === 0 ? "inline-block md:block mr-2 md:mr-0" : "inline-block md:block text-sky-400"}>
+                   <span key={i} className={i === 0 ? "inline-block md:block mr-2 md:mr-0" : "inline-block md:block text-sky-500 dark:text-sky-400"}>
                      {word}
                    </span>
                  ))}
                </h2>
                
                {/* خط نيون ديكوري تحت الاسم */}
-               <div className="h-1.5 md:h-2 w-20 md:w-32 bg-sky-400 mt-4 md:mt-6 rounded-full shadow-[0_0_20px_rgba(56,189,248,1)] relative z-10 mx-auto md:ml-auto md:mr-0" />
+               <div className="h-1.5 md:h-2 w-20 md:w-32 bg-sky-500 dark:bg-sky-400 mt-4 md:mt-6 rounded-full shadow-[0_0_15px_rgba(14,165,233,0.5)] dark:shadow-[0_0_20px_rgba(56,189,248,1)] relative z-10 mx-auto md:ml-auto md:mr-0 transition-colors duration-500" />
             </div>
             
-            <div className="absolute -inset-6 bg-indigo-500/10 rounded-full -z-10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity hidden md:block" />
+            <div className="absolute -inset-6 bg-sky-500/10 dark:bg-indigo-500/10 rounded-full -z-10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity hidden md:block" />
           </div>
         </div>
 

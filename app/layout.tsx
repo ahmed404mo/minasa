@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 // استيراد الـ Providers والزرار
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import ChatBot from '@/components/ChatBot';
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -51,7 +52,7 @@ export default function RootLayout({
             <LayoutWrapper>
               {children}
             </LayoutWrapper>
-            
+            <ChatBot />
           </ClickSpark>
         </ThemeProvider>
 
