@@ -161,7 +161,7 @@ export const countryData: Record<string, any> = {
       }
     ]
   },
-  "africa": {
+"africa": {
     countryName: "مصر 🇪🇬",
     continentName: "أفريقيا",
     theme: "from-orange-900 via-amber-900 to-red-950",
@@ -186,7 +186,12 @@ export const countryData: Record<string, any> = {
         audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776329960/lahajati_______1776329876613_pd3hha.mp3"
       }
     ],
-    videos: []
+    videos: [
+      { 
+        title: "اكتشف حضارة مصر 🇪🇬", 
+        url: "https://res.cloudinary.com/da52viu5e/video/upload/v1776332162/%D9%81%D9%8A%D8%AF%D9%8A%D9%88_%D9%85%D8%B5%D8%B1_eynjt6.mp4" 
+      }
+    ]
   },
   "europe": {
     countryName: "فرنسا 🇫🇷",

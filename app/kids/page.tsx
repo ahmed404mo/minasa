@@ -315,7 +315,7 @@ export default function KidsContinentsHub() {
         whileTap={{ scale: 0.95 }}
         className="w-full bg-sky-500 text-white px-8 py-5 md:px-12 md:py-6 rounded-3xl md:rounded-[2rem] font-black text-2xl md:text-3xl shadow-xl flex items-center justify-center gap-4 transition-all"
       >
-        يلا نستكشف! 🚀
+        يلا نكتشف! 🚀
       </motion.button>
     </Link>
 

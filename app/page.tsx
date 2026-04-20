@@ -165,7 +165,7 @@ export default function LandingPage() {
         <div className="max-w-[1400px] mx-auto px-6 relative">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants}>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4 transition-colors">مجتمع <span className="text-sky-500">مكتشف العوالم</span></h2>
+              <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4 transition-colors">مجتمع <span className="text-sky-500">المكتشف الصغير</span></h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
