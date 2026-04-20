@@ -3,14 +3,40 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Loader2, Bot, Trash2, Eraser, Sparkles } from "lucide-react";
+
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<{ role: "user" | "bot"; content: string }[]>([
-    { role: "bot", content: "أهلاً بك يا بطل! أنا مساعدك الذكي، تحب تسأل عن إيه النهاردة؟" }
-  ]);
+  
+  // 🌟 1. فصلنا الرسالة الترحيبية عشان نقدر نستخدمها في كذا مكان
+  const defaultMessage = { role: "bot", content: "أهلاً بك يا بطل! أنا مساعدك الذكي، تحب تسأل عن إيه النهاردة؟" };
+  const [messages, setMessages] = useState<{ role: "user" | "bot"; content: string }[]>([defaultMessage]);
+  
+  // 🌟 2. حالة جديدة عشان نتأكد إننا على المتصفح مش السيرفر (Next.js SSR Fix)
+  const [isMounted, setIsMounted] = useState(false); 
+  
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // 🌟 3. تحميل المحادثة من الـ LocalStorage أول ما الصفحة تفتح
+  useEffect(() => {
+    setIsMounted(true);
+    const savedChat = localStorage.getItem("chatHistory");
+    if (savedChat) {
+      try {
+        setMessages(JSON.parse(savedChat));
+      } catch (error) {
+        console.error("خطأ في قراءة المحادثة السابقة:", error);
+      }
+    }
+  }, []);
+
+  // 🌟 4. حفظ المحادثة في الـ LocalStorage مع كل رسالة جديدة
+  useEffect(() => {
+    if (isMounted) {
+      localStorage.setItem("chatHistory", JSON.stringify(messages));
+    }
+  }, [messages, isMounted]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -51,11 +77,12 @@ export default function ChatBot() {
   };
 
   const clearChat = () => {
-    setMessages([{ role: "bot", content: "أهلاً بك من جديد! كيف يمكنني مساعدتك؟" }]);
+    // 🌟 5. لما يمسح المحادثة، هترجع للرسالة الترحيبية (والـ useEffect هيحفظ التغيير دا تلقائياً)
+    setMessages([defaultMessage]);
   };
 
   return (
-<div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[9999] flex flex-col items-end" dir="rtl">
+    <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[9999] flex flex-col items-end" dir="rtl">
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -139,28 +166,28 @@ export default function ChatBot() {
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="اسألني أي شيء..."
                   className="w-full bg-slate-100 dark:bg-slate-800/50 text-slate-900 dark:text-white px-5 py-2.5 md:py-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-sky-500/50 transition-all font-bold text-sm md:text-base placeholder:text-slate-400"
+                  dir="rtl"
                 />
               </div>
               <button 
                 type="submit" 
                 disabled={isLoading || !input.trim()}
-                className="bg-sky-500 hover:bg-sky-600 disabled:opacity-40 disabled:grayscale text-white p-2.5 md:p-3 rounded-xl shadow-lg active:scale-90 transition-all flex-shrink-0"
+                className="bg-sky-500 hover:bg-sky-600 disabled:opacity-40 disabled:grayscale text-white p-2.5 md:p-3 rounded-xl shadow-lg active:scale-90 transition-all flex-shrink-0 flex items-center justify-center"
               >
-                <Send size={20} className="rotate-180" />
+                <Send size={20} className="transform scale-x-[-1]" />
               </button>
             </form>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* 🌟 Floating Button - AI Theme */}
+      {/* Floating Button - AI Theme */}
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
         className="bg-gradient-to-br from-indigo-600 via-sky-500 to-emerald-400 text-white p-4 md:p-5 rounded-[1.8rem] shadow-[0_0_30px_rgba(99,102,241,0.4)] flex items-center justify-center transition-all border-4 border-white dark:border-slate-800 relative group overflow-hidden ring-1 ring-sky-500/20"
       >
-        {/* تأثير اللمعة المتحركة (AI Shine) */}
         <motion.div 
           animate={{ x: ['-100%', '100%'] }}
           transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
@@ -182,7 +209,6 @@ export default function ChatBot() {
             >
               <div className="relative">
                 <Bot size={32} className="md:w-9 md:h-9" />
-                {/* نجوم الذكاء الاصطناعي المتحركة */}
                 <motion.div
                   animate={{ opacity: [0, 1, 0], scale: [0.8, 1.2, 0.8] }}
                   transition={{ repeat: Infinity, duration: 2 }}
@@ -194,12 +220,6 @@ export default function ChatBot() {
             </motion.div>
           )}
         </AnimatePresence>
-        
-        {/* {!isOpen && (
-          <span className="absolute -top-1 -left-1 w-5 h-5 bg-gradient-to-r from-rose-500 to-orange-500 border-2 border-white dark:border-slate-800 rounded-full flex items-center justify-center text-[10px] font-bold text-white shadow-sm animate-bounce z-20">
-            1
-          </span>
-        )} */}
       </motion.button>
 
       <style jsx global>{`
