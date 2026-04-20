@@ -95,7 +95,7 @@ export default function CountryHub() {
             </h1>
             
             <p className="text-xl font-bold text-sky-600 dark:text-sky-300 drop-shadow-sm bg-white/50 dark:bg-black/30 px-5 py-2 rounded-xl inline-block border border-slate-300 dark:border-white/5 transition-colors mt-4">
-               استكشاف {data.continentName} 🚀
+               استكشاف {data.continentName} 
             </p>
           </div>
           

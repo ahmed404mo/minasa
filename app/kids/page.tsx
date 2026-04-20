@@ -52,7 +52,7 @@ export default function KidsContinentsHub() {
       top: "15%", left: "25%", size: "22rem",
       hoverAudio: "/audio/North America.mp3", 
       clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320051/amerca_vt1apb.mp3",
-      detailsTitle: "قارة أمريكا الشمالية 🌍", 
+      detailsTitle: "قارة أمريكا الشمالية ", 
       detailsDesc: "قارة ضخمة جداً، تتميز بوجود مساحات خضراء واسعة وجبال عالية، وتعتبر من أكثر الأماكن تطوراً في التكنولوجيا.",
       targetCountry: "تعالى نشوف أشهر بلد فيها.. أمريكا! 🇺🇸"
     },
@@ -62,7 +62,7 @@ export default function KidsContinentsHub() {
       top: "45%", left: "28%", size: "24rem",
       hoverAudio: "/audio/South America.mp3", 
       clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320130/elbarazel_kcfuet.mp3",
-      detailsTitle: "قارة أمريكا الجنوبية 🌍", 
+      detailsTitle: "قارة أمريكا الجنوبية ", 
       detailsDesc: "أرض الطبيعة الساحرة! موطن أكبر غابة في العالم (غابات الأمازون) اللي بنسميها رئة كوكب الأرض.",
       targetCountry: "تعالى نشوف أشهر بلد فيها.. البرازيل! 🇧🇷"
     },
@@ -72,7 +72,7 @@ export default function KidsContinentsHub() {
       top: "15%", left: "44%", size: "18rem",
       hoverAudio: "/audio/Europe.mp3", 
       clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320343/lahajati_______1776320312614_ilo9er.mp3",
-      detailsTitle: "قارة أوروبا 🌍", 
+      detailsTitle: "قارة أوروبا ", 
       detailsDesc: "قارة الجمال والفن، مليانة قلاع تاريخية قديمة ومناظر طبيعية كأنها طالعة من القصص الخيالية.",
       targetCountry: "تعالى نشوف أشهر بلد فيها.. فرنسا! 🇫🇷"
     },
@@ -82,7 +82,7 @@ export default function KidsContinentsHub() {
       top: "42%", left: "58%", size: "28rem",
       hoverAudio: "/audio/Africa.mp3", 
       clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320439/lahajati_______1776320414712_nsicv4.mp3",
-      detailsTitle: "قارة أفريقيا 🌍", 
+      detailsTitle: "قارة أفريقيا ", 
       detailsDesc: "قارة الدفء والشمس! موطن الحيوانات البرية المدهشة زي الأسود، الزرافات، والأفيال، وفيها أطول أنهار العالم.",
       targetCountry: "تعالى نشوف أشهر بلد فيها.. مصر! 🇪🇬"
     },
@@ -92,7 +92,7 @@ export default function KidsContinentsHub() {
       top: "15%", left: "68%", size: "35rem",
       hoverAudio: "/audio/Asia.mp3", 
       clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320517/lahajati_______1776320496740_tdn6d6.mp3",
-      detailsTitle: "قارة آسيا 🌍", 
+      detailsTitle: "قارة آسيا ", 
       detailsDesc: "أكبر قارة في العالم! فيها تنوع عجيب جداً، من أعلى قمة جبل في العالم لحد أذكى الروبوتات.",
       targetCountry: "تعالى نشوف أشهر بلد فيها.. اليابان! 🇯🇵"
     },
@@ -102,7 +102,7 @@ export default function KidsContinentsHub() {
       top: "65%", left: "75%", size: "16rem",
       hoverAudio: "/audio/Australia.mp3", 
       clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320578/lahajati_______1776320557384_m89lgf.mp3",
-      detailsTitle: "قارة أستراليا 🌍", 
+      detailsTitle: "قارة أستراليا ", 
       detailsDesc: "قارة عبارة عن جزيرة عملاقة، بتتميز بكائنات مدهشة مش موجودة في أي مكان تاني في العالم غير هناك.",
       targetCountry: "تعالى نشوف أشهر بلد فيها.. أستراليا! 🇦🇺"
     },
@@ -112,7 +112,7 @@ export default function KidsContinentsHub() {
       top: "75%", left: "50%", size: "38rem",
       hoverAudio: "/audio/Antarctica.mp3", 
       clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320646/lahajati_______1776320623692_vecbm0.mp3",
-      detailsTitle: "القارة القطبية ❄️", 
+      detailsTitle: "القارة القطبية ", 
       detailsDesc: "أبرد مكان على كوكب الأرض! كله تلج وجليد، ومفيش ناس بتعيش هناك بشكل دائم، بس مليانة حيوانات لطيفة.",
       targetCountry: "تعالى نشوف أشهر سكانها.. البطريق! 🐧"
     },
@@ -315,7 +315,7 @@ export default function KidsContinentsHub() {
         whileTap={{ scale: 0.95 }}
         className="w-full bg-sky-500 text-white px-8 py-5 md:px-12 md:py-6 rounded-3xl md:rounded-[2rem] font-black text-2xl md:text-3xl shadow-xl flex items-center justify-center gap-4 transition-all"
       >
-        يلا نكتشف! 🚀
+        يلا نكتشف
       </motion.button>
     </Link>
 
