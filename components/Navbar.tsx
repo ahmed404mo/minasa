@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Rocket, Menu, X, Home, Info, Mail, LogIn } from "lucide-react";
+// 🌟 1. تم استبدال Rocket بـ Search
+import { Search, Menu, X, Home, Info, Mail, LogIn } from "lucide-react";
 
 import GlassSurface from "@/components/react-bits/GlassSurface";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -47,7 +48,8 @@ export default function Navbar() {
               
               <Link href="/" className="flex items-center gap-2 md:gap-3 group shrink-0 relative z-[110]">
                 <div className="bg-sky-500 p-2 md:p-2.5 rounded-xl md:rounded-2xl shadow-[0_0_20px_rgba(14,165,233,0.5)] group-hover:rotate-12 transition-transform">
-                  <Rocket className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  {/* 🌟 2. تم وضع أيقونة العدسة المكبرة (Search) هنا */}
+                  <Search className="w-5 h-5 md:w-6 md:h-6 text-white" />
                 </div>
                 {/* 🌟 اللوجو: أسود في الفاتح، أبيض في الغامق */}
                 <span className="text-lg md:text-2xl font-black text-slate-900 dark:text-white tracking-tight drop-shadow-md">
