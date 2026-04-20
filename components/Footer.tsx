@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Rocket, Heart } from "lucide-react";
+// 🌟 1. تم استبدال Rocket بـ Search
+import { Search, Heart } from "lucide-react";
 
 export default function Footer() {
   // إعدادات الأنيميشن (العناصر تظهر ورا بعض بالترتيب)
@@ -42,10 +43,11 @@ export default function Footer() {
         {/* اللوجو والاسم */}
         <motion.div variants={itemVariants} className="flex items-center gap-3 mb-6">
           <div className="bg-gradient-to-br from-sky-400 to-indigo-500 p-2.5 rounded-2xl shadow-lg shadow-sky-500/20">
-            <Rocket className="w-7 h-7 text-white" />
+            {/* 🌟 2. تم وضع أيقونة العدسة المكبرة (Search) هنا */}
+            <Search className="w-7 h-7 text-white" />
           </div>
           {/* لون النص أسود في النهاري وأبيض في الليلي */}
-          <span className="text-3xl font-black text-slate-900 dark:text-white tracking-tight transition-colors">مكتشف العوالم</span>
+          <span className="text-3xl font-black text-slate-900 dark:text-white tracking-tight transition-colors">المكتشف الصغير</span>
         </motion.div>
 
         {/* وصف سريع */}
@@ -62,7 +64,7 @@ export default function Footer() {
 
         {/* حقوق الملكية */}
         <motion.div variants={itemVariants} className="w-full border-t border-slate-200 dark:border-white/10 pt-6 flex flex-col items-center gap-3 transition-colors">
-          <p className="text-slate-500 text-sm font-medium">© {new Date().getFullYear()} منصة مكتشف العوالم. جميع الحقوق محفوظة.</p>
+          <p className="text-slate-500 text-sm font-medium">© {new Date().getFullYear()} منصة المكتشف الصغير. جميع الحقوق محفوظة.</p>
           <p className="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm font-bold transition-colors">
             صُنع بحب من أجل مستقبل أطفالنا <Heart className="w-4 h-4 text-rose-500 fill-rose-500 animate-pulse" />
           </p>

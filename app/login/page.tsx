@@ -119,7 +119,7 @@ export default function LoginPage() {
                   <ShieldCheck className="w-16 h-16 text-emerald-500 dark:text-emerald-400 drop-shadow-sm" />
                 </div>
                 {/* 🌟 تعديل: النصوص */}
-                <h3 className="text-4xl md:text-5xl font-black text-slate-800 dark:text-white mb-4 tracking-tight transition-colors duration-500">جاهز للمغامرة؟ 🚀</h3>
+                <h3 className="text-4xl md:text-5xl font-black text-slate-800 dark:text-white mb-4 tracking-tight transition-colors duration-500">جاهز للمغامرة؟ </h3>
                 <p className="text-slate-500 dark:text-slate-400 mb-12 text-xl font-medium leading-relaxed transition-colors duration-500">
                   عالم مليان ألعاب وفيديوهات ومفاجآت مستنيك تكتشفه!
                 </p>

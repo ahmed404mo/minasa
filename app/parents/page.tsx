@@ -16,23 +16,25 @@ export default function ParentsDashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 p-6 md:p-12">
+    // 🌟 1. تم إضافة pt-32 لتنزيل المحتوى تحت الناف بار
+    // 🌟 2. تم إضافة كلاسات dark: لدعم الوضع الليلي (اختياري، يمكنك إزالتها إذا لم تكن بحاجتها)
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 px-6 md:px-12 pb-12 pt-32 md:pt-40 transition-colors duration-500">
       <div className="max-w-6xl mx-auto">
         
         {/* الهيدر بتاع لوحة التحكم */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6 bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
           <div>
-            <h1 className="text-3xl font-black text-slate-800 mb-2">
+            <h1 className="text-3xl font-black text-slate-800 dark:text-white mb-2">
               <ShinyText text="لوحة تحكم الآباء" />
             </h1>
-            <p className="text-slate-500">مرحباً بك! تابع تقدم طفلك بسهولة.</p>
+            <p className="text-slate-500 dark:text-slate-400">مرحباً بك! تابع تقدم طفلك بسهولة.</p>
           </div>
           <div className="flex gap-4">
-            <button className="p-3 bg-slate-100 text-slate-600 rounded-xl hover:bg-slate-200 transition-colors">
+            <button className="p-3 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
               <Settings className="w-6 h-6" />
             </button>
             <Link href="/">
-              <button className="flex items-center gap-2 px-6 py-3 bg-rose-50 text-rose-600 font-bold rounded-xl hover:bg-rose-100 transition-colors">
+              <button className="flex items-center gap-2 px-6 py-3 bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 font-bold rounded-xl hover:bg-rose-100 dark:hover:bg-rose-500/20 transition-colors">
                 <LogOut className="w-5 h-5" /> تسجيل خروج
               </button>
             </Link>
@@ -47,14 +49,14 @@ export default function ParentsDashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center gap-6"
+              className="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center gap-6"
             >
-              <div className="p-4 bg-slate-50 rounded-2xl">
+              <div className="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl">
                 {stat.icon}
               </div>
               <div>
-                <p className="text-slate-500 text-sm font-bold mb-1">{stat.title}</p>
-                <p className="text-2xl font-black text-slate-800">{stat.value}</p>
+                <p className="text-slate-500 dark:text-slate-400 text-sm font-bold mb-1">{stat.title}</p>
+                <p className="text-2xl font-black text-slate-800 dark:text-white">{stat.value}</p>
               </div>
             </motion.div>
           ))}
