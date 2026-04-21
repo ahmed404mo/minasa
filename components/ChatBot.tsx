@@ -4,21 +4,29 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Loader2, Bot, Trash2, Eraser, Sparkles } from "lucide-react";
 
+// 🌟 1. تعريف النوع (Type) عشان نمنع أي أخطاء من TypeScript
+type Message = {
+  role: "user" | "bot";
+  content: string;
+};
+
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   
-  // 🌟 1. فصلنا الرسالة الترحيبية عشان نقدر نستخدمها في كذا مكان
-  const defaultMessage = { role: "bot", content: "أهلاً بك يا بطل! أنا مساعدك الذكي، تحب تسأل عن إيه النهاردة؟" };
-  const [messages, setMessages] = useState<{ role: "user" | "bot"; content: string }[]>([defaultMessage]);
+  // 🌟 2. تطبيق النوع على الرسالة الافتراضية
+  const defaultMessage: Message = { 
+    role: "bot", 
+    content: "أهلاً بك يا بطل! أنا مساعدك الذكي، تحب تسأل عن إيه النهاردة؟" 
+  };
   
-  // 🌟 2. حالة جديدة عشان نتأكد إننا على المتصفح مش السيرفر (Next.js SSR Fix)
+  // 🌟 3. استخدام نفس النوع في הـ State
+  const [messages, setMessages] = useState<Message[]>([defaultMessage]);
+  
   const [isMounted, setIsMounted] = useState(false); 
-  
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // 🌟 3. تحميل المحادثة من الـ LocalStorage أول ما الصفحة تفتح
   useEffect(() => {
     setIsMounted(true);
     const savedChat = localStorage.getItem("chatHistory");
@@ -31,7 +39,6 @@ export default function ChatBot() {
     }
   }, []);
 
-  // 🌟 4. حفظ المحادثة في الـ LocalStorage مع كل رسالة جديدة
   useEffect(() => {
     if (isMounted) {
       localStorage.setItem("chatHistory", JSON.stringify(messages));
@@ -77,7 +84,6 @@ export default function ChatBot() {
   };
 
   const clearChat = () => {
-    // 🌟 5. لما يمسح المحادثة، هترجع للرسالة الترحيبية (والـ useEffect هيحفظ التغيير دا تلقائياً)
     setMessages([defaultMessage]);
   };
 
