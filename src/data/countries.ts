@@ -38,7 +38,7 @@ export const countryData: Record<string, any> = {
     img: "https://res.cloudinary.com/dhvuw8yog/image/upload/v1776018585/SouthAmerica_l5pwcq.png",
     explore: [
       { 
-        img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.03_AM_1_vb8dgt", 
+        img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.03_AM_bbtlf6", 
         title: "غابات الأمازون", 
         desc: "أكبر غابة في العالم، مليانة حيوانات وطيور شكلها عجيب!",
         audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776328829/lahajati_______1776328807281_oniumd.mp3"
@@ -50,7 +50,7 @@ export const countryData: Record<string, any> = {
         audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776328890/lahajati_______1776328870042_w21luj.mp3"
       },
       { 
-        img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.03_AM_bbtlf6", 
+        img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.03_AM_1_vb8dgt", 
         title: "نهر الأمازون", 
         desc: "نهر ضخم جداً بيعيش فيه كائنات مذهلة ومفترسة.",
         audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776328951/lahajati_______1776328932444_cxousc.mp3"
@@ -138,18 +138,18 @@ export const countryData: Record<string, any> = {
     img: "https://res.cloudinary.com/dhvuw8yog/image/upload/v1776018579/Antarctica_lnoprt.png",
     explore: [
       { 
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzQdurvVjAk1cSvN82WrRDKho6WNd43ZhPJA&s", 
+        img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.07_AM_2_szucw8", 
         title: "الجبال الجليدية", 
         desc: "جبال ضخمة جداً من التلج عايمة في الماية.",
         audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776329615/lahajati_______1776329578007_yy22ng.mp3"
       },
       { 
-        img: "https://thumbs.dreamstime.com/b/adorable-emperor-penguin-family-chilly-antarctic-winter-night-cartoon-illustration-crackled-iceberg-scene-witness-353840625.jpg", 
+        img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.07_AM_1_dp3i2g", 
         title: "البطريق الإمبراطور", 
         desc: "أكبر أنواع البطاريق بيعيش هناك وبيستحمل البرد القارس."
       },
       { 
-        img: "https://thumbs.dreamstime.com/b/antarctic-research-station-penguins-polar-exploration-science-vector-design-generative-ai-intriguing-illustration-395839707.jpg", 
+        img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.07_AM_olguab", 
         title: "محطات الأبحاث", 
         desc: "مفيش مدن هناك، بس فيه علماء بيدرسوا التلج والطقس." 
       }
