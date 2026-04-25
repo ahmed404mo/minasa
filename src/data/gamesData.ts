@@ -100,7 +100,9 @@ export const gamesData: Record<string, any[]> = {
     { type: "iframe", riddle: "عبقري فرنسا 6 🇫🇷", src: "https://wordwall.net/embed/538ea4270b4d49eb91ab0388bfc79ed2?themeId=65&templateId=30&fontStackId=0" },
     { type: "iframe", riddle: "أسطورة فرنسا 7 🇫🇷", src: "https://wordwall.net/embed/538ea4270b4d49eb91ab0388bfc79ed2?themeId=1&templateId=8&fontStackId=0" }
   ],
-  "antarctica": [],
+  "antarctica": [
+{ type: "iframe", riddle: "رحلة أنتاركتيكا 🐧", src: "https://ahmed404mo.github.io/gameAjj/" }
+  ],
   "australia": [
     { type: "iframe", riddle: "رحلة أستراليا 🇦🇺", src: "https://asmoahossam-droid.github.io/game1/" },
     { type: "iframe", riddle: "مغامرة أستراليا 1 🇦🇺", src: "https://wordwall.net/embed/f6b96747e81146688968babb35888a04?themeId=41&templateId=3&fontStackId=0" },
