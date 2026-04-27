@@ -968,7 +968,6 @@ return (
     overflow: 'hidden'
   }}>
     
-    {/* النقاط المنقطة خلف الكانفاس لتعزيز شكل الكرتون */}
     <div className="absolute inset-0 z-0 opacity-[0.1] pointer-events-none"
       style={{
         backgroundImage: `radial-gradient(#000 1.5px, transparent 1.5px)`,
@@ -976,7 +975,6 @@ return (
       }}
     />
 
-    {/* الكانفاس الـ 3D */}
     <canvas 
       id="infinite-grid-menu-canvas" 
       ref={canvasRef} 
@@ -992,77 +990,69 @@ return (
     />
 
     {activeItem && (
-      /* 🌟 الحاوية الرئيسية: توزيع العناصر بشكل كرتوني */
-      <div className="absolute inset-0 z-20 flex flex-col-reverse md:flex-row items-center justify-end md:justify-between px-4 pt-28 pb-12 md:pt-0 md:px-24 md:pb-0 gap-8 md:gap-0 pointer-events-none">
+<div className="absolute inset-0 z-20 flex flex-col-reverse lg:flex-row items-center justify-between lg:justify-between px-4 pb-20 pt-10 lg:pt-0 lg:px-8 xl:px-16 gap-24 lg:gap-12 pointer-events-none">
+  
+  <div className={`flex flex-col items-center lg:items-start gap-4 lg:gap-6 w-full lg:w-auto max-w-[90vw] lg:max-w-md transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] 
+    ${isMoving ? 'opacity-0 scale-90 translate-y-10' : 'opacity-100 scale-100 translate-y-0'}`}>
+    
+    <div className="relative pointer-events-auto w-full">
+      <div className="bg-white border-[3px] lg:border-[5px] border-black p-4 lg:p-8 rounded-[1.5rem] lg:rounded-[2rem] shadow-[6px_6px_0_0_#000] lg:shadow-[10px_10px_0_0_#000] text-center lg:text-right">
+        <div className="bg-yellow-400 border-[2px] lg:border-[3px] border-black w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center -mt-8 lg:-mt-12 mb-3 lg:mb-4 shadow-[3px_3px_0_0_#000] md:shadow-[4px_4px_0_0_#000] mx-auto lg:mr-0">
+          <span className="text-black font-black text-xs lg:text-base">!</span>
+        </div>
         
-        {/* ==================== الجانب الأيسر: كارد الوصف + الزرار ==================== */}
-        <div className={`flex flex-col items-center md:items-start gap-6 w-full md:w-auto transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] 
-          ${isMoving ? 'opacity-0 scale-90 translate-y-10' : 'opacity-100 scale-100 translate-y-0'}`}>
-          
-          {/* كارد الوصف الكرتوني (Neo-Brutalist) */}
-          <div className="relative pointer-events-auto w-full max-w-[90vw] md:max-w-md">
-            <div className="bg-white border-[5px] border-black p-6 md:p-8 rounded-[2rem] shadow-[10px_10px_0_0_#000] text-center md:text-right">
-              {/* أيقونة صغيرة كرتونية */}
-              <div className="bg-yellow-400 border-[3px] border-black w-10 h-10 rounded-full flex items-center justify-center -mt-12 mb-4 shadow-[4px_4px_0_0_#000] mx-auto md:mr-0">
-                <span className="text-black font-black">!</span>
-              </div>
-              
-              <p className="text-black font-black text-lg md:text-2xl leading-tight">
-                {activeItem.description}
-              </p>
-            </div>
-          </div>
-
-          {/* زرار التواصل - كرتوني بامتياز */}
-          <button 
-            onClick={handleButtonClick}
-            className="group relative w-full max-w-[80vw] md:w-auto px-8 py-4 bg-sky-400 text-black font-black text-xl md:text-2xl rounded-2xl border-[4px] border-black shadow-[8px_8px_0_0_#000] hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[4px] hover:translate-y-[4px] transition-all pointer-events-auto active:scale-95 flex items-center justify-center gap-3"
-          >
-            <span>كلمني هنا</span>
-            <div className="bg-black rounded-full p-1 group-hover:rotate-12 transition-transform">
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="w-5 h-5 text-white" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M14 5l7 7-7 7" />
-              </svg>
-            </div>
-          </button>
-        </div>
-
-        {/* ==================== الجانب الأيمن: كارد الاسم ==================== */}
-        <div className={`flex flex-col items-center md:items-end w-full md:w-auto transition-all duration-700 delay-75
-          ${isMoving ? 'opacity-0 scale-75 blur-md' : 'opacity-100 scale-100 blur-0'}`}>
-          
-          <div className="relative pointer-events-auto group w-full max-w-[90vw] md:w-auto">
-            {/* كارد الاسم بستايل الفقاعة الكرتونية */}
-            <div className="bg-rose-400 border-[6px] border-black p-6 md:p-10 rounded-[3rem] shadow-[15px_15px_0_0_#000] relative flex flex-col items-center md:items-end">
-               
-               <h2 className="text-5xl md:text-8xl font-black text-white italic tracking-tighter leading-none text-center md:text-right drop-shadow-[4px_4px_0_#000]">
-                 {activeItem.title.split(' ').map((word, i) => (
-                   <span key={i} className={i === 0 ? "block mb-2" : "block text-yellow-300"}>
-                     {word}
-                   </span>
-                 ))}
-               </h2>
-               
-               {/* زخرفة كرتونية تحت الاسم */}
-               <div className="h-4 w-24 md:w-40 bg-black mt-6 rounded-full" />
-            </div>
-
-            {/* نجوم ديكورية تظهر حول الاسم */}
-            <div className="absolute -top-6 -left-6 text-yellow-400 animate-bounce">
-              <svg className="w-12 h-12 fill-current stroke-black stroke-[2px]" viewBox="0 0 24 24">
-                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-              </svg>
-            </div>
-          </div>
-        </div>
-
+        <p className="text-black font-black text-sm sm:text-base lg:text-xl xl:text-2xl leading-relaxed lg:leading-tight break-words px-2">
+          {activeItem.description}
+        </p>
       </div>
+    </div>
+
+    {/* زر التواصل */}
+    <button 
+      onClick={handleButtonClick}
+      className="group relative w-full px-5 py-2.5 lg:px-8 lg:py-4 bg-sky-400 text-black font-black text-base lg:text-xl xl:text-2xl rounded-[1rem] lg:rounded-2xl border-[3px] lg:border-[4px] border-black shadow-[5px_5px_0_0_#000] lg:shadow-[8px_8px_0_0_#000] hover:shadow-[2px_2px_0_0_#000] lg:hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[2px] hover:translate-y-[2px] lg:hover:translate-x-[4px] lg:hover:translate-y-[4px] transition-all pointer-events-auto active:scale-95 flex items-center justify-center gap-2 lg:gap-3"
+    >
+      <span>كلمني هنا</span>
+      <div className="bg-black rounded-full p-1 group-hover:rotate-12 transition-transform">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          className="w-3.5 h-3.5 lg:w-5 lg:h-5 text-white" 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M14 5l7 7-7 7" />
+        </svg>
+      </div>
+    </button>
+  </div>
+
+  <div className={`flex flex-col items-center lg:items-end w-full lg:w-auto transition-all duration-700 delay-75
+    ${isMoving ? 'opacity-0 scale-75 blur-md' : 'opacity-100 scale-100 blur-0'}`}>
+    
+    <div className="relative pointer-events-auto group w-full max-w-[85vw] sm:max-w-[80vw] md:max-w-[70vw] lg:max-w-none">
+      <div className="bg-gradient-to-br from-rose-400 to-rose-500 border-[4px] lg:border-[6px] border-black p-6 lg:p-10 rounded-[2rem] lg:rounded-[3rem] shadow-[10px_10px_0_0_#000] lg:shadow-[15px_15px_0_0_#000] relative flex flex-col items-center lg:items-end">
+         
+         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-black text-white italic tracking-tighter leading-tight text-center lg:text-right drop-shadow-[3px_3px_0_#000] lg:drop-shadow-[4px_4px_0_#000]">
+           {activeItem.title.split(' ').map((word, i) => (
+             <span key={i} className={i === 0 ? "block mb-1 lg:mb-2" : "block text-yellow-300"}>
+               {word}
+             </span>
+           ))}
+         </h2>
+         
+         <div className="h-2 lg:h-4 w-16 sm:w-24 lg:w-40 bg-black mt-3 lg:mt-6 rounded-full" />
+      </div>
+
+      {/* النجمه */}
+      <div className="absolute -top-4 -left-4 lg:-top-6 lg:-left-6 text-yellow-400 animate-bounce">
+        <svg className="w-8 h-8 lg:w-12 lg:h-12 fill-current stroke-black stroke-[1.5px] lg:stroke-[2px]" viewBox="0 0 24 24">
+          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
     )}
   </div>
 );

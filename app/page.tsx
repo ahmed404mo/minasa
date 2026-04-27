@@ -95,7 +95,7 @@ export default function LandingPage() {
               whileHover={{ scale: 1.05, rotate: 2 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link href="/preview" className="flex items-center gap-3 bg-white border-[5px] border-black px-10 py-5 rounded-full shadow-[8px_8px_0_0_#000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+              <Link href="/kids" className="flex items-center gap-3 bg-white border-[5px] border-black px-10 py-5 rounded-full shadow-[8px_8px_0_0_#000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
                 <Eye className="w-8 h-8 text-sky-600" />
                 <span className="text-3xl font-black text-slate-800">جولة سريعة</span>
               </Link>
