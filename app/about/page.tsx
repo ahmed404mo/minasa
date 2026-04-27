@@ -1,6 +1,5 @@
 "use client";
 
-// import { motion } from "framer-motion";
 import Link from "next/link";
 import { 
   ShieldCheck, 
@@ -8,239 +7,311 @@ import {
   BrainCircuit, 
   HeartHandshake, 
   Globe2,
-  ArrowLeft
+  ArrowLeft,
+  Star,
+  Rocket,
+  Trophy,
+  Palette,
+  Music
 } from "lucide-react";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
-import LightRays from "@/components/react-bits/LightRays";
 
 // ==========================================
-// 🚀 إعدادات الأنيميشن
+// إعدادات الأنيميشن
 // ==========================================
 const gridVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15, 
-    }
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 }
   }
 };
 
-const cardVariants :Variants= {
-  hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
+const cardVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.8, rotate: -5, y: 50 },
   visible: { 
     opacity: 1, 
-    y: 0, 
-    filter: "blur(0px)",
-    transition: { type: "spring", stiffness: 100, damping: 20 }
+    scale: 1, 
+    rotate: 0,
+    y: 0,
+    transition: { type: "spring", stiffness: 200, damping: 15 }
   }
 };
 
 // ==========================================
-// 🪄 المكون السحري (بعد توضيح الصور) 🪄
+// المكون الكرتوني مع الخلفية المنقطة داخل الكرت
 // ==========================================
 interface BentoCardProps {
   className?: string;
   children: ReactNode;
-  glowColor?: string;
-  bgImage?: string;
+  bgColor?: string;
 }
 
-const MagicBentoCard = ({ className = "", children, glowColor = "from-sky-500 to-indigo-500", bgImage }: BentoCardProps) => {
+const CartoonBentoCard = ({ className = "", children, bgColor = "bg-white" }: BentoCardProps) => {
   return (
     <motion.div
       variants={cardVariants}
+      whileHover={{ y: -10, rotate: 1, scale: 1.02 }}
       className={`h-full ${className}`}
     >
-      <div className="relative h-full w-full group/card rounded-[2.5rem] p-[2px] overflow-hidden transition-all duration-500 group-hover/bento:grayscale group-hover/bento:opacity-50 hover:!grayscale-0 hover:!opacity-100 hover:scale-[1.03] hover:z-10">
+      <div className={`relative h-full w-full rounded-[3rem] border-[6px] border-black shadow-[15px_15px_0_0_#000] overflow-hidden ${bgColor} transition-all duration-300`}>
         
-        <div className={`absolute inset-0 bg-gradient-to-br ${glowColor} opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 rounded-[2.5rem] z-0`} />
-        
-        {/* خلينا الخلفية الأساسية أشف شوية (bg-opacity-80) عشان تدي مساحة للصورة */}
-        <div className="relative h-full w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl rounded-[2.4rem] p-8 border border-slate-200 dark:border-white/10 group-hover/card:border-transparent transition-colors duration-500 overflow-hidden flex flex-col z-10">
-          
-          {bgImage && (
-            <>
-              {/* 1. رفعنا وضوح الصورة لـ 60% في العادي و 100% في الـ Hover */}
-              <img 
-                src={bgImage} 
-                alt="background" 
-                className="absolute inset-0 w-full h-full object-cover opacity-60 dark:opacity-70 group-hover/card:opacity-100 transition-opacity duration-500 z-0"
-              />
-              {/* 2. خلينا التدرج شفاف من فوق عشان تفاصيل الصورة تبان، وموجود بس تحت عشان يحمي قراءة النص */}
-              <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/50 to-transparent dark:from-slate-950/95 dark:via-slate-900/50 dark:to-transparent z-0 transition-colors duration-500" />
-            </>
-          )}
+        {/* النقاط المنقطة الداخلية للكارت (Polka Dots) */}
+        <div 
+          className="absolute inset-0 opacity-[0.08] pointer-events-none"
+          style={{
+            backgroundImage: `radial-gradient(#000 2px, transparent 2px)`,
+            backgroundSize: '20px 20px'
+          }}
+        />
 
-          <div className={`absolute -top-24 -right-24 w-48 h-48 bg-gradient-to-br ${glowColor} rounded-full blur-[80px] opacity-20 group-hover/card:opacity-40 transition-opacity duration-700 z-0`} />
-          
-          <div className="relative z-10 flex-1 flex flex-col">
-            {children}
-          </div>
+        <div className="relative z-10 p-6 md:p-8 h-full flex flex-col">
+          {children}
         </div>
       </div>
     </motion.div>
   );
 };
 
-// ==========================================
-// 📄 صفحة "عن المنصة" (About Us) 📄
-// ==========================================
 export default function AboutPage() {
+  const [mounted, setMounted] = useState(false);
+  const [floatingStars, setFloatingStars] = useState<any[]>([]);
+
+  useEffect(() => {
+    setMounted(true);
+    // نجوم عائمة
+    const stars = Array.from({ length: 20 }, () => ({
+      id: Math.random(),
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      delay: Math.random() * 5,
+      duration: 2 + Math.random() * 4,
+      size: 6 + Math.random() * 15
+    }));
+    setFloatingStars(stars);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
-    <div className="relative min-h-screen w-full bg-background text-foreground overflow-x-hidden selection:bg-sky-500/30 transition-colors duration-500" dir="rtl">
+    <div className="relative min-h-screen w-full bg-[#F0F9FF] text-black overflow-x-hidden font-bold" dir="rtl">
       
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-50 dark:opacity-80 transition-opacity duration-500">
-        <LightRays />
-      </div>
+      {/* نجوم متحركة */}
+      {floatingStars.map((star) => (
+        <motion.div
+          key={star.id}
+          className="absolute pointer-events-none z-0"
+          style={{
+            left: `${star.left}%`,
+            top: `${star.top}%`,
+            width: `${star.size}px`,
+            height: `${star.size}px`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            rotate: [0, 360],
+            opacity: [0.2, 0.6, 0.2]
+          }}
+          transition={{
+            duration: star.duration,
+            delay: star.delay,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        >
+          <Star className="w-full h-full text-yellow-300 fill-yellow-300" />
+        </motion.div>
+      ))}
 
-      <div className="fixed top-0 left-1/4 w-96 h-96 bg-sky-600/10 rounded-full blur-[150px] pointer-events-none z-0" />
-      <div className="fixed bottom-0 right-1/4 w-96 h-96 bg-emerald-600/10 rounded-full blur-[150px] pointer-events-none z-0" />
+      {/* دوائر خلفية */}
+      <div className="fixed inset-0 z-0 opacity-[0.08] pointer-events-none"
+        style={{
+          backgroundImage: `radial-gradient(#000 1.5px, transparent 1.5px)`,
+          backgroundSize: '30px 30px'
+        }}
+      />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-24 md:py-32">
+      <div className="fixed top-20 left-10 w-32 h-32 bg-yellow-300 rounded-full border-4 border-black -z-10 opacity-40 blur-xl" />
+      <div className="fixed bottom-20 right-10 w-48 h-48 bg-pink-300 rounded-full border-4 border-black -z-10 opacity-40 blur-xl" />
+      <div className="fixed top-1/2 left-1/2 w-96 h-96 bg-sky-300 rounded-full border-4 border-black -z-10 opacity-30 blur-xl" />
+
+      <main className="relative z-10 max-w-6xl mx-auto px-6 pt-44 pb-20">
         
-        {/* الهيدر */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 mb-6 shadow-lg backdrop-blur-md transition-colors duration-500"
-          >
-            <Sparkles className="w-5 h-5 text-sky-500 dark:text-sky-400" />
-            <span className="text-sm font-bold text-slate-700 dark:text-sky-200 tracking-wider transition-colors">مكتشف العوالم</span>
-          </motion.div>
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-black mb-6 drop-shadow-lg leading-tight text-slate-900 dark:text-white transition-colors"
-          >
-            إحنا بنبني <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-indigo-500 dark:from-sky-400 dark:to-indigo-400">المستقبل</span>
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 font-medium leading-relaxed drop-shadow-md transition-colors"
-          >
-            منصة تعليمية ترفيهية بتجمع بين الخيال والتكنولوجيا، عشان نخلق بيئة آمنة وذكية لطفلك يكتشف فيها العالم وهو بيلعب.
-          </motion.p>
-        </div>
+        {/* الهيدر - نزل لتحت */}
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: "spring", bounce: 0.5 }}
+        >
+          <header className="bg-white border-[6px] border-black rounded-[3.5rem] p-10 md:p-14 shadow-[20px_20px_0_0_#000] mb-16 flex flex-col md:flex-row items-center justify-between gap-10">
+            <div className="text-right w-full md:w-3/5">
+              <div className="inline-flex items-center gap-2 bg-yellow-400 border-[3px] border-black px-4 py-1 rounded-full mb-6 shadow-[4px_4px_0_0_#000]">
+                <Sparkles className="w-5 h-5 text-black" />
+                <span className="text-sm font-black text-black">مرحباً يا بطل</span>
+              </div>
+              <h1 className="text-5xl md:text-8xl font-black mb-6 italic leading-none drop-shadow-[5px_5px_0_#38bdf8]">
+                حكاية <span className="text-black">منصتنا</span>
+              </h1>
+              <p className="text-xl md:text-2xl font-black text-black/70 leading-tight">
+                إحنا مش بس موقع، إحنا <span className="bg-emerald-300 px-3 border-2 border-black rounded-lg text-black shadow-[3px_3px_0_0_#000]">مغامرة</span> لكل بطل صغير
+              </p>
+            </div>
+            <motion.div animate={{ y: [0, -15, 0] }} transition={{ repeat: Infinity, duration: 3 }}>
+              <img src="/backk.png" className="w-56 md:w-72 object-contain opacity-20 contrast-200" alt="background" />
+            </motion.div>
+          </header>
+        </motion.div>
 
-        {/* 🍱 شبكة الكروت 🍱 */}
+        {/* شبكة الكروت المنقطة */}
         <motion.div 
           variants={gridVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 auto-rows-[280px] gap-6 max-w-6xl mx-auto group/bento"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 md:grid-cols-12 gap-8"
         >
           
-          <MagicBentoCard 
-            className="md:col-span-2 md:row-span-2" 
-            glowColor="from-sky-400 to-blue-600" 
-            bgImage="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop"
-          >
-            <div className="h-full flex flex-col justify-between">
-              <div className="bg-sky-100 dark:bg-sky-500/30 backdrop-blur-md w-16 h-16 rounded-2xl flex items-center justify-center mb-6 border border-sky-200 dark:border-sky-400/50 shadow-inner transition-colors">
-                <Globe2 className="w-8 h-8 text-sky-600 dark:text-sky-300" />
+          {/* كارد العالم - كبير */}
+          <div className="md:col-span-8">
+            <CartoonBentoCard bgColor="bg-gradient-to-br from-sky-400 to-blue-500">
+              <div className="bg-white border-[4px] border-black w-20 h-20 rounded-2xl flex items-center justify-center mb-6 shadow-[8px_8px_0_0_#000]">
+                <Globe2 className="w-10 h-10 text-sky-600" />
               </div>
-              <div>
-                <h2 className="text-4xl font-black text-slate-900 dark:text-white mb-4 drop-shadow-md transition-colors">العالم بين إيديهم</h2>
-                <p className="text-slate-700 dark:text-slate-200 text-lg md:text-xl leading-loose font-medium max-w-md drop-shadow-md transition-colors">
-                  مهمتنا مش بس إننا نعلم الأطفال الجغرافيا والتاريخ، إحنا بناخدهم في رحلة سحرية لكل قارة، يشوفوا معالمها، يلعبوا بألعابها، ويعرفوا ثقافتها كأنهم سافروا بجد. بنكسر حدود التعليم التقليدي!
-                </p>
+              <h2 className="text-4xl md:text-5xl font-black mb-4 text-white">العالم بين إيديهم</h2>
+              <p className="text-xl md:text-2xl font-bold text-white/90 leading-relaxed">
+                مهمتنا إننا ناخد طفلك في رحلة سحرية لكل قارة، يشوف معالمها ويلعب ألعابها ويعرف ثقافتها كأنه سافر بجد
+              </p>
+              <div className="mt-4">
+                <div className="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-2">
+                  <Rocket className="w-5 h-5 text-white" />
+                  <span className="text-white text-sm font-black">7 قارات سحرية</span>
+                </div>
               </div>
-            </div>
-          </MagicBentoCard>
+            </CartoonBentoCard>
+          </div>
 
-          <MagicBentoCard 
-            className="md:col-span-1 md:row-span-2" 
-            glowColor="from-emerald-400 to-teal-500" 
-            bgImage="https://static.sayidaty.net/2026-01/471936.jpg?VersionId=nN1xqpTDaVOtkIEvLP8Uu0doqijk.QJw"
-          >
-            <div className="h-full flex flex-col justify-between">
-              <div className="bg-emerald-100 dark:bg-emerald-500/30 backdrop-blur-md w-16 h-16 rounded-2xl flex items-center justify-center mb-6 border border-emerald-200 dark:border-emerald-400/50 shadow-inner transition-colors">
-                <ShieldCheck className="w-8 h-8 text-emerald-600 dark:text-emerald-300" />
+          {/* كارد الأمان */}
+          <div className="md:col-span-4">
+            <CartoonBentoCard bgColor="bg-gradient-to-br from-emerald-400 to-green-500">
+              <div className="bg-white border-[4px] border-black w-16 h-16 rounded-2xl flex items-center justify-center mb-5 shadow-[6px_6px_0_0_#000]">
+                <ShieldCheck className="w-8 h-8 text-emerald-600" />
               </div>
-              <div>
-                <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-4 drop-shadow-md transition-colors">أمان 100%</h2>
-                <p className="text-slate-700 dark:text-slate-200 text-lg leading-relaxed font-medium drop-shadow-md transition-colors">
-                  بيئة مقفولة تماماً خالية من الإعلانات والمحتوى المزعج. بوابة خاصة للآباء لمتابعة كل خطوة بيخطيها البطل الصغير.
-                </p>
+              <h2 className="text-3xl font-black mb-3 text-white">أمان تام</h2>
+              <p className="text-base font-bold text-white/90 leading-relaxed">
+                بيئة مقفولة وآمنة تماماً خالية من أي إعلانات مزعجة
+              </p>
+              <div className="mt-auto pt-4">
+                <div className="flex items-center gap-1 text-white/80 text-sm">
+                  <Star className="w-3 h-3 fill-white" />
+                  <span>ثقة الآباء</span>
+                </div>
               </div>
-            </div>
-          </MagicBentoCard>
+            </CartoonBentoCard>
+          </div>
 
-          <MagicBentoCard 
-            className="md:col-span-1 md:row-span-1" 
-            glowColor="from-purple-400 to-fuchsia-500" 
-            bgImage="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop"
-          >
-            <div className="flex flex-col justify-center h-full">
-              <div className="bg-purple-100 dark:bg-purple-500/30 backdrop-blur-md w-12 h-12 rounded-xl flex items-center justify-center mb-4 border border-purple-200 dark:border-purple-400/50 transition-colors">
-                <BrainCircuit className="w-6 h-6 text-purple-600 dark:text-purple-300" />
+          {/* كارد تعليم ذكي */}
+          <div className="md:col-span-4">
+            <CartoonBentoCard bgColor="bg-gradient-to-br from-purple-400 to-purple-600">
+              <div className="bg-white border-[4px] border-black w-14 h-14 rounded-xl flex items-center justify-center mb-4 shadow-[6px_6px_0_0_#000]">
+                <BrainCircuit className="w-7 h-7 text-purple-600" />
               </div>
-              <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-2 drop-shadow-md transition-colors">تعليم ذكي</h3>
-              <p className="text-slate-700 dark:text-slate-200 font-medium drop-shadow-sm transition-colors">تكنولوجيا بتفهم الطفل وبتتفاعل معاه.</p>
-            </div>
-          </MagicBentoCard>
+              <h3 className="text-2xl md:text-3xl font-black mb-2 text-white">تعليم ذكي</h3>
+              <p className="text-sm md:text-base font-bold text-white/80">ألعاب بتفهم طفلك وبتنمي ذكاءه وهو بيستمتع</p>
+            </CartoonBentoCard>
+          </div>
 
-          <MagicBentoCard 
-            className="md:col-span-1 md:row-span-1" 
-            glowColor="from-rose-400 to-orange-500" 
-            bgImage="https://images.unsplash.com/photo-1543269664-76bc3997d9ea?q=80&w=800&auto=format&fit=crop"
-          >
-            <div className="flex flex-col justify-center h-full">
-              <div className="bg-rose-100 dark:bg-rose-500/30 backdrop-blur-md w-12 h-12 rounded-xl flex items-center justify-center mb-4 border border-rose-200 dark:border-rose-400/50 transition-colors">
-                <HeartHandshake className="w-6 h-6 text-rose-600 dark:text-rose-300" />
+          {/* كارد ثقة الآباء */}
+          <div className="md:col-span-4">
+            <CartoonBentoCard bgColor="bg-gradient-to-br from-rose-400 to-rose-600">
+              <div className="bg-white border-[4px] border-black w-14 h-14 rounded-xl flex items-center justify-center mb-4 shadow-[6px_6px_0_0_#000]">
+                <HeartHandshake className="w-7 h-7 text-rose-600" />
               </div>
-              <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-2 drop-shadow-md transition-colors">ثقة الآباء</h3>
-              <p className="text-slate-700 dark:text-slate-200 font-medium drop-shadow-sm transition-colors">تقارير لحظية عشان تفرح بنجاحات طفلك.</p>
-            </div>
-          </MagicBentoCard>
+              <h3 className="text-2xl md:text-3xl font-black mb-2 text-white">ثقة الآباء</h3>
+              <p className="text-sm md:text-base font-bold text-white/80">تقارير سهلة عشان تتابع تطور البطل الصغير لحظة بلحظة</p>
+            </CartoonBentoCard>
+          </div>
 
-          <MagicBentoCard 
-            className="md:col-span-2 md:row-span-1" 
-            glowColor="from-yellow-400 to-amber-500" 
-          >
-            <div className="h-full flex items-center justify-around text-center">
-              <div>
-                <div className="text-4xl md:text-6xl font-black text-amber-500 dark:text-yellow-400 mb-2 drop-shadow-md transition-colors">7</div>
-                <div className="text-slate-600 dark:text-slate-200 font-bold text-lg transition-colors">قارات للاستكشاف</div>
+          {/* كارد التحديات والجوائز */}
+          <div className="md:col-span-4">
+            <CartoonBentoCard bgColor="bg-gradient-to-r from-yellow-400 to-orange-500">
+              <div className="bg-white border-[4px] border-black w-14 h-14 rounded-xl flex items-center justify-center mb-4 shadow-[6px_6px_0_0_#000]">
+                <Trophy className="w-7 h-7 text-yellow-600" />
               </div>
-              <div className="w-px h-20 bg-slate-200 dark:bg-white/10 transition-colors" />
-              <div>
-                <div className="text-4xl md:text-6xl font-black text-amber-500 dark:text-yellow-400 mb-2 drop-shadow-md transition-colors">+50</div>
-                <div className="text-slate-600 dark:text-slate-200 font-bold text-lg transition-colors">لعبة تفاعلية</div>
-              </div>
-              <div className="w-px h-20 bg-slate-200 dark:bg-white/10 hidden sm:block transition-colors" />
-              <div className="hidden sm:block">
-                <div className="text-4xl md:text-6xl font-black text-amber-500 dark:text-yellow-400 mb-2 drop-shadow-md transition-colors">100%</div>
-                <div className="text-slate-600 dark:text-slate-200 font-bold text-lg transition-colors">متعة وتعليم</div>
-              </div>
-            </div>
-          </MagicBentoCard>
+              <h3 className="text-2xl md:text-3xl font-black mb-2 text-black">تحديات وجوائز</h3>
+              <p className="text-sm md:text-base font-bold text-black/80">كل إنجاز بيعمله الطفل ليه مكافأة تشجعه يكمل</p>
+            </CartoonBentoCard>
+          </div>
 
-          <MagicBentoCard 
-            className="md:col-span-2 md:row-span-1" 
-            glowColor="from-indigo-500 to-cyan-400" 
-          >
-            <div className="h-full flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-3 drop-shadow-md transition-colors">جاهز تبدأ الرحلة؟ 🚀</h2>
-                <p className="text-slate-600 dark:text-sky-100 font-medium text-lg transition-colors">خلي طفلك ينضم لآلاف الأبطال المكتشفين.</p>
+          {/* كارد الإبداع */}
+          <div className="md:col-span-4">
+            <CartoonBentoCard bgColor="bg-gradient-to-br from-indigo-400 to-indigo-600">
+              <div className="bg-white border-[4px] border-black w-14 h-14 rounded-xl flex items-center justify-center mb-4 shadow-[6px_6px_0_0_#000]">
+                <Palette className="w-7 h-7 text-indigo-600" />
               </div>
-              <Link href="/login" className="shrink-0">
-                <button className="bg-indigo-600 text-white dark:bg-white dark:text-indigo-950 px-10 py-5 rounded-2xl font-black text-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-3 shadow-[0_0_30px_rgba(99,102,241,0.4)] dark:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
-                  يالا بينا <ArrowLeft className="w-6 h-6" />
-                </button>
-              </Link>
-            </div>
-          </MagicBentoCard>
+              <h3 className="text-2xl md:text-3xl font-black mb-2 text-white">إبداع بلا حدود</h3>
+              <p className="text-sm md:text-base font-bold text-white/80">رسم، تلوين، وقصص تفاعلية تنمي خيال الطفل</p>
+            </CartoonBentoCard>
+          </div>
+
+          {/* كارد المرح */}
+          <div className="md:col-span-4">
+            <CartoonBentoCard bgColor="bg-gradient-to-br from-pink-400 to-pink-600">
+              <div className="bg-white border-[4px] border-black w-14 h-14 rounded-xl flex items-center justify-center mb-4 shadow-[6px_6px_0_0_#000]">
+                <Music className="w-7 h-7 text-pink-600" />
+              </div>
+              <h3 className="text-2xl md:text-3xl font-black mb-2 text-white">أغاني ومرح</h3>
+              <p className="text-sm md:text-base font-bold text-white/80">أغاني تعليمية وأناشيد ممتعة يحبها الأطفال</p>
+            </CartoonBentoCard>
+          </div>
+
+          {/* كارد البداية - كبير */}
+          <div className="md:col-span-12">
+            <motion.div
+              whileHover={{ scale: 1.01 }}
+              className="bg-black border-[6px] border-black rounded-[3rem] p-1 text-white shadow-[20px_20px_0_0_#fbbf24]"
+            >
+              <div className="bg-gradient-to-r from-black to-slate-800 rounded-[2.5rem] p-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                <div className="text-center md:text-right">
+                  <motion.div
+                    animate={{ y: [0, -10, 0], rotate: [0, -5, 5, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="inline-block mb-4"
+                  >
+                    <Rocket className="w-16 h-16 text-yellow-400" />
+                  </motion.div>
+                  <h2 className="text-4xl md:text-5xl font-black italic mb-3 text-white">جاهز تبدأ الرحلة؟</h2>
+                  <p className="text-xl md:text-2xl font-bold text-white/70">انضم لعيلة المكتشفين الصغار دلوقتي</p>
+                </div>
+                <Link href="/login">
+                  <motion.button 
+                    whileHover={{ scale: 1.08, rotate: 2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black border-[4px] border-black px-10 md:px-14 py-5 md:py-6 rounded-[2rem] text-2xl md:text-3xl font-black shadow-[10px_10px_0_0_#fff] flex items-center gap-3 transition-all"
+                  >
+                    يالا بينا <ArrowLeft size={32} />
+                  </motion.button>
+                </Link>
+              </div>
+            </motion.div>
+          </div>
 
         </motion.div>
-      </div>
+
+        {/* نص سفلي */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="text-center mt-12"
+        >
+          <Link href="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-black font-black transition-colors">
+            <ArrowLeft className="w-5 h-5" />
+            العودة للصفحة الرئيسية
+          </Link>
+        </motion.div>
+
+      </main>
     </div>
   );
 }

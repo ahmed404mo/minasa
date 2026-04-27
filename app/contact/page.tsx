@@ -2,8 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import InfiniteMenu from "@/components/react-bits/InfiniteMenu";
-import { ThemeToggle } from "@/components/ThemeToggle"; 
+import Link from "next/link";
+import { ArrowLeft, Star, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 
+// ==========================================
+// 🦸‍♂️ بيانات فريق الأبطال
+// ==========================================
 const items = [
   {
     title: 'أشرقت نصر',
@@ -87,14 +92,45 @@ export default function ContactPage() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return <div className="h-screen w-full bg-background" />;
+  if (!mounted) return <div className="h-screen w-full bg-[#F0F9FF]" />;
 
   return (
-    <div className="h-screen w-full relative bg-sky-50 dark:bg-[#020617] transition-colors duration-500 overflow-hidden">
+    // ✨ ضفت هنا pt-28 و md:pt-32 عشان أسيب مساحة للناف بار ✨
+    <div className="h-screen w-full relative bg-[#F0F9FF] text-black overflow-hidden font-bold flex flex-col pt-28 md:pt-32" dir="rtl">
       
-      {/* 🌟 السطر السحري ده هيسكت الـ TypeScript ويخلي Vercel يقبل الكود 🌟 */}
-      {/* @ts-expect-error */}
-      <InfiniteMenu items={items} scale={1} />
+      <div className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none"
+        style={{
+          backgroundImage: `radial-gradient(#000 1.5px, transparent 1.5px)`,
+          backgroundSize: '30px 30px'
+        }}
+      />
+
+      <header className="relative z-10 flex flex-col sm:flex-row items-center justify-between px-6 pb-6 gap-4">
+        <div className="hidden sm:block w-[150px]"></div> {/* مساحة وهمية لضبط التوسيط */}
+      </header>
+
+      {/* 📺 إطار عرض الـ Infinite Menu */}
+      <main className="relative z-10 flex-1 w-full p-4 md:p-8 pt-0 overflow-hidden pb-8">
+        <motion.div 
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", bounce: 0.4 }}
+          className="w-full h-full bg-white border-[6px] border-black rounded-[3rem] shadow-[15px_15px_0_0_#000] overflow-hidden relative"
+        >
+          {/* شريط ديكوري فوق الإطار كأنه متصفح كرتوني */}
+          <div className="absolute top-0 left-0 right-0 h-10 bg-slate-100 border-b-[4px] border-black flex items-center px-6 gap-2 z-20">
+            <div className="w-4 h-4 rounded-full bg-rose-500 border-2 border-black" />
+            <div className="w-4 h-4 rounded-full bg-yellow-400 border-2 border-black" />
+            <div className="w-4 h-4 rounded-full bg-emerald-400 border-2 border-black" />
+          </div>
+
+          <div className="w-full h-full pt-10 relative z-10 bg-gradient-to-b from-sky-50 to-white">
+            {/* 🌟 السطر السحري ده هيسكت الـ TypeScript ويخلي Vercel يقبل الكود 🌟 */}
+            {/* @ts-expect-error */}
+            <InfiniteMenu items={items} scale={1} />
+          </div>
+        </motion.div>
+      </main>
 
     </div>
   );

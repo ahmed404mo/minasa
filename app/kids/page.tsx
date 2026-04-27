@@ -44,7 +44,6 @@ export default function KidsContinentsHub() {
     }
   };
 
-  // 🌟 تم إضافة الروابط الصوتية الحقيقية الخاصة بك في clickAudio
   const continents = [
     { 
       id: "north-america", name: "أمريكا الشمالية", 
@@ -52,9 +51,9 @@ export default function KidsContinentsHub() {
       top: "15%", left: "25%", size: "22rem",
       hoverAudio: "/audio/North America.mp3", 
       clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320051/amerca_vt1apb.mp3",
-      detailsTitle: "قارة أمريكا الشمالية ", 
+      detailsTitle: "قارة أمريكا الشمالية", 
       detailsDesc: "قارة ضخمة جداً، تتميز بوجود مساحات خضراء واسعة وجبال عالية، وتعتبر من أكثر الأماكن تطوراً في التكنولوجيا.",
-      targetCountry: "تعالى نشوف أشهر بلد فيها.. أمريكا! 🇺🇸"
+      targetCountry: "أمريكا"
     },
     { 
       id: "south-america", name: "أمريكا الجنوبية", 
@@ -62,9 +61,9 @@ export default function KidsContinentsHub() {
       top: "45%", left: "28%", size: "24rem",
       hoverAudio: "/audio/South America.mp3", 
       clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320130/elbarazel_kcfuet.mp3",
-      detailsTitle: "قارة أمريكا الجنوبية ", 
+      detailsTitle: "قارة أمريكا الجنوبية", 
       detailsDesc: "أرض الطبيعة الساحرة! موطن أكبر غابة في العالم (غابات الأمازون) اللي بنسميها رئة كوكب الأرض.",
-      targetCountry: "تعالى نشوف أشهر بلد فيها.. البرازيل! 🇧🇷"
+      targetCountry: "البرازيل"
     },
     { 
       id: "europe", name: "أوروبا", 
@@ -72,9 +71,9 @@ export default function KidsContinentsHub() {
       top: "15%", left: "44%", size: "18rem",
       hoverAudio: "/audio/Europe.mp3", 
       clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320343/lahajati_______1776320312614_ilo9er.mp3",
-      detailsTitle: "قارة أوروبا ", 
+      detailsTitle: "قارة أوروبا", 
       detailsDesc: "قارة الجمال والفن، مليانة قلاع تاريخية قديمة ومناظر طبيعية كأنها طالعة من القصص الخيالية.",
-      targetCountry: "تعالى نشوف أشهر بلد فيها.. فرنسا! 🇫🇷"
+      targetCountry: "فرنسا"
     },
     { 
       id: "africa", name: "أفريقيا", 
@@ -82,9 +81,9 @@ export default function KidsContinentsHub() {
       top: "42%", left: "58%", size: "28rem",
       hoverAudio: "/audio/Africa.mp3", 
       clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320439/lahajati_______1776320414712_nsicv4.mp3",
-      detailsTitle: "قارة أفريقيا ", 
+      detailsTitle: "قارة أفريقيا", 
       detailsDesc: "قارة الدفء والشمس! موطن الحيوانات البرية المدهشة زي الأسود، الزرافات، والأفيال، وفيها أطول أنهار العالم.",
-      targetCountry: "تعالى نشوف أشهر بلد فيها.. مصر! 🇪🇬"
+      targetCountry: "مصر"
     },
     { 
       id: "asia", name: "آسيا", 
@@ -92,9 +91,9 @@ export default function KidsContinentsHub() {
       top: "15%", left: "68%", size: "35rem",
       hoverAudio: "/audio/Asia.mp3", 
       clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320517/lahajati_______1776320496740_tdn6d6.mp3",
-      detailsTitle: "قارة آسيا ", 
+      detailsTitle: "قارة آسيا", 
       detailsDesc: "أكبر قارة في العالم! فيها تنوع عجيب جداً، من أعلى قمة جبل في العالم لحد أذكى الروبوتات.",
-      targetCountry: "تعالى نشوف أشهر بلد فيها.. اليابان! 🇯🇵"
+      targetCountry: "اليابان"
     },
     { 
       id: "australia", name: "أستراليا", 
@@ -102,9 +101,9 @@ export default function KidsContinentsHub() {
       top: "65%", left: "75%", size: "16rem",
       hoverAudio: "/audio/Australia.mp3", 
       clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320578/lahajati_______1776320557384_m89lgf.mp3",
-      detailsTitle: "قارة أستراليا ", 
+      detailsTitle: "قارة أستراليا", 
       detailsDesc: "قارة عبارة عن جزيرة عملاقة، بتتميز بكائنات مدهشة مش موجودة في أي مكان تاني في العالم غير هناك.",
-      targetCountry: "تعالى نشوف أشهر بلد فيها.. أستراليا! 🇦🇺"
+      targetCountry: "أستراليا"
     },
     { 
       id: "antarctica", name: "أنتاركتيكا", 
@@ -112,70 +111,42 @@ export default function KidsContinentsHub() {
       top: "75%", left: "50%", size: "38rem",
       hoverAudio: "/audio/Antarctica.mp3", 
       clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320646/lahajati_______1776320623692_vecbm0.mp3",
-      detailsTitle: "القارة القطبية ", 
+      detailsTitle: "القارة القطبية", 
       detailsDesc: "أبرد مكان على كوكب الأرض! كله تلج وجليد، ومفيش ناس بتعيش هناك بشكل دائم، بس مليانة حيوانات لطيفة.",
-      targetCountry: "تعالى نشوف أشهر سكانها.. البطريق! 🐧"
+      targetCountry: "البطريق"
     },
   ];
 
   const selectedContinent = continents.find(c => c.id === selectedId);
 
   return (
-    <div className="relative min-h-screen w-full overflow-x-hidden overflow-y-auto lg:overflow-hidden flex flex-col items-center select-none bg-slate-50 dark:bg-black pb-20 lg:pb-0 transition-colors duration-500" dir="rtl">
+    <div className="relative min-h-screen w-full overflow-x-hidden overflow-y-auto lg:overflow-hidden flex flex-col items-center select-none bg-slate-50 dark:bg-black transition-colors duration-500" dir="rtl">
       
       {/* الخلفية: فيديو متحرك */}
       <div className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none">
-        <video ref={videoRef} autoPlay loop muted playsInline className="w-full h-full object-cover">
+        <video ref={videoRef} autoPlay loop muted playsInline className="w-full h-full object-cover opacity-80">
           <source src="https://res.cloudinary.com/dhvuw8yog/video/upload/v1776018584/background_yprel9.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-slate-100/60 dark:bg-[#020617]/60 transition-colors duration-500" />
+        <div className="absolute inset-0 bg-sky-100/40 dark:bg-[#020617]/70" />
       </div>
 
-      {/* الهيدر: زر العودة + زر التبديل */}
+      {/* الهيدر: زر العودة (نمط طفولي حاد) */}
       <div className="relative w-full max-w-7xl flex justify-between items-center py-8 px-6 z-20">
         <Link href="/">
-          <button className="bg-white/60 dark:bg-white/10 backdrop-blur-2xl text-slate-800 dark:text-white/90 px-6 py-4 md:px-8 md:py-4 rounded-3xl border border-slate-300 dark:border-white/20 hover:bg-white dark:hover:bg-white hover:text-sky-600 dark:hover:text-black transition-all duration-500 font-black flex items-center gap-3 shadow-xl active:scale-95">
+          <button className="bg-white border-[4px] border-black text-black px-8 py-3 rounded-2xl font-black flex items-center gap-3 shadow-[6px_6px_0_0_#000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all active:scale-95">
             <ArrowRight className="w-6 h-6 rotate-180" />
-            العودة للرئيسية
+            الرئيسية
           </button>
         </Link>
 
         {mounted && (
           <button
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-            className="p-3 md:p-4 rounded-full bg-white/60 dark:bg-white/10 backdrop-blur-2xl border border-slate-300 dark:border-white/20 text-slate-800 dark:text-white hover:scale-110 transition-all shadow-xl"
+            className="p-3 rounded-2xl bg-white border-[4px] border-black shadow-[6px_6px_0_0_#000] text-black hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
           >
-            {resolvedTheme === "dark" ? <Sun size={26} className="text-sky-400" /> : <Moon size={26} className="text-sky-600" />}
+            {resolvedTheme === "dark" ? <Sun size={26} /> : <Moon size={26} />}
           </button>
         )}
-      </div>
-
-      {/* 1. تصميم الموبايل */}
-      <div className="flex lg:hidden flex-col items-center justify-center gap-24 w-full z-10 px-4 pt-10 pb-20">
-        {continents.map((continent) => (
-          <motion.div
-            key={`mobile-${continent.id}`}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            className="relative flex flex-col items-center cursor-pointer active:scale-95 transition-transform"
-            onClick={() => {
-              playSound(continent.clickAudio);
-              setSelectedId(continent.id);
-            }}
-          >
-            <div className="absolute inset-0 bg-sky-500/20 blur-[60px] rounded-full -z-10" />
-            <motion.img
-              layoutId={`continent-img-${continent.id}`}
-              src={continent.img}
-              alt={continent.name}
-              className="w-[280px] h-auto drop-shadow-[0_15px_30px_rgba(56,189,248,0.4)] filter brightness-110"
-            />
-            <div className="bg-white dark:bg-slate-800 px-10 py-4 rounded-[2rem] text-sky-700 dark:text-sky-300 font-black text-3xl shadow-2xl border-[5px] border-sky-400 dark:border-sky-600 absolute -bottom-10 z-20 whitespace-nowrap transition-colors duration-500">
-              {continent.name}
-            </div>
-          </motion.div>
-        ))}
       </div>
 
       {/* 2. تصميم الكمبيوتر */}
@@ -201,8 +172,8 @@ export default function KidsContinentsHub() {
                   src={continent.img} 
                   alt={continent.name}
                   className={`h-auto transition-all duration-500 pointer-events-none
-                    ${isHovered ? "scale-110 drop-shadow-[0_0_40px_rgba(56,189,248,0.8)]" : "drop-shadow-2xl"} 
-                    ${isOthersHovered ? "grayscale opacity-30 blur-[4px]" : ""} 
+                    ${isHovered ? "scale-110 brightness-110 drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)]" : ""} 
+                    ${isOthersHovered ? "grayscale opacity-20 blur-[2px]" : ""} 
                   `}
                   style={{ width: continent.size }} 
                 />
@@ -220,9 +191,10 @@ export default function KidsContinentsHub() {
                   }}
                 />
 
+                {/* اسم القارة بتصميم الكارتون الأبيض */}
                 <span 
-                  className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-slate-800 px-8 py-3 rounded-2xl text-sky-700 dark:text-sky-300 font-black text-3xl transition-all duration-300 shadow-2xl border-4 border-sky-400 dark:border-sky-600 pointer-events-none whitespace-nowrap z-40
-                    ${isHovered ? "opacity-100 scale-100 -translate-y-[80%]" : "opacity-0 scale-50"}
+                  className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white border-[4px] border-black px-8 py-3 rounded-2xl text-black font-black text-3xl transition-all duration-300 shadow-[8px_8px_0_0_#000] pointer-events-none whitespace-nowrap z-40
+                    ${isHovered ? "opacity-100 scale-100 -translate-y-[120%]" : "opacity-0 scale-50"}
                   `}
                 >
                   {continent.name}
@@ -233,128 +205,79 @@ export default function KidsContinentsHub() {
         })}
       </div>
 
-      {/* النافذة المنبثقة (Modal) */}
+      {/* النافذة المنبثقة (Modal) بتصميم طفولي حاد */}
       <AnimatePresence mode="wait">
         {selectedId && selectedContinent && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-20 overflow-y-auto">
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 overflow-hidden">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={closePopup}
-              className="fixed inset-0 bg-white/80 dark:bg-[#020617]/95 backdrop-blur-3xl cursor-pointer transition-colors duration-500"
+              className="fixed inset-0 bg-sky-200/60 backdrop-blur-md cursor-pointer"
             />
 
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full max-w-7xl gap-10 my-auto py-10 md:py-0">
-              <motion.div
-                initial={{ opacity: 0, x: -100, filter: "blur(10px)" }}
-                animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, x: -50, filter: "blur(10px)" }}
-                transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                className="w-full md:w-3/5 order-2 md:order-1 text-center md:text-right flex flex-col items-center md:items-start"
-              >
-                <div className="relative w-full max-w-2xl">
-                  <div className="absolute -inset-10 bg-sky-500/10 blur-[120px] rounded-full -z-10 hidden md:block" />
-                  <div className="flex flex-col items-center md:items-start space-y-4 md:space-y-6">
-                    
-                    <motion.div 
-                      initial={{ scale: 0 }} animate={{ scale: 1 }}
-                      className="px-6 py-2 bg-sky-100 dark:bg-sky-500/20 border border-sky-300 dark:border-sky-400/30 rounded-full backdrop-blur-md inline-block transition-colors"
-                    >
-                      <span className="text-sky-600 dark:text-sky-300 font-black tracking-widest text-sm md:text-base uppercase flex items-center justify-center gap-3">
-                        <Map className="w-5 h-5 text-sky-500 dark:text-sky-400" /> وجهتك القادمة
-                      </span>
-                    </motion.div>
-<div className="flex justify-center md:justify-start">
-  <motion.button
-    whileHover={{ scale: 1.1, rotate: 5 }}
-    whileTap={{ scale: 0.9 }}
-    onClick={() => playSound(selectedContinent.clickAudio)}
-    // 🌟 تم تقليل الـ padding لـ p-3 والـ rounded لـ 2xl والـ border لـ 2
-    className="p-3 md:p-4 bg-sky-500 hover:bg-sky-600 text-white rounded-2xl shadow-md shadow-sky-500/30 transition-all flex items-center justify-center border-2 border-white dark:border-slate-800 active:bg-sky-700"
-    title="اسمع الحكاية"
-  >
-    {/* 🌟 تصغير الأيقونة لـ w-6 في الموبايل و w-8 في الديسكتوب */}
-    <Volume2 className="w-6 h-6 md:w-8 md:h-8 animate-pulse" />
-  </motion.button>
-</div>
-                    <h2 className="text-5xl md:text-8xl font-black text-slate-900 dark:text-white leading-tight tracking-tighter drop-shadow-lg dark:drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] transition-colors">
-                      {selectedContinent.detailsTitle}
-                    </h2>
-                    
-                    {/* 🌟 1. وصف القارة الأساسي */}
-                    
-                    <p className="text-xl md:text-2xl font-bold text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl transition-colors">
-                      {selectedContinent.detailsDesc}
-                    </p>
-
-                    {/* 🌟 2. التمهيد للبلد المشهورة (Box مميز) */}
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-                      className="bg-sky-50 dark:bg-sky-900/30 border-r-8 border-sky-500 border-l border-t border-b border-sky-200 dark:border-sky-500/20 p-5 md:p-6 rounded-2xl w-full text-right shadow-sm mt-2"
-                    >
-                      <h3 className="text-xl md:text-3xl font-black text-sky-700 dark:text-sky-300 flex items-center gap-3">
-                        
-                        <Sparkles className="w-6 h-6 text-yellow-500" />
-                        {selectedContinent.targetCountry}
-                      </h3>
-                    </motion.div>
-
-{/* أزرار التحكم داخل الـ Modal */}
-<div className="flex flex-col gap-6 w-full pt-6">
-  
-  {/* 🌟 زر السماعة الكبير */}
-
-
-  {/* أزرار التنقل */}
-  <div className="flex flex-col sm:flex-row gap-4 md:gap-6 w-full">
-    <Link href={`/kids/continent/${selectedContinent.id}`} className="group flex-1">
-      <motion.button 
-        onMouseEnter={() => playSound("https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320862/lahajati_______1776320833923_ixjjqa.mp3")}
-        whileHover={{ scale: 1.03, boxShadow: "0 0 30px rgba(14,165,233,0.4)" }}
-        whileTap={{ scale: 0.95 }}
-        className="w-full bg-sky-500 text-white px-8 py-5 md:px-12 md:py-6 rounded-3xl md:rounded-[2rem] font-black text-2xl md:text-3xl shadow-xl flex items-center justify-center gap-4 transition-all"
-      >
-        يلا نكتشف
-      </motion.button>
-    </Link>
-
-    <button 
-      onClick={closePopup}
-      onMouseEnter={() => playSound("https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320946/lahajati_______1776320928874_wppavz.mp3")}
-      className="px-8 py-5 md:px-10 md:py-6 rounded-3xl md:rounded-[2rem] font-black text-xl text-slate-700 dark:text-white/60 bg-slate-200/50 dark:bg-transparent hover:text-slate-900 dark:hover:text-white hover:bg-slate-300 dark:hover:bg-white/10 transition-all border border-slate-300 dark:border-white/20 backdrop-blur-sm"
-    >
-      العودة للخريطة
-    </button>
-  </div>
-</div>
-                  </div>
-                </div>
-              </motion.div>
-
-              <div className="w-full md:w-2/5 flex justify-center md:justify-end order-1 md:order-2 mb-8 md:mb-0">
-                <motion.div
-                  initial={{ scale: 0.5, opacity: 0, rotate: -15 }}
-                  animate={{ scale: 1, opacity: 1, rotate: 0 }}
-                  transition={{ type: "spring", stiffness: 80, damping: 15 }}
-                  className="relative"
-                >
-                  <div className="absolute inset-0 bg-sky-400/20 blur-[150px] rounded-full" />
-                  <motion.img
-                    src={selectedContinent.img}
-                    alt={selectedContinent.name}
-                    className="w-[280px] md:w-[600px] lg:w-[750px] h-auto drop-shadow-[0_0_100px_rgba(56,189,248,0.6)] filter brightness-110 dark:brightness-125 transition-all"
-                  />
-                </motion.div>
-              </div>
-            </div>
-
-            <button 
-              onClick={closePopup}
-              className="absolute top-6 left-6 md:top-10 md:left-10 p-3 md:p-4 bg-slate-200 dark:bg-white/10 text-slate-800 dark:text-white/80 hover:text-white hover:bg-red-500 dark:hover:bg-red-500 rounded-full transition-all border border-slate-300 dark:border-white/20 z-50 backdrop-blur-md shadow-2xl"
+            <motion.div 
+              initial={{ scale: 0.8, y: 100, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.8, y: 100, opacity: 0 }}
+              className="relative z-10 w-full max-w-6xl bg-white border-[8px] border-black rounded-[3rem] shadow-[20px_20px_0_0_#000] overflow-hidden flex flex-col md:flex-row"
             >
-              <X className="w-8 h-8 md:w-10 md:h-10" />
-            </button>
+              {/* صورة القارة في اليمين */}
+              <div className="w-full md:w-1/2 bg-sky-100 p-10 flex items-center justify-center border-b-[8px] md:border-b-0 md:border-l-[8px] border-black">
+                <img
+                  src={selectedContinent.img}
+                  alt={selectedContinent.name}
+                  className="w-full h-auto drop-shadow-[10px_10px_0_rgba(0,0,0,0.1)]"
+                />
+              </div>
+
+              {/* تفاصيل القارة في اليسار */}
+              <div className="w-full md:w-1/2 p-10 flex flex-col justify-center text-right">
+                <div className="flex items-center gap-4 mb-4">
+                   <div className="bg-yellow-400 border-[4px] border-black p-3 rounded-2xl shadow-[4px_4px_0_0_#000]">
+                      <Map className="w-8 h-8 text-black" />
+                   </div>
+                   <h2 className="text-5xl font-black text-black italic leading-none uppercase">
+                    {selectedContinent.detailsTitle}
+                  </h2>
+                </div>
+
+                <p className="text-2xl font-bold text-slate-800 leading-relaxed mb-8">
+                  {selectedContinent.detailsDesc}
+                </p>
+
+                {/* زر الدولة المستهدفة */}
+                <div className="bg-emerald-400 border-[4px] border-black p-5 rounded-[2rem] shadow-[8px_8px_0_0_#000] mb-10 inline-block self-start">
+                   <span className="text-3xl font-black text-black">{selectedContinent.targetCountry}</span>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-6">
+                  <Link href={`/kids/continent/${selectedContinent.id}`} className="flex-1">
+                    <button 
+                      className="w-full bg-sky-400 border-[5px] border-black text-black py-5 rounded-[1.5rem] font-black text-3xl shadow-[8px_8px_0_0_#000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
+                    >
+                      استكشاف
+                    </button>
+                  </Link>
+
+                  <button 
+                    onClick={() => playSound(selectedContinent.clickAudio)}
+                    className="p-5 bg-yellow-400 border-[5px] border-black rounded-[1.5rem] shadow-[8px_8px_0_0_#000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
+                  >
+                    <Volume2 className="w-10 h-10 text-black" />
+                  </button>
+                </div>
+              </div>
+
+              {/* زر الإغلاق */}
+              <button 
+                onClick={closePopup}
+                className="absolute top-6 left-6 p-2 bg-white border-[4px] border-black rounded-xl hover:bg-rose-500 transition-colors"
+              >
+                <X className="w-8 h-8 text-black" />
+              </button>
+            </motion.div>
           </div>
         )}
       </AnimatePresence>

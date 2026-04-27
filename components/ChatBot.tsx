@@ -2,9 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Loader2, Bot, Trash2, Eraser, Sparkles } from "lucide-react";
+import { X, Send, Loader2, Bot, Eraser, Sparkles } from "lucide-react";
 
-// 🌟 1. تعريف النوع (Type) عشان نمنع أي أخطاء من TypeScript
 type Message = {
   role: "user" | "bot";
   content: string;
@@ -13,15 +12,12 @@ type Message = {
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   
-  // 🌟 2. تطبيق النوع على الرسالة الافتراضية
   const defaultMessage: Message = { 
     role: "bot", 
     content: "أهلاً بك يا بطل! أنا مساعدك الذكي، تحب تسأل عن إيه النهاردة؟" 
   };
   
-  // 🌟 3. استخدام نفس النوع في הـ State
   const [messages, setMessages] = useState<Message[]>([defaultMessage]);
-  
   const [isMounted, setIsMounted] = useState(false); 
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +30,7 @@ export default function ChatBot() {
       try {
         setMessages(JSON.parse(savedChat));
       } catch (error) {
-        console.error("خطأ في قراءة المحادثة السابقة:", error);
+        console.error("Error reading history:", error);
       }
     }
   }, []);
@@ -76,57 +72,44 @@ export default function ChatBot() {
       const botReply = data.answer || "عذراً يا بطل، مش قادر أرد دلوقتي!"; 
       setMessages((prev) => [...prev, { role: "bot", content: botReply }]);      
     } catch (error) {
-      console.error("Chat Error:", error);
-      setMessages((prev) => [...prev, { role: "bot", content: "معلش يا بطل، حصلت مشكلة في الاتصال بالسيرفر. حاول تاني كمان شوية!" }]);
+      setMessages((prev) => [...prev, { role: "bot", content: "معلش يا بطل، حصلت مشكلة. حاول تاني كمان شوية!" }]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const clearChat = () => {
-    setMessages([defaultMessage]);
-  };
+  const clearChat = () => setMessages([defaultMessage]);
 
   return (
-    <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[9999] flex flex-col items-end" dir="rtl">
+    <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end font-black" dir="rtl">
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 50, x: 20, transformOrigin: "bottom right" }}
-            animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 50, x: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="mb-4 w-[calc(100vw-2rem)] md:w-[400px] max-h-[80vh] md:max-h-[600px] h-[550px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-slate-200 dark:border-slate-800 flex flex-col overflow-hidden transition-all duration-300 ring-1 ring-black/5"
+            initial={{ opacity: 0, scale: 0.8, y: 100 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 100 }}
+            className="mb-6 w-[calc(100vw-2rem)] md:w-[420px] h-[600px] bg-white border-[6px] border-black rounded-[3rem] shadow-[10px_10px_0_0_#000] flex flex-col overflow-hidden"
           >
-            {/* Header - Modern Gradient */}
-            <div className="p-4 md:p-5 bg-gradient-to-l from-sky-500 via-sky-600 to-indigo-600 text-white flex justify-between items-center relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-full -ml-16 -mt-16 blur-2xl" />
-              
-              <div className="flex items-center gap-3 z-10">
-                <div className="bg-white/20 p-2.5 rounded-2xl backdrop-blur-md border border-white/30 shadow-inner">
-                  <Bot size={22} className="text-white" />
+            {/* Header - الكرتوني الأصفر */}
+            <div className="p-5 bg-yellow-400 border-b-[6px] border-black flex justify-between items-center relative">
+              <div className="flex items-center gap-3">
+                <div className="bg-white border-4 border-black p-2 rounded-2xl shadow-[4px_4px_0_0_#000] -rotate-3">
+                  <Bot size={28} className="text-black" />
                 </div>
                 <div>
-                  <h3 className="font-black text-base md:text-lg leading-none mb-1">مساعد المستكشف</h3>
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                    <span className="text-[10px] md:text-xs text-sky-100 font-medium">ذكي ومستعد للرد</span>
+                  <h3 className="text-xl text-black">مساعد المستكشف</h3>
+                  <div className="flex items-center gap-1">
+                    <div className="w-3 h-3 bg-green-500 rounded-full border-2 border-black" />
+                    <span className="text-xs text-black/70">جاهز للمغامرة!</span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-1 md:gap-2 z-10">
-                <button 
-                   onClick={clearChat} 
-                   className="p-2 hover:bg-white/10 rounded-xl transition-colors group"
-                   title="مسح المحادثة"
-                >
-                  <Eraser size={18} className="group-active:scale-90 transition-transform" />
+              <div className="flex gap-2">
+                <button onClick={clearChat} className="p-2 bg-white border-2 border-black rounded-xl hover:bg-rose-100 shadow-[3px_3px_0_0_#000] active:shadow-none active:translate-y-1 transition-all">
+                  <Eraser size={20} />
                 </button>
-                <button 
-                  onClick={() => setIsOpen(false)} 
-                  className="p-2 hover:bg-white/10 rounded-xl transition-colors"
-                >
+                <button onClick={() => setIsOpen(false)} className="p-2 bg-white border-2 border-black rounded-xl hover:bg-rose-100 shadow-[3px_3px_0_0_#000] active:shadow-none active:translate-y-1 transition-all">
                   <X size={20} />
                 </button>
               </div>
@@ -135,19 +118,20 @@ export default function ChatBot() {
             {/* Messages Area */}
             <div 
               ref={scrollRef} 
-              className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/50 dark:bg-slate-950/20 transition-colors custom-scrollbar"
+              className="flex-1 overflow-y-auto p-4 space-y-6 bg-sky-50 custom-scrollbar"
+              style={{ backgroundImage: `radial-gradient(circle at 1px 1px, #cbd5e1 1px, transparent 1px)`, backgroundSize: '20px 20px' }}
             >
               {messages.map((msg, i) => (
                 <motion.div 
-                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  initial={{ x: msg.role === "user" ? 20 : -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
                   key={i} 
                   className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                 >
-                  <div className={`max-w-[85%] px-4 py-3 rounded-[1.5rem] text-sm md:text-base leading-relaxed shadow-sm font-bold ${
+                  <div className={`max-w-[85%] px-5 py-3 border-[4px] border-black text-lg shadow-[5px_5px_0_0_#000] relative ${
                     msg.role === "user" 
-                    ? "bg-gradient-to-br from-sky-500 to-sky-600 text-white rounded-br-none" 
-                    : "bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-bl-none border border-slate-200 dark:border-slate-700"
+                    ? "bg-yellow-400 text-black rounded-[2rem] rounded-br-none" 
+                    : "bg-white text-black rounded-[2rem] rounded-bl-none"
                   }`}>
                     {msg.content}
                   </div>
@@ -155,92 +139,68 @@ export default function ChatBot() {
               ))}
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="bg-white dark:bg-slate-800 px-4 py-3 rounded-2xl rounded-bl-none border border-slate-200 dark:border-slate-700 shadow-sm flex items-center gap-2">
-                    <Loader2 className="animate-spin text-sky-500" size={18} />
-                    <span className="text-xs md:text-sm font-bold text-slate-400 animate-pulse">بيفكر...</span>
+                  <div className="bg-white border-4 border-black px-5 py-2 rounded-[2rem] rounded-bl-none shadow-[5px_5px_0_0_#000] flex items-center gap-2">
+                    <Loader2 className="animate-spin text-sky-500" size={24} />
+                    <span className="text-lg">بيفكر...</span>
                   </div>
                 </div>
               )}
             </div>
 
             {/* Input Area */}
-            <form onSubmit={handleSendMessage} className="p-3 md:p-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex gap-2 items-center">
-              <div className="relative flex-1">
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="اسألني أي شيء..."
-                  className="w-full bg-slate-100 dark:bg-slate-800/50 text-slate-900 dark:text-white px-5 py-2.5 md:py-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-sky-500/50 transition-all font-bold text-sm md:text-base placeholder:text-slate-400"
-                  dir="rtl"
-                />
-              </div>
+            <form onSubmit={handleSendMessage} className="p-5 bg-white border-t-[6px] border-black flex gap-3 items-center">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="اسألني أي شيء يا بطل..."
+                className="flex-1 bg-slate-100 border-[4px] border-black px-5 py-3 rounded-2xl focus:bg-white focus:outline-none transition-all text-lg placeholder:text-slate-400"
+              />
               <button 
                 type="submit" 
                 disabled={isLoading || !input.trim()}
-                className="bg-sky-500 hover:bg-sky-600 disabled:opacity-40 disabled:grayscale text-white p-2.5 md:p-3 rounded-xl shadow-lg active:scale-90 transition-all flex-shrink-0 flex items-center justify-center"
+                className="bg-yellow-400 border-[4px] border-black p-4 rounded-2xl shadow-[5px_5px_0_0_#000] active:shadow-none active:translate-y-1 disabled:opacity-50 transition-all"
               >
-                <Send size={20} className="transform scale-x-[-1]" />
+                <Send size={24} className="transform scale-x-[-1]" />
               </button>
             </form>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Floating Button - AI Theme */}
+      {/* زر البوت العائم */}
       <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-gradient-to-br from-indigo-600 via-sky-500 to-emerald-400 text-white p-4 md:p-5 rounded-[1.8rem] shadow-[0_0_30px_rgba(99,102,241,0.4)] flex items-center justify-center transition-all border-4 border-white dark:border-slate-800 relative group overflow-hidden ring-1 ring-sky-500/20"
+        className="bg-yellow-400 border-[6px] border-black p-5 rounded-[2.5rem] shadow-[8px_8px_0_0_#000] relative group overflow-hidden"
       >
-        <motion.div 
-          animate={{ x: ['-100%', '100%'] }}
-          transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12"
-        />
-
+        <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12" />
         <AnimatePresence mode="wait">
           {isOpen ? (
-            <motion.div key="close" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
-              <X size={28} className="md:w-8 md:h-8 relative z-10" />
-            </motion.div>
+            <X size={35} key="close" />
           ) : (
-            <motion.div 
-              key="ai-icon" 
-              initial={{ scale: 0.5, opacity: 0 }} 
-              animate={{ scale: 1, opacity: 1 }} 
-              exit={{ scale: 0.5, opacity: 0 }}
-              className="relative z-10"
-            >
-              <div className="relative">
-                <Bot size={32} className="md:w-9 md:h-9" />
-                <motion.div
-                  animate={{ opacity: [0, 1, 0], scale: [0.8, 1.2, 0.8] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                  className="absolute -top-1 -right-1 text-yellow-300"
-                >
-                  <Sparkles size={16} fill="currentColor" />
-                </motion.div>
-              </div>
-            </motion.div>
+            <div className="relative" key="bot">
+              <Bot size={40} />
+              <motion.div
+                animate={{ opacity: [0, 1, 0], scale: [1, 1.5, 1] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+                className="absolute -top-3 -right-3 text-white"
+              >
+                <Sparkles size={24} fill="white" />
+              </motion.div>
+            </div>
           )}
         </AnimatePresence>
       </motion.button>
 
       <style jsx global>{`
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 5px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(14, 165, 233, 0.2);
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f0f9ff; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { 
+          background: #000; 
           border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(14, 165, 233, 0.4);
+          border: 2px solid #f0f9ff;
         }
       `}</style>
     </div>

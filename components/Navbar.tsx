@@ -4,11 +4,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-// 🌟 1. تم استبدال Rocket بـ Search
-import { Search, Menu, X, Home, Info, Mail, LogIn } from "lucide-react";
-
-import GlassSurface from "@/components/react-bits/GlassSurface";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -27,142 +22,128 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { name: "الرئيسية", href: "/", icon: <Home className="w-5 h-5" /> },
-    { name: "عن المنصة", href: "/about", icon: <Info className="w-5 h-5" /> },
-    { name: "فريق العمل", href: "/contact", icon: <Mail className="w-5 h-5" /> },
+    { name: "الرئيسية", href: "/" },
+    { name: "عن المنصة", href: "/about" },
+    { name: "فريق العمل", href: "/contact" },
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-[100] px-3 md:px-10 pt-4" dir="rtl">
+    <nav className="fixed top-0 left-0 right-0 z-[100] px-4 pt-6" dir="rtl">
       <div className="max-w-7xl mx-auto w-full">
         <motion.div
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 100, damping: 20 }}
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
+          transition={{ type: "spring", stiffness: 120, damping: 20 }}
+          className="bg-white border-[5px] border-black rounded-[2.5rem] shadow-[0_10px_0_0_#000] px-6 md:px-10 py-4 flex items-center justify-between relative overflow-hidden"
         >
-          <GlassSurface 
-            // 🌟 تعديل خلفية الناف بار: أبيض شفاف في الفاتح، وكحلي شفاف في الغامق
-            className="rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-white/20 shadow-2xl w-full bg-white/80 dark:bg-slate-950/60 backdrop-blur-xl"
-          >
-            <div className="px-4 md:px-10 py-3 md:py-5 flex items-center justify-between w-full">
-              
-              <Link href="/" className="flex items-center gap-2 md:gap-3 group shrink-0 relative z-[110]">
-                <div className="bg-sky-500 p-2 md:p-2.5 rounded-xl md:rounded-2xl shadow-[0_0_20px_rgba(14,165,233,0.5)] group-hover:rotate-12 transition-transform">
-                  {/* 🌟 2. تم وضع أيقونة العدسة المكبرة (Search) هنا */}
-                  <Search className="w-5 h-5 md:w-6 md:h-6 text-white" />
-                </div>
-                {/* 🌟 اللوجو: أسود في الفاتح، أبيض في الغامق */}
-                <span className="text-lg md:text-2xl font-black text-slate-900 dark:text-white tracking-tight drop-shadow-md">
-                  المكتشف <span className="text-sky-500 drop-shadow-none">الصغير</span>
-                </span>
-              </Link>
+          {/* نقش خلفية خفيف جداً */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+            style={{
+              backgroundImage: `radial-gradient(circle at 2px 2px, #000 2px, transparent 2px)`,
+              backgroundSize: '24px 24px'
+            }}>
+          </div>
 
-              {/* 💻 روابط الديسكتوب */}
-              <div className="hidden lg:flex items-center gap-2 p-1.5 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+          {/* لوجو الموقع */}
+          <Link href="/" className="flex items-center gap-3 group relative z-10">
+            <div className="bg-yellow-400 border-4 border-black p-2 rounded-2xl group-hover:rotate-12 transition-transform shadow-[4px_4px_0_0_#000]">
+               <div className="w-6 h-6 bg-black rounded-lg flex items-center justify-center">
+                  <div className="w-2 h-2 bg-white rounded-full" />
+               </div>
+            </div>
+            <span className="text-2xl md:text-3xl font-black text-black tracking-tight">
+              المكتشف <span className="text-yellow-500">الصغير</span>
+            </span>
+          </Link>
+
+          {/* روابط الديسكتوب */}
+          <div className="hidden lg:flex items-center gap-4 relative z-10">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link 
+                  key={link.href} 
+                  href={link.href}
+                  className={`px-6 py-2 rounded-2xl text-lg font-black transition-all border-4 ${
+                    isActive 
+                      ? "bg-yellow-400 border-black text-black shadow-[4px_4px_0_0_#000]" 
+                      : "border-transparent text-slate-600 hover:text-black hover:bg-yellow-50"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="hidden md:flex items-center gap-5 relative z-10">
+            <Link href="/login">
+              <button className="bg-yellow-400 text-black px-8 py-3 rounded-[1.5rem] font-black text-xl border-4 border-black shadow-[6px_6px_0_0_#000] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
+                دخول 
+              </button>
+            </Link>
+          </div>
+
+          {/* زر الموبايل */}
+          <button 
+            className="lg:hidden bg-yellow-400 border-4 border-black p-2 rounded-xl shadow-[4px_4px_0_0_#000] active:translate-y-1 active:shadow-none transition-all relative z-10"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <div className="w-8 h-8 flex flex-col justify-around items-center p-1">
+              <div className={`w-full h-1.5 bg-black rounded transition-all ${mobileMenuOpen ? 'rotate-45 translate-y-2.5' : ''}`} />
+              <div className={`w-full h-1.5 bg-black rounded transition-all ${mobileMenuOpen ? 'opacity-0' : ''}`} />
+              <div className={`w-full h-1.5 bg-black rounded transition-all ${mobileMenuOpen ? '-rotate-45 -translate-y-2.5' : ''}`} />
+            </div>
+          </button>
+        </motion.div>
+      </div>
+
+      {/* منيو الموبايل */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[80]"
+            />
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 h-full w-[85%] bg-white border-l-[10px] border-black z-[120] p-10"
+            >
+              <div className="flex flex-col gap-8 mt-16">
                 {navLinks.map((link) => {
                   const isActive = pathname === link.href;
                   return (
                     <Link 
                       key={link.href} 
                       href={link.href}
-                      className={`px-6 py-2.5 rounded-xl text-base font-bold transition-all duration-300 flex items-center gap-2 ${
+                      className={`text-4xl font-black p-5 rounded-[2rem] border-[5px] transition-all ${
                         isActive 
-                          ? "bg-sky-500 text-white shadow-[0_0_15px_rgba(14,165,233,0.4)]" // 🌟 زرار الأكتف ثابت (أزرق وكلام أبيض)
-                          : "text-slate-600 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white" // 🌟 كلام أسود فاتح وخلفية رمادي فاتح
+                        ? "bg-yellow-400 border-black text-black shadow-[8px_8px_0_0_#000]" 
+                        : "border-transparent text-slate-700 hover:bg-yellow-50"
                       }`}
                     >
                       {link.name}
                     </Link>
                   );
                 })}
-              </div>
+                
+                <div className="h-2 bg-black/5 rounded-full my-4" />
 
-              <div className="hidden md:flex items-center gap-3 lg:gap-5">
-                <ThemeToggle />
                 <Link href="/login">
-                  {/* 🌟 زر الدخول: أسود في الفاتح، أبيض في الغامق، ولما تقف عليه يبقى أزرق */}
-                  <button className="bg-slate-900 text-white dark:bg-white dark:text-slate-950 px-6 lg:px-10 py-2.5 rounded-xl font-black text-base hover:bg-sky-500 dark:hover:bg-sky-500 hover:text-white dark:hover:text-white transition-all shadow-lg active:scale-95 flex items-center gap-2">
-                    <LogIn className="w-4 h-4" />
-                    دخول
+                  <button className="w-full bg-yellow-400 text-black py-6 rounded-[2.5rem] border-[5px] border-black font-black text-3xl shadow-[10px_10px_0_0_#000] active:shadow-none active:translate-y-2 transition-all">
+                    بوابة الدخول
                   </button>
                 </Link>
               </div>
-
-              {/* 📱 أدوات الموبايل */}
-              <div className="flex lg:hidden items-center gap-2 md:gap-3 relative z-[110]">
-                <div className="scale-90 md:scale-100">
-                  <ThemeToggle />
-                </div>
-                <button 
-                  // 🌟 زرار المنيو: لون غامق في الفاتح عشان يبان
-                  className="text-slate-900 dark:text-white p-2 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 active:scale-90 transition-transform shadow-sm"
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  aria-label="Toggle Menu"
-                >
-                  {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
-              </div>
-
-            </div>
-          </GlassSurface>
-        </motion.div>
-      </div>
-
-      {/* 📱 Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-[85px] left-4 right-4 lg:hidden z-[90]"
-          >
-            {/* 🌟 خلفية منيو الموبايل */}
-            <div className="rounded-[2rem] border border-slate-200 dark:border-slate-700 shadow-2xl p-6 bg-white dark:bg-slate-950 w-full">
-              <div className="flex flex-col gap-3">
-                {navLinks.map((link, idx) => {
-                  const isActive = pathname === link.href;
-                  return (
-                    <motion.div
-                      key={link.href}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.1 }}
-                    >
-                      <Link 
-                        href={link.href}
-                        className={`flex items-center gap-4 p-4 rounded-2xl text-xl font-bold transition-all shadow-sm ${
-                          isActive 
-                            ? "bg-sky-500 text-white shadow-[0_0_15px_rgba(14,165,233,0.4)]" // 🌟 زرار الأكتف ثابت
-                            : "text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-100 dark:border-transparent"
-                        }`}
-                      >
-                        <span className={`p-3 rounded-xl ${isActive ? "bg-sky-600" : "bg-slate-200 dark:bg-slate-700"}`}>
-                          {link.icon}
-                        </span>
-                        {link.name}
-                      </Link>
-                    </motion.div>
-                  );
-                })}
-                
-                <hr className="my-4 border-slate-200 dark:border-slate-700" />
-                
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navLinks.length * 0.1 }}
-                >
-                  <Link href="/login">
-                    <button className="w-full bg-sky-500 text-white py-5 rounded-2xl font-black text-xl flex items-center justify-center gap-3 shadow-xl shadow-sky-500/30 active:scale-[0.98]">
-                      <LogIn className="w-6 h-6" />
-                      بوابة الدخول للأبطال
-                    </button>
-                  </Link>
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>

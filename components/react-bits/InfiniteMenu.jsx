@@ -960,7 +960,7 @@ export default function InfiniteMenu({ items = [], scale = 1.0 }) {
   };
 
 return (
-  <div className="bg-slate-50 dark:bg-transparent transition-colors duration-500" style={{ 
+  <div className="bg-[#F0F9FF] transition-colors duration-500" style={{ 
     position: 'relative', 
     width: '100%', 
     height: '100%', 
@@ -968,7 +968,15 @@ return (
     overflow: 'hidden'
   }}>
     
-    {/* الكانفاس الـ 3D - بطل العرض */}
+    {/* النقاط المنقطة خلف الكانفاس لتعزيز شكل الكرتون */}
+    <div className="absolute inset-0 z-0 opacity-[0.1] pointer-events-none"
+      style={{
+        backgroundImage: `radial-gradient(#000 1.5px, transparent 1.5px)`,
+        backgroundSize: '30px 30px'
+      }}
+    />
+
+    {/* الكانفاس الـ 3D */}
     <canvas 
       id="infinite-grid-menu-canvas" 
       ref={canvasRef} 
@@ -977,72 +985,80 @@ return (
         height: '100%', 
         outline: 'none', 
         display: 'block' ,
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        position: 'relative',
+        zIndex: 5
       }} 
     />
 
     {activeItem && (
-      /* 🌟 الحاوية الرئيسية: تم إضافة pt-28 للموبايل و md:pt-0 للديسكتوب */
-      <div className="absolute inset-0 z-20 flex flex-col-reverse md:flex-row items-center justify-end md:justify-between px-4 pt-28 pb-12 md:pt-0 md:px-24 md:pb-0 gap-[60%] md:gap-0 pointer-events-none">
+      /* 🌟 الحاوية الرئيسية: توزيع العناصر بشكل كرتوني */
+      <div className="absolute inset-0 z-20 flex flex-col-reverse md:flex-row items-center justify-end md:justify-between px-4 pt-28 pb-12 md:pt-0 md:px-24 md:pb-0 gap-8 md:gap-0 pointer-events-none">
         
         {/* ==================== الجانب الأيسر: كارد الوصف + الزرار ==================== */}
-        <div className={`flex flex-col items-center md:items-start gap-4 md:gap-10 w-full md:w-auto transition-all duration-700 ease-out 
-          ${isMoving ? 'opacity-0 md:-translate-x-20 translate-y-10 md:translate-y-0 blur-lg' : 'opacity-100 translate-x-0 translate-y-0 blur-0'}`}>
+        <div className={`flex flex-col items-center md:items-start gap-6 w-full md:w-auto transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] 
+          ${isMoving ? 'opacity-0 scale-90 translate-y-10' : 'opacity-100 scale-100 translate-y-0'}`}>
           
-          {/* كارد الوصف الزجاجي */}
-          <div className="relative group pointer-events-auto w-full max-w-[90vw] md:max-w-md">
-            {/* 🌟 تعديل لون الخلفية والحدود لدعم الـ Theme */}
-            <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-3xl p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-slate-200/50 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden text-center md:text-left break-words transition-colors duration-500">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sky-500/50 dark:via-sky-400/50 to-transparent opacity-50" />
+          {/* كارد الوصف الكرتوني (Neo-Brutalist) */}
+          <div className="relative pointer-events-auto w-full max-w-[90vw] md:max-w-md">
+            <div className="bg-white border-[5px] border-black p-6 md:p-8 rounded-[2rem] shadow-[10px_10px_0_0_#000] text-center md:text-right">
+              {/* أيقونة صغيرة كرتونية */}
+              <div className="bg-yellow-400 border-[3px] border-black w-10 h-10 rounded-full flex items-center justify-center -mt-12 mb-4 shadow-[4px_4px_0_0_#000] mx-auto md:mr-0">
+                <span className="text-black font-black">!</span>
+              </div>
               
-              {/* 🌟 تعديل لون النص: رمادي غامق في الفاتح، أزرق فاتح في الغامق */}
-              <p className="text-slate-700 dark:text-sky-100 font-bold text-base md:text-xl lg:text-2xl leading-relaxed relative z-10 drop-shadow-none dark:drop-shadow-sm transition-colors duration-500">
+              <p className="text-black font-black text-lg md:text-2xl leading-tight">
                 {activeItem.description}
               </p>
             </div>
-            <div className="absolute -inset-4 bg-sky-500/10 rounded-[3rem] -z-10 blur-3xl opacity-50 group-hover:opacity-100 transition-opacity hidden md:block" />
           </div>
 
-          {/* زرار التواصل - تصميم نيون */}
+          {/* زرار التواصل - كرتوني بامتياز */}
           <button 
             onClick={handleButtonClick}
-            // 🌟 تعديل الزرار: أزرق صريح في الفاتح والغامق (لأن اللون الأزرق محايد ومميز للـ CTA)
-            className="group relative w-full max-w-[90vw] md:w-auto px-8 md:px-10 py-4 md:py-5 bg-sky-500 text-white font-black text-lg md:text-xl rounded-[1.5rem] md:rounded-2xl shadow-[0_0_20px_rgba(14,165,233,0.3)] hover:bg-sky-400 hover:shadow-sky-500/50 transition-all duration-300 flex items-center justify-center md:justify-start gap-4 pointer-events-auto active:scale-95"
+            className="group relative w-full max-w-[80vw] md:w-auto px-8 py-4 bg-sky-400 text-black font-black text-xl md:text-2xl rounded-2xl border-[4px] border-black shadow-[8px_8px_0_0_#000] hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[4px] hover:translate-y-[4px] transition-all pointer-events-auto active:scale-95 flex items-center justify-center gap-3"
           >
-            <span>إرسال رسالة</span>
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7-7 7" />
-            </svg>
+            <span>كلمني هنا</span>
+            <div className="bg-black rounded-full p-1 group-hover:rotate-12 transition-transform">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                className="w-5 h-5 text-white" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M14 5l7 7-7 7" />
+              </svg>
+            </div>
           </button>
         </div>
 
-        {/* ==================== الجانب الأيمن: الاسم (كارد الاسم) ==================== */}
-        <div className={`flex flex-col items-center md:items-end w-full md:w-auto transition-all duration-700 ease-out delay-75
-          ${isMoving ? 'opacity-0 md:translate-x-20 -translate-y-10 md:translate-y-0 blur-lg' : 'opacity-100 translate-x-0 translate-y-0 blur-0'}`}>
+        {/* ==================== الجانب الأيمن: كارد الاسم ==================== */}
+        <div className={`flex flex-col items-center md:items-end w-full md:w-auto transition-all duration-700 delay-75
+          ${isMoving ? 'opacity-0 scale-75 blur-md' : 'opacity-100 scale-100 blur-0'}`}>
           
-          <div className="relative pointer-events-auto group w-full max-w-[90vw] md:w-auto text-center md:text-right">
-            {/* 🌟 تعديل خلفية كارد الاسم لتناسب الفاتح والغامق */}
-            <div className="bg-white/40 dark:bg-white/[0.03] backdrop-blur-3xl p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] border border-slate-200/50 dark:border-white/10 shadow-xl dark:shadow-2xl relative overflow-hidden flex flex-col items-center md:items-end transition-colors duration-500">
-               {/* 🌟 تعديل لون الاسم: أسود في الفاتح، أبيض في الغامق */}
-               <h2 className="text-4xl md:text-8xl font-black text-slate-900 dark:text-white tracking-tighter leading-tight md:leading-none drop-shadow-md dark:drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] relative z-10 transition-colors duration-500">
+          <div className="relative pointer-events-auto group w-full max-w-[90vw] md:w-auto">
+            {/* كارد الاسم بستايل الفقاعة الكرتونية */}
+            <div className="bg-rose-400 border-[6px] border-black p-6 md:p-10 rounded-[3rem] shadow-[15px_15px_0_0_#000] relative flex flex-col items-center md:items-end">
+               
+               <h2 className="text-5xl md:text-8xl font-black text-white italic tracking-tighter leading-none text-center md:text-right drop-shadow-[4px_4px_0_#000]">
                  {activeItem.title.split(' ').map((word, i) => (
-                   <span key={i} className={i === 0 ? "inline-block md:block mr-2 md:mr-0" : "inline-block md:block text-sky-500 dark:text-sky-400"}>
+                   <span key={i} className={i === 0 ? "block mb-2" : "block text-yellow-300"}>
                      {word}
                    </span>
                  ))}
                </h2>
                
-               {/* خط نيون ديكوري تحت الاسم */}
-               <div className="h-1.5 md:h-2 w-20 md:w-32 bg-sky-500 dark:bg-sky-400 mt-4 md:mt-6 rounded-full shadow-[0_0_15px_rgba(14,165,233,0.5)] dark:shadow-[0_0_20px_rgba(56,189,248,1)] relative z-10 mx-auto md:ml-auto md:mr-0 transition-colors duration-500" />
+               {/* زخرفة كرتونية تحت الاسم */}
+               <div className="h-4 w-24 md:w-40 bg-black mt-6 rounded-full" />
             </div>
-            
-            <div className="absolute -inset-6 bg-sky-500/10 dark:bg-indigo-500/10 rounded-full -z-10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity hidden md:block" />
+
+            {/* نجوم ديكورية تظهر حول الاسم */}
+            <div className="absolute -top-6 -left-6 text-yellow-400 animate-bounce">
+              <svg className="w-12 h-12 fill-current stroke-black stroke-[2px]" viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+            </div>
           </div>
         </div>
 

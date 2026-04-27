@@ -2,189 +2,145 @@
 
 import { motion } from "framer-motion"; 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, Gamepad2, ShieldCheck, BookOpen, HeartPulse, Globe2, Users } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowLeft, Gamepad2, ShieldCheck, BookOpen, HeartPulse, Globe2, Users, Stars, UserPlus, Eye } from "lucide-react";
 
-import ShinyText from "@/components/react-bits/ShinyText";
-import TiltedCard from "@/components/react-bits/TiltedCard";
 import CountUp from "@/components/react-bits/CountUp"; 
-import ArabicText from "@/components/ArabicText"; 
 
 export default function LandingPage() {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const video = videoRef.current;
-    if (!video) return;
-    const handleEnded = () => {
-      video.currentTime = 0;
-      video.play();
-    };
-    video.addEventListener("ended", handleEnded);
-    return () => video.removeEventListener("ended", handleEnded);
   }, []);
 
+  const cartoonTextStyle = {
+    textShadow: `
+      4px 4px 0 #000,
+      -1px -1px 0 #000,  
+       1px -1px 0 #000,
+      -1px  1px 0 #000,
+       1px  1px 0 #000,
+       0px 10px 20px rgba(0,0,0,0.3)
+    `,
+  };
+
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
-      transition: { staggerChildren: 0.3, delayChildren: 0.1 } 
+      y: 0,
+      transition: { staggerChildren: 0.2, duration: 0.6 } 
     },
-  } as any;
-
-  const textVariants = {
-    hidden: { y: 25, opacity: 0, filter: "blur(10px)" },
-    visible: { 
-      y: 0, 
-      opacity: 1, 
-      filter: "blur(0px)", 
-      transition: { 
-        type: "spring", 
-        damping: 14, 
-        stiffness: 100 
-      } 
-    },
-  } as any;
-
-  const card3DVariants = {
-    hidden: { 
-      z: -500,
-      rotateX: 45,
-      opacity: 0, 
-      filter: "blur(15px)" 
-    },
-    visible: { 
-      z: 0, 
-      rotateX: 0, 
-      opacity: 1, 
-      filter: "blur(0px)", 
-      transition: { 
-        type: "spring", 
-        damping: 15, 
-        stiffness: 80, 
-        duration: 1 
-      } 
-    },
-  } as any;
+  };
 
   if (!mounted) return null;
 
   return (
-    <div className="relative min-h-screen w-full flex flex-col bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-500 perspective-[1500px]">
+    <div className="relative min-h-screen w-full flex flex-col bg-[#f0f9ff] dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
       
       {/* ===================== HERO SECTION ===================== */}
-      <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden pt-32 pb-24">
-        <video ref={videoRef} autoPlay muted playsInline className="absolute inset-0 w-full h-full object-cover">
-          <source src="/back.mp4" type="video/mp4" />
-        </video>
+      <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 w-full h-full z-0">
+          <img 
+            src="/backk.png" 
+            alt="Background" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-white/40 backdrop-blur-[1px]"></div>
+        </div>
         
-        {/* 🌟 Overlay */}
-        <div className="absolute inset-0 bg-white/60 dark:bg-slate-950/70 backdrop-blur-[2px] transition-colors duration-500"></div>
-
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="relative z-10 w-full max-w-6xl px-6 flex flex-col items-center text-center"
-          style={{ transformStyle: "preserve-3d" }}
         >
-          {/* Header Title */}
-          <motion.h1 
-            variants={textVariants} 
-            className="text-5xl md:text-[80px] font-black text-slate-900 dark:text-white mb-6 leading-tight drop-shadow-xl transition-colors duration-500"
-            style={{ fontStyle: "normal" }}
-          >
-             <ShinyText text="منصة المكتشف الصغير " className="inline text-sky-500" />
-          </motion.h1>
+          {/* العنوان الرئيسي */}
+          <motion.div variants={{hidden: {scale: 0.8, opacity: 0}, visible: {scale: 1, opacity: 1, transition: {type: "spring", bounce: 0.5}}}}>
+            <h1 
+              className="text-6xl md:text-[110px] font-black text-white mb-6 tracking-tight leading-[1.1]"
+              style={cartoonTextStyle}
+            >
+              منصة <span className="text-yellow-400">المكتشف</span> الصغير
+            </h1>
+          </motion.div>
           
-          {/* Subtitle */}
-          <div className="mb-16 max-w-2xl" style={{ fontFamily: "var(--font-cairo)" }}>
-            <ArabicText 
-              text="المنصة التعليمية الأولى المصممة خصيصاً لتنمية مهارات الأطفال واكتشاف العالم بأمان تام."
-              className="text-lg md:text-2xl text-slate-700 dark:text-slate-200 font-bold drop-shadow-md leading-relaxed transition-colors duration-500"
-            />
+          {/* النص الوصفي */}
+          <div className="mb-12 max-w-3xl">
+            <p 
+              className="text-2xl md:text-4xl text-white font-black leading-relaxed"
+              style={cartoonTextStyle}
+            >
+              المنصة التعليمية الأولى المصممة خصيصاً لتنمية مهارات الأطفال واكتشاف العالم بأمان تام.
+            </p>
           </div>
 
-          {/* ===================== HERO CARDS ===================== */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-4xl z-20">
-            
-            {/* 🟢 كارت عالم الأطفال */}
-            <motion.div variants={card3DVariants} className="w-full">
-              <TiltedCard className="w-full">
-                <Link href="/login" className="block group w-full outline-none">
-                  <div className="relative rounded-[2.5rem] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_50px_-12px_rgba(16,185,129,0.25)] dark:shadow-black/50 h-[450px] flex flex-col border border-slate-300 hover:border-emerald-400 dark:border-slate-800 overflow-hidden bg-white dark:bg-slate-900 transition-all duration-500">
-                    <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                      style={{ backgroundImage: "url('https://res.cloudinary.com/dmuuyiwtr/image/upload/q_auto/f_auto/v1775773530/Gemini_Generated_Image_bmv7yrbmv7yrbmv7_fuihqi.png')" }}></div>
-                    <div className="absolute top-6 right-6 z-10 bg-white/20 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-white/30 group-hover:bg-emerald-500/30 transition-colors">
-                      <Gamepad2 className="w-8 h-8 text-white drop-shadow-md" />
-                    </div>
-                    {/* 🌟 خلفية النص أخضر فاتح */}
-                    <div className="absolute bottom-0 inset-x-0 bg-emerald-50/95 dark:bg-slate-950/90 backdrop-blur-xl p-8 flex flex-col text-right border-t border-emerald-100 dark:border-slate-800 transition-colors duration-500">
-                      <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">عالم الأطفال</h2>
-                      <p className="text-slate-600 dark:text-slate-300 font-medium mb-6 text-sm leading-relaxed transition-colors">ألعاب، فيديوهات، وقصص سحرية حول قارات العالم!</p>
-                      <button className="w-full bg-emerald-500 text-white text-lg font-black py-4 rounded-xl flex items-center justify-center gap-3 group-hover:bg-emerald-400 transition-all shadow-[0_8px_16px_rgba(16,185,129,0.3)] group-hover:shadow-[0_8px_25px_rgba(16,185,129,0.5)]">
-                        دخول الأبطال <ArrowLeft className="w-5 h-5 group-hover:-translate-x-2 transition-transform" />
-                      </button>
-                    </div>
-                  </div>
-                </Link>
-              </TiltedCard>
+          {/* ===================== BUTTONS SECTION ===================== */}
+          <div className="flex flex-col sm:flex-row gap-8 w-full justify-center items-center">
+            {/* زر تسجيل جديد */}
+            <motion.div
+              whileHover={{ scale: 1.05, rotate: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link href="/login" className="flex items-center gap-3 bg-yellow-400 border-[5px] border-black px-10 py-5 rounded-full shadow-[8px_8px_0_0_#000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+                <UserPlus className="w-8 h-8 text-black" />
+                <span className="text-3xl font-black text-black">انضم الآن مجاناً</span>
+                <ArrowLeft className="w-6 h-6 text-black" />
+              </Link>
             </motion.div>
 
-            {/* 🔵 كارت بوابة الآباء */}
-            <motion.div variants={card3DVariants} className="w-full">
-              <TiltedCard className="w-full">
-                <Link href="/login" className="block group w-full outline-none">
-                  <div className="relative rounded-[2.5rem] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_50px_-12px_rgba(14,165,233,0.25)] dark:shadow-black/50 h-[450px] flex flex-col border border-slate-300 hover:border-sky-400 dark:border-slate-800 overflow-hidden bg-white dark:bg-slate-900 transition-all duration-500">
-                    <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                      style={{ backgroundImage: "url('https://res.cloudinary.com/dmuuyiwtr/image/upload/q_auto/f_auto/v1775773549/Gemini_Generated_Image_dt0gf7dt0gf7dt0g_r1nfnx.png')" }}></div>
-                    <div className="absolute top-6 right-6 z-10 bg-white/20 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-white/30 group-hover:bg-sky-500/30 transition-colors">
-                      <ShieldCheck className="w-8 h-8 text-white drop-shadow-md" />
-                    </div>
-                    {/* 🌟 خلفية النص أزرق فاتح */}
-                    <div className="absolute bottom-0 inset-x-0 bg-sky-50/95 dark:bg-slate-950/90 backdrop-blur-xl p-8 flex flex-col text-right border-t border-sky-100 dark:border-slate-800 transition-colors duration-500">
-                      <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">بوابة الآباء</h2>
-                      <p className="text-slate-600 dark:text-slate-300 font-medium mb-6 text-sm leading-relaxed transition-colors">تابع تقدم طفلك، تحكم في وقت اللعب، واكتشف التقارير بسهولة.</p>
-                      <button className="w-full bg-sky-500 text-white text-lg font-black py-4 rounded-xl flex items-center justify-center gap-3 group-hover:bg-sky-400 transition-all shadow-[0_8px_16px_rgba(14,165,233,0.3)] group-hover:shadow-[0_8px_25px_rgba(14,165,233,0.5)]">
-                        دخول الآباء <ArrowLeft className="w-5 h-5 group-hover:-translate-x-2 transition-transform" />
-                      </button>
-                    </div>
-                  </div>
-                </Link>
-              </TiltedCard>
+            {/* زر معاينة المنصة */}
+            <motion.div
+              whileHover={{ scale: 1.05, rotate: 2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link href="/preview" className="flex items-center gap-3 bg-white border-[5px] border-black px-10 py-5 rounded-full shadow-[8px_8px_0_0_#000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+                <Eye className="w-8 h-8 text-sky-600" />
+                <span className="text-3xl font-black text-slate-800">جولة سريعة</span>
+              </Link>
             </motion.div>
+          </div>
+        </motion.div>
 
+        {/* سهم تلميح للنزول لتحت */}
+        <motion.div 
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 hidden md:block"
+        >
+          <div className="w-8 h-12 border-4 border-black rounded-full flex justify-center pt-2">
+            <div className="w-2 h-2 bg-black rounded-full animate-bounce"></div>
           </div>
         </motion.div>
       </section>
 
-      {/* ===================== COMMUNITY SECTION ===================== */}
-      <section className="relative z-10 w-full bg-slate-100 dark:bg-slate-950 py-24 border-t border-slate-200 dark:border-slate-800 overflow-hidden transition-colors duration-500">
-        <div className="max-w-[1400px] mx-auto px-6 relative">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants}>
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4 transition-colors">مجتمع <span className="text-sky-500">المكتشف الصغير</span></h2>
+      {/* ===================== STATISTICS SECTION ===================== */}
+      <section className="relative z-10 w-full bg-white py-24 border-t-8 border-dashed border-yellow-300 before:absolute before:inset-0 before:opacity-10 before:pointer-events-none before:[background-image:radial-gradient(#000_1.5px,transparent_1.5px)] before:[background-size:20px_20px]">
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <div className="inline-block bg-yellow-400 text-black font-black px-8 py-3 rounded-full text-2xl mb-4 border-4 border-black rotate-2 shadow-[5px_5px_0_0_#000]">
+               إحصائيات المكتشفين 
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                { icon: <Users />, color: "text-sky-500", label: "أب وأم يثقون بنا", count: 5000 },
-                { icon: <HeartPulse />, color: "text-emerald-500", label: "طفل سعيد يتعلم", count: 12000 },
-                { icon: <BookOpen />, color: "text-purple-500", label: "درس تفاعلي وقصة", count: 150 },
-                { icon: <Globe2 />, color: "text-yellow-500", label: "قارات للاستكشاف", count: 7 }
-              ].map((item, i) => (
-                <motion.div key={i} variants={textVariants} className="flex flex-col items-center p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-300/60 dark:shadow-none rounded-3xl transition-colors duration-500">
-                   <div className={`p-4 rounded-2xl mb-4 ${item.color} bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700`}>{item.icon}</div>
-                   <div className="text-4xl font-black mb-2 flex items-center gap-1 text-slate-900 dark:text-white transition-colors">
-                     <span>+</span>
-                     <CountUp to={item.count} duration={2} />
-                   </div>
-                   <p className="text-slate-500 dark:text-slate-400 font-medium transition-colors">{item.label}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { label: "أب وأم", count: 5000, color: "bg-sky-400", icon: <Users className="w-8 h-8" /> },
+              { label: "طفل سعيد", count: 12000, color: "bg-rose-400", icon: <HeartPulse className="w-8 h-8" /> },
+              { label: "قصة ممتعة", count: 150, color: "bg-emerald-400", icon: <BookOpen className="w-8 h-8" /> },
+              { label: "قارة", count: 7, color: "bg-orange-400", icon: <Globe2 className="w-8 h-8" /> }
+            ].map((stat, i) => (
+              <div key={i} className={`${stat.color} border-4 border-black p-8 rounded-[2rem] shadow-[8px_8px_0_0_#000] text-center transform hover:-translate-y-2 transition-transform`}>
+                <div className="bg-white w-16 h-16 rounded-2xl border-4 border-black flex items-center justify-center mx-auto mb-4 -rotate-6 shadow-[4px_4px_0_0_#000]">
+                  {stat.icon}
+                </div>
+                <div className="text-4xl font-black text-black mb-1 flex justify-center items-center gap-1">
+                  +<CountUp to={stat.count} duration={3} />
+                </div>
+                <p className="text-black font-black text-xl">{stat.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>
