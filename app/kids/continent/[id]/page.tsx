@@ -23,7 +23,7 @@ const gameImages: Record<string, string> = {
   antarctica: "https://res.cloudinary.com/dmuuyiwtr/image/upload/v1775773530/Gemini_Generated_Image_bmv7yrbmv7yrbmv7_fuihqi.png",
 };
 
-// --- مكون كارد الألعاب مع iframe وصور ---
+// --- مكون كارد الألعاب ---
 const GamesTab = ({ eduGame }: { eduGame: any[] }) => {
   const [selectedGame, setSelectedGame] = useState<any>(null);
 
@@ -39,15 +39,6 @@ const GamesTab = ({ eduGame }: { eduGame: any[] }) => {
     );
   }
 
-  const openGame = (game: any) => {
-    setSelectedGame(game);
-  };
-
-  const closeGame = () => {
-    setSelectedGame(null);
-  };
-
-  // الحصول على صورة مناسبة للعبة
   const getGameImage = (riddle: string) => {
     if (riddle.includes("البرازيل") || riddle.includes("Brazil")) return gameImages.brazil;
     if (riddle.includes("اليابان") || riddle.includes("Japan")) return gameImages.japan;
@@ -61,7 +52,6 @@ const GamesTab = ({ eduGame }: { eduGame: any[] }) => {
 
   return (
     <>
-      {/* تحويل الشبكة إلى 3 أعمدة في الشاشات الكبيرة لتكون مدمجة (Compact) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-2">
         {eduGame.map((game, index) => (
           <motion.div
@@ -71,26 +61,22 @@ const GamesTab = ({ eduGame }: { eduGame: any[] }) => {
             transition={{ delay: Math.min(index * 0.1, 0.4) }}
             whileHover={{ y: -5 }}
             className="bg-white border-[4px] border-black rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-[8px_8px_0_0_#000] flex flex-col cursor-pointer transition-all duration-300 group"
-            onClick={() => openGame(game)}
+            onClick={() => setSelectedGame(game)}
           >
-            {/* صورة اللعبة مدمجة */}
             <div className="h-40 md:h-48 bg-gradient-to-br from-sky-300 to-sky-400 border-b-[4px] border-black relative flex items-center justify-center overflow-hidden">
               <img 
                 src={getGameImage(game.riddle)} 
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
                 alt={game.riddle}
               />
-              {/* شارة مميزة */}
               <div className="absolute top-2 right-2 bg-yellow-400 border-[3px] border-black p-1.5 md:p-2 rounded-full shadow-[3px_3px_0_0_#000]">
                 <Star size={16} className="md:w-[20px] md:h-[20px] fill-black text-black" />
               </div>
-              {/* شارة العدد */}
               <div className="absolute bottom-2 left-2 bg-emerald-400 border-[3px] border-black px-2 py-1 rounded-full shadow-[3px_3px_0_0_#000]">
                 <span className="text-black font-black text-xs md:text-sm">لعبة {index + 1}</span>
               </div>
             </div>
 
-            {/* محتوى الكارد */}
             <div className="p-4 md:p-5 flex flex-col items-center text-center gap-2">
               <h3 className="text-lg md:text-xl font-black text-black line-clamp-1">
                 {game.riddle || "لعبة ممتعة"}
@@ -113,7 +99,6 @@ const GamesTab = ({ eduGame }: { eduGame: any[] }) => {
         ))}
       </div>
 
-      {/* نافذة iframe منبثقة - متجاوبة و Compact */}
       <AnimatePresence>
         {selectedGame && (
           <motion.div
@@ -121,7 +106,7 @@ const GamesTab = ({ eduGame }: { eduGame: any[] }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/70 backdrop-blur-md"
-            onClick={closeGame}
+            onClick={() => setSelectedGame(null)}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -131,20 +116,18 @@ const GamesTab = ({ eduGame }: { eduGame: any[] }) => {
               className="relative w-full max-w-4xl h-[85vh] md:h-[80vh] bg-white border-[4px] md:border-[6px] border-black rounded-[2rem] overflow-hidden shadow-[15px_15px_0_0_#000]"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* رأس النافذة */}
               <div className="bg-yellow-400 border-b-[4px] border-black p-3 md:p-4 flex justify-between items-center">
                 <h3 className="text-base md:text-xl font-black text-black truncate pr-2">
                   {selectedGame.riddle}
                 </h3>
                 <button
-                  onClick={closeGame}
+                  onClick={() => setSelectedGame(null)}
                   className="p-1.5 md:p-2 bg-white border-[3px] border-black rounded-xl shadow-[3px_3px_0_0_#000] active:shadow-none active:translate-y-1 transition-all"
                 >
                   <X size={20} className="text-black" />
                 </button>
               </div>
               
-              {/* الـ iframe */}
               <iframe
                 src={selectedGame.src}
                 className="w-full h-[calc(85vh-60px)] md:h-[calc(80vh-68px)] bg-white"
@@ -193,14 +176,8 @@ export default function CountryHub() {
   if (!data) return <div className="min-h-screen bg-white flex items-center justify-center text-black font-black text-2xl md:text-3xl">جاري التحميل...</div>;
 
   const nameMapper: Record<string, string> = {
-    "us": "usa",
-    "united-states": "usa", 
-    "america": "usa",       
-    "north-america": "usa", 
-    "br": "brazil",
-    "brazil-br": "brazil",
-    "jp": "japan",
-    "japan-jp": "japan",
+    "us": "usa", "united-states": "usa", "america": "usa", "north-america": "usa", 
+    "br": "brazil", "brazil-br": "brazil", "jp": "japan", "japan-jp": "japan",
   };
 
   if (nameMapper[gameId]) {
@@ -212,11 +189,22 @@ export default function CountryHub() {
   return (
     <div className="relative min-h-screen bg-[#f0f9ff] text-black overflow-x-hidden transition-colors duration-500 selection:bg-yellow-200" dir="rtl">
       
-      {/* الخلفية المدمجة مع النقاط والصورة */}
+      {/* --- طبقة الخلفية مع النقاط المنقطة --- */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className={`absolute inset-0 bg-gradient-to-br ${data.theme} opacity-20`} />
-        <img src="/backk.png" className="w-full h-full object-cover opacity-30 mix-blend-multiply" alt="" />
-        <div className="absolute inset-0 opacity-[0.15]" style={{ backgroundImage: `radial-gradient(circle at 2px 2px, black 2px, transparent 2px)`, backgroundSize: '32px 32px' }} />
+        {/* لون الخلفية المتدرج الخاص بالدولة */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${data.theme} opacity-15`} />
+        
+        {/* صورة الخلفية */}
+        {/* <img src="/backk.png" className="w-full h-full object-cover opacity-20 mix-blend-multiply" alt="" /> */}
+        
+        {/* طبقة النقاط (Dotted Pattern) */}
+        <div 
+          className="absolute inset-0 opacity-[0.25]" 
+          style={{ 
+            backgroundImage: `radial-gradient(#000 1.5px, transparent 0)`, 
+            backgroundSize: '24px 24px' 
+          }} 
+        />
       </div>
 
       {mounted && (
@@ -230,7 +218,6 @@ export default function CountryHub() {
 
       <main className="relative z-10 max-w-5xl mx-auto px-4 md:px-6 py-8 md:py-10">
         
-        {/* هيدر مدمج (Compact) */}
         <header className="bg-white border-[4px] md:border-[6px] border-black rounded-[2.5rem] p-6 md:p-8 shadow-[10px_10px_0_0_#000] mb-8 flex flex-col md:flex-row items-center justify-between gap-6 relative">
           <div className="flex flex-col items-start text-right w-full md:w-2/3">
             <Link href="/kids">
@@ -267,7 +254,6 @@ export default function CountryHub() {
           </div>
         )}
 
-        {/* أزرار التنقل مدمجة */}
         <nav className="flex justify-center mb-8 px-2">
           <div className="bg-white border-[4px] border-black p-2 rounded-[2rem] shadow-[8px_8px_0_0_#000] flex flex-wrap md:flex-nowrap gap-2 w-full max-w-2xl">
             {[
@@ -290,7 +276,6 @@ export default function CountryHub() {
           </div>
         </nav>
 
-        {/* مساحة العرض مدمجة */}
         <section className="relative z-20 bg-white border-[4px] md:border-[6px] border-black rounded-[2.5rem] p-6 md:p-8 shadow-[12px_12px_0_0_#000] min-h-[450px]">
           <AnimatePresence mode="wait">
             <motion.div
@@ -309,6 +294,7 @@ export default function CountryHub() {
 
       </main>
 
+      {/* لمسات إضافية من الألوان في الزوايا */}
       <div className="fixed top-1/4 -right-20 w-80 h-80 bg-sky-300 opacity-20 blur-[120px] rounded-full pointer-events-none" />
       <div className="fixed bottom-1/4 -left-20 w-96 h-96 bg-emerald-300 opacity-20 blur-[120px] rounded-full pointer-events-none" />
       
