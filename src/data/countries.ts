@@ -97,7 +97,7 @@ export const countryData: Record<string, any> = {
     videos: [
       { 
         title: "عالم اليابان المذهل 🇯🇵", 
-        url: "https://player.cloudinary.com/embed/?cloud_name=da52viu5e&public_id=%D9%81%D9%8A%D8%AF%D9%8A%D9%88_%D8%A7%D9%84%D9%8A%D8%A7%D8%A8%D8%A7%D9%86_xkqzok"
+        url: "https://res.cloudinary.com/da52viu5e/video/upload/v1777374060/%D9%81%D9%8A%D8%AF%D9%8A%D9%88_%D8%A7%D9%84%D9%8A%D8%A7%D8%A8%D8%A7%D9%86_mc7bjv.mp4"
       }
     ]
   },
