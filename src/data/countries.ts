@@ -63,7 +63,7 @@ export const countryData: Record<string, any> = {
       // },
       {
         title: "دولة البرازيل 🇧🇷", 
-        url: "https://res.cloudinary.com/dj1tvn1or/video/upload/v1777313422/202604271937_h9rqel.mp4"
+        url: "https://res.cloudinary.com/dj1tvn1or/video/upload/v1777313422/202604271937_h9rqel.mp4?v=2"
       }
     ]
   },
@@ -144,7 +144,7 @@ export const countryData: Record<string, any> = {
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.07_AM_2_szucw8", 
         title: "الجبال الجليدية", 
         desc: "جبال ضخمة جداً من التلج عايمة في الماية.",
-        audio: "https://collection.cloudinary.com/dupadpkbn/c8dfd6ea0fe4da5653ecbb4fe4f461e1"
+        audio: "https://res.cloudinary.com/dj1tvn1or/video/upload/v1777835929/WhatsApp_Audio_2026-05-03_at_10.14.46_PM_v6mnbm.ogg"
       },
       { 
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.07_AM_1_dp3i2g", 
@@ -156,13 +156,13 @@ export const countryData: Record<string, any> = {
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.07_AM_olguab", 
         title: "محطات الأبحاث", 
         desc: "مفيش مدن هناك، بس فيه علماء بيدرسوا التلج والطقس." ,
-        audio: "https://drive.google.com/file/d/1l0qgSJtfbHj_E-w1eUdLT_CGqHaPrXnh/view?usp=drivesdk"
+        audio: "https://res.cloudinary.com/dj1tvn1or/video/upload/v1777835879/WhatsApp_Audio_2026-05-03_at_10.14.46_PM1_qx0xbs.ogg"
       }
     ],
     videos: [
       { 
         title: "عالم الجليد في أنتاركتيكا ❄️", 
-        url: "https://drive.google.com/file/d/1l0qgSJtfbHj_E-w1eUdLT_CGqHaPrXnh/view?usp=drivesdk"
+        url: "https://youtu.be/ZzHtQlvnSxU"
       }
     ]
   },
