@@ -71,7 +71,7 @@ export const gamesData: Record<string, any[]> = {
     { type: "iframe", riddle: "تحدي اليابان 4 🇯🇵", src: "https://wordwall.net/embed/ae86ed1087f142c9959c5938ed1e9f2d?themeId=65&templateId=38&fontStackId=0" },
     { type: "iframe", riddle: "لغز اليابان 5 🇯🇵", src: "https://wordwall.net/embed/ae86ed1087f142c9959c5938ed1e9f2d?themeId=65&templateId=76&fontStackId=0" },
     { type: "iframe", riddle: "لغز اليابان 6 🇯🇵", src: "https://wordwall.net/embed/ae86ed1087f142c9959c5938ed1e9f2d?themeId=65&templateId=25&fontStackId=0" },
-    { type: "iframe", riddle: "بطل اليابان 7 🇯🇵", src: "https://wordwall.net/embed/ae86ed1087f142c9959c5938ed1e9f2d?themeId=65&templateId=70&fontStackId=0" },
+    { type: "iframe", riddle: "بطل اليابان 7  🇯🇵", src: "https://wordwall.net/embed/ae86ed1087f142c9959c5938ed1e9f2d?themeId=65&templateId=70&fontStackId=0" },
     { type: "iframe", riddle: "عبقري اليابان 8 🇯🇵", src: "https://wordwall.net/embed/ae86ed1087f142c9959c5938ed1e9f2d?themeId=65&templateId=30&fontStackId=0" },
     { type: "iframe", riddle: "عبقري اليابان 9 🇯🇵", src: "https://ashrakatnasr31-stack.github.io/ashrokaaaa31/" }
   ],
