@@ -21,7 +21,6 @@ export default function Navbar() {
     }
   }, [mobileMenuOpen]);
 
-  // الستايل السحري لوضوح الكلام الأبيض فوق أي لون
   const whiteTextStyle = {
     textShadow: `
       2px 2px 0 #000,
@@ -35,6 +34,11 @@ export default function Navbar() {
   const navLinks = [
     { name: "الرئيسية", href: "/" },
     { name: "عن المنصة", href: "/about" },
+    { 
+      name: "دليل المعلم", 
+      href: "https://drive.google.com/file/d/19Vhvyt0CoCQ-MTzlVILDL6JkcmRFI-QU/view?usp=sharing",
+      isExternal: true 
+    },
     { name: "فريق العمل", href: "/contact" },
   ];
 
@@ -47,7 +51,6 @@ export default function Navbar() {
           transition={{ type: "spring", stiffness: 120, damping: 20 }}
           className="bg-white border-y-[5px] border-black px-6 md:px-10 py-4 flex items-center justify-between relative overflow-hidden"
         >
-          {/* نقش خلفية خفيف جداً */}
           <div className="absolute inset-0 opacity-[0.05] pointer-events-none"
             style={{
               backgroundImage: `radial-gradient(circle at 2px 2px, #fff 2px, transparent 2px)`,
@@ -55,7 +58,6 @@ export default function Navbar() {
             }}>
           </div>
 
-          {/* لوجو الموقع */}
           <Link href="/" className="flex items-center gap-3 group relative z-10">
             <div className="bg-yellow-400 border-4 border-black p-2 rounded-2xl group-hover:rotate-12 transition-transform shadow-[4px_4px_0_0_#000]">
                <div className="w-6 h-6 bg-black rounded-lg flex items-center justify-center">
@@ -67,7 +69,6 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* روابط الديسكتوب */}
           <div className="hidden lg:flex items-center gap-4 relative z-10">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -75,6 +76,8 @@ export default function Navbar() {
                 <Link 
                   key={link.href} 
                   href={link.href}
+                  target={link.isExternal ? "_blank" : "_self"}
+                  rel={link.isExternal ? "noopener noreferrer" : ""}
                   className={`px-6 py-2 text-3xl rounded-2xl font-black transition-all border-4 ${
                     isActive 
                       ? "bg-yellow-400 border-black text-white shadow-[4px_4px_0_0_#000] " 
@@ -96,7 +99,6 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* زر الموبايل */}
           <button 
             className="lg:hidden bg-orange-400 border-4 border-black p-2 rounded-xl shadow-[4px_4px_0_0_#000] active:translate-y-1 active:shadow-none transition-all relative z-10"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -110,7 +112,6 @@ export default function Navbar() {
         </motion.div>
       </div>
 
-      {/* منيو الموبايل */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
@@ -135,12 +136,13 @@ export default function Navbar() {
                     <Link 
                       key={link.href} 
                       href={link.href}
+                      target={link.isExternal ? "_blank" : "_self"}
                       className={`text-4xl font-black p-5 rounded-[2rem] border-[5px] transition-all ${
                         isActive 
                         ? "bg-orange-400 border-black text-white shadow-[8px_8px_0_0_#000]" 
                         : "border-transparent text-white"
                       }`}
-                      style={whiteTextStyle} // تطبيق الستايل هنا ليظهر بوضوح فوق السيان والبرتقالي
+                      style={whiteTextStyle}
                     >
                       {link.name}
                     </Link>
