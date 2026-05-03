@@ -154,7 +154,7 @@ export default function ChatBot() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="اسألني أي شيء يا بطل..."
-                className="flex-1 bg-slate-100 border-[4px] border-black px-5 py-3 rounded-2xl focus:bg-white focus:outline-none transition-all text-lg placeholder:text-slate-400"
+                className="flex-1 text-black bg-slate-100 border-[4px] border-black px-5 py-3 rounded-2xl focus:bg-white focus:outline-none transition-all text-lg placeholder:text-slate-400"
               />
               <button 
                 type="submit" 

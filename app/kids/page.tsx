@@ -60,7 +60,7 @@ export default function KidsContinentsHub() {
       img: "https://res.cloudinary.com/dhvuw8yog/image/upload/v1776018585/SouthAmerica_l5pwcq.png", 
       top: "45%", left: "28%", size: "24rem",
       hoverAudio: "/audio/South America.mp3", 
-      clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320130/elbarazel_kcfuet.mp3",
+      clickAudio: "https://res.cloudinary.com/dj1tvn1or/video/upload/v1777386506/WhatsApp_Audio_2026-04-28_at_5.26.50_PM_bgfdin.ogg",
       detailsTitle: "قارة أمريكا الجنوبية", 
       detailsDesc: "أرض الطبيعة الساحرة! موطن أكبر غابة في العالم (غابات الأمازون) اللي بنسميها رئة كوكب الأرض.",
       targetCountry: "البرازيل"
@@ -80,7 +80,7 @@ export default function KidsContinentsHub() {
       img: "https://res.cloudinary.com/dhvuw8yog/image/upload/v1776018578/Africa_iewsja.png", 
       top: "42%", left: "58%", size: "28rem",
       hoverAudio: "/audio/Africa.mp3", 
-      clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320439/lahajati_______1776320414712_nsicv4.mp3",
+      clickAudio: "https://res.cloudinary.com/djzqacydq/video/upload/v1777824492/WhatsApp_Audio_2026-05-03_at_7.03.46_PM_wzkyfj.ogg",
       detailsTitle: "قارة أفريقيا", 
       detailsDesc: "قارة الدفء والشمس! موطن الحيوانات البرية المدهشة زي الأسود، الزرافات، والأفيال، وفيها أطول أنهار العالم.",
       targetCountry: "مصر"
@@ -90,7 +90,7 @@ export default function KidsContinentsHub() {
       img: "https://res.cloudinary.com/dhvuw8yog/image/upload/v1776018579/Asia_j9qlby.png", 
       top: "15%", left: "68%", size: "35rem",
       hoverAudio: "/audio/Asia.mp3", 
-      clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320517/lahajati_______1776320496740_tdn6d6.mp3",
+      clickAudio: "https://res.cloudinary.com/dj1tvn1or/video/upload/v1777386893/WhatsApp_Audio_2026-04-28_at_4.51.49_PM_tspajy.ogg",
       detailsTitle: "قارة آسيا", 
       detailsDesc: "أكبر قارة في العالم! فيها تنوع عجيب جداً، من أعلى قمة جبل في العالم لحد أذكى الروبوتات.",
       targetCountry: "اليابان"
@@ -100,7 +100,7 @@ export default function KidsContinentsHub() {
       img: "https://res.cloudinary.com/dhvuw8yog/image/upload/v1776018581/Australia_ymjfsx.png", 
       top: "65%", left: "75%", size: "16rem",
       hoverAudio: "/audio/Australia.mp3", 
-      clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320578/lahajati_______1776320557384_m89lgf.mp3",
+      clickAudio: "https://res.cloudinary.com/djzqacydq/video/upload/v1777813926/WhatsApp_Audio_2026-05-03_at_4.05.06_PM_mtwqyn.ogg",
       detailsTitle: "قارة أستراليا", 
       detailsDesc: "قارة عبارة عن جزيرة عملاقة، بتتميز بكائنات مدهشة مش موجودة في أي مكان تاني في العالم غير هناك.",
       targetCountry: "أستراليا"
@@ -110,7 +110,7 @@ export default function KidsContinentsHub() {
       img: "https://res.cloudinary.com/dhvuw8yog/image/upload/v1776018579/Antarctica_lnoprt.png", 
       top: "75%", left: "50%", size: "38rem",
       hoverAudio: "/audio/Antarctica.mp3", 
-      clickAudio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776320646/lahajati_______1776320623692_vecbm0.mp3",
+      clickAudio: "https://res.cloudinary.com/dj1tvn1or/video/upload/v1777481553/WhatsApp_Audio_2026-04-29_at_7.36.34_PM_firqmp.ogg",
       detailsTitle: "القارة القطبية", 
       detailsDesc: "أبرد مكان على كوكب الأرض! كله تلج وجليد، ومفيش ناس بتعيش هناك بشكل دائم، بس مليانة حيوانات لطيفة.",
       targetCountry: "البطريق"

@@ -41,32 +41,34 @@ export const countryData: Record<string, any> = {
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.03_AM_bbtlf6", 
         title: "غابات الأمازون", 
         desc: "أكبر غابة في العالم، مليانة حيوانات وطيور شكلها عجيب!",
-        audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776328829/lahajati_______1776328807281_oniumd.mp3"
+        audio: "https://res.cloudinary.com/dj1tvn1or/video/upload/v1777386590/WhatsApp_Audio_2026-04-28_at_5.26.51_PM_eyp0kz.ogg"
       },
       { 
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.02_AM_1_m4nzrj", 
         title: "كرة القدم", 
         desc: "البرازيل أكتر دولة كسبت كاس العالم، وكلهم هناك حريفة كورة!",
-        audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776328890/lahajati_______1776328870042_w21luj.mp3"
+        audio: "https://res.cloudinary.com/dj1tvn1or/video/upload/v1777386713/WhatsApp_Audio_2026-04-28_at_5.26.51_PM_pufsbv.ogg"
       },
       { 
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.03_AM_1_vb8dgt", 
         title: "نهر الأمازون", 
         desc: "نهر ضخم جداً بيعيش فيه كائنات مذهلة ومفترسة.",
-        audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776328951/lahajati_______1776328932444_cxousc.mp3"
+        audio: "https://res.cloudinary.com/dj1tvn1or/video/upload/v1777386772/WhatsApp_Audio_2026-04-28_at_5.26.51_PM_gz9c5y.ogg"
       }
     ],
     videos: [
-      { 
-        title: "جمال البرازيل والأمازون 🇧🇷", 
-        url: "https://player.cloudinary.com/embed/?cloud_name=dwxizyr3l&public_id=%D9%81%D9%8A%D8%AF_%D8%A7%D9%84%D8%A8%D8%B1%D8%A7%D8%B2%D9%8A%D9%84_oa4bvs"
-      },
+      // { 
+      //   title: "جمال البرازيل والأمازون 🇧🇷", 
+      //   url: "https://player.cloudinary.com/embed/?cloud_name=dwxizyr3l&public_id=%D9%81%D9%8A%D8%AF_%D8%A7%D9%84%D8%A8%D8%B1%D8%A7%D8%B2%D9%8A%D9%84_oa4bvs"
+      // },
       {
         title: "دولة البرازيل 🇧🇷", 
-        url: "https://player.cloudinary.com/embed/?cloud_name=da52viu5e&public_id=%D8%AF%D9%88%D9%84%D8%A9_%D8%A7%D9%84%D8%A8%D8%B1%D8%A7%D8%B2%D9%8A%D9%84_nx4xii"
+        url: "https://res.cloudinary.com/dj1tvn1or/video/upload/v1777313422/202604271937_h9rqel.mp4"
       }
     ]
   },
+
+
   "asia": {
     countryName: "اليابان 🇯🇵",
     continentName: "آسيا",
@@ -77,19 +79,19 @@ export const countryData: Record<string, any> = {
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.05_AM_1_hwbnat", 
         title: "جبل فوجي", 
         desc: "جبل بركاني شكله تحفة والتلج مغطي قمته من فوق.",
-        audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776329209/lahajati_______1776329186959_xsqjtt.mp3"
+        audio: "https://res.cloudinary.com/dj1tvn1or/video/upload/v1777386939/WhatsApp_Audio_2026-04-28_at_4.51.49_PM_uyzwo7.ogg"
       },
       { 
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.05_AM_2_tayxbz", 
         title: "افلام انمي ", 
         desc: "اليابان بتعمل أحلى مسلسلات كرتون وتكنولوجيا سابقة عصرها.",
-        audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776329262/lahajati_______1776329241746_adkm5w.mp3"
+        audio: "https://res.cloudinary.com/dj1tvn1or/video/upload/v1777386991/WhatsApp_Audio_2026-04-28_at_4.51.49_PM_oetztc.ogg"
       },
       { 
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.05_AM_q1wqdw", 
         title: "السوشي", 
         desc: "أكلة صحية ومشهورة جداً بتتعمل من الرز والسمك الطازة.",
-        audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776329322/lahajati_______1776329302861_zyefq6.mp3"
+        audio: "https://res.cloudinary.com/dj1tvn1or/video/upload/v1777386839/WhatsApp_Audio_2026-04-28_at_4.51.48_PM_wihesq.ogg"
       }
     ],
     videos: [
@@ -109,25 +111,25 @@ export const countryData: Record<string, any> = {
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.05_AM_3_jhpyuy", 
         title: "دار الأوبرا بسيدني", 
         desc: "مبنى شكله مميز جداً وعامل زي شراع المركب بالظبط.",
-        audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776329395/lahajati_______1776329375166_aik1ap.mp3"
+        audio: "https://res.cloudinary.com/djzqacydq/video/upload/v1777813925/WhatsApp_Audio_2026-05-03_at_4.05.06_PM_1_ilee1t.ogg"
       },
       { 
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.06_AM_cfie4l", 
-        title: "الحيوانات البرية ", 
+        title: "الكنغر والكوالا", 
         desc: "حيوانات عجيبة مش بتعيش في أي حتة تانية في العالم غير هناك.",
-        audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776329460/lahajati_______1776329436083_afm4ts.mp3"
+        audio: "https://res.cloudinary.com/djzqacydq/video/upload/v1777813925/WhatsApp_Audio_2026-05-03_at_4.05.06_PM_2_l2fzum.ogg"
       },
       { 
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.06_AM_1_r3hbfr", 
         title: "الحاجز المرجاني", 
         desc: "أكبر مكان فيه شعاب مرجانية وأسماك ملونة تحت الماية.",
-        audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776329517/lahajati_______1776329497021_fsltok.mp3"
+        audio: "https://res.cloudinary.com/djzqacydq/video/upload/v1777813926/WhatsApp_Audio_2026-05-03_at_4.05.06_PM_3_lqofcq.ogg"
       }
     ],
     videos: [
       { 
         title: "مغامرة في أستراليا 🇦🇺", 
-        url: "https://player.cloudinary.com/embed/?cloud_name=dwxizyr3l&public_id=0401_m4rako"
+        url: "https://drive.google.com/file/d/1aQM0FyL2WNOO9CJzDrNCQ479a5FM52e1/view?usp=drive_link"
       }
     ]
   },
@@ -141,23 +143,25 @@ export const countryData: Record<string, any> = {
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.07_AM_2_szucw8", 
         title: "الجبال الجليدية", 
         desc: "جبال ضخمة جداً من التلج عايمة في الماية.",
-        audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776329615/lahajati_______1776329578007_yy22ng.mp3"
+        audio: "https://collection.cloudinary.com/dupadpkbn/c8dfd6ea0fe4da5653ecbb4fe4f461e1"
       },
       { 
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.07_AM_1_dp3i2g", 
         title: "البطريق الإمبراطور", 
-        desc: "أكبر أنواع البطاريق بيعيش هناك وبيستحمل البرد القارس."
+        desc: "أكبر أنواع البطاريق بيعيش هناك وبيستحمل البرد القارس.",
+        audio: "https://res.cloudinary.com/dj1tvn1or/video/upload/v1777481563/WhatsApp_Audio_2026-04-29_at_7.36.35_PM_vt45yp.ogg"
       },
       { 
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.07_AM_olguab", 
         title: "محطات الأبحاث", 
-        desc: "مفيش مدن هناك، بس فيه علماء بيدرسوا التلج والطقس." 
+        desc: "مفيش مدن هناك، بس فيه علماء بيدرسوا التلج والطقس." ,
+        audio: "https://collection.cloudinary.com/dupadpkbn/c9a79d48c565130b6ce97ac59d277d61"
       }
     ],
     videos: [
       { 
         title: "عالم الجليد في أنتاركتيكا ❄️", 
-        url: "https://player.cloudinary.com/embed/?cloud_name=da52viu5e&public_id=%D9%81%D9%8A%D8%AF%D9%8A%D9%88_%D8%B9%D9%86_%D9%82%D8%A7%D8%B1%D9%87_%D8%A7%D9%86%D8%AA%D8%B1%D9%83%D8%A7%D8%AA%D9%8A%D9%83%D8%A7_xl6kxm"
+        url: "https://drive.google.com/file/d/1l0qgSJtfbHj_E-w1eUdLT_CGqHaPrXnh/view?usp=drive_link"
       }
     ]
   },
@@ -171,13 +175,13 @@ export const countryData: Record<string, any> = {
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.04_AM_yaaeqg", 
         title: "أهرامات الجيزة", 
         desc: "من عجايب الدنيا السبع، بناها الفراعنة من آلاف السنين.",
-        audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776329753/lahajati_______1776329734161_d9oeaf.mp3"
+        audio: "https://res.cloudinary.com/djzqacydq/video/upload/v1777824484/WhatsApp_Audio_2026-05-03_at_7.03.47_PM_zdf5gf.ogg"
       },
       { 
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.04_AM_1_szgpxf", 
         title: "نهر النيل", 
         desc: "أطول نهر في العالم، وهو شريان الحياة لكل المصريين.",
-        audio: "https://res.cloudinary.com/dhvuw8yog/video/upload/v1776329851/lahajati_______1776329829742_oudanp.mp3"
+        audio: "https://res.cloudinary.com/djzqacydq/video/upload/v1777824485/WhatsApp_Audio_2026-05-03_at_7.03.47_PM_1_i4bsqz.ogg"
       },
       { 
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.03_AM_2_si0nlj", 
