@@ -127,10 +127,11 @@ export const countryData: Record<string, any> = {
       }
     ],
     videos: [
+
       { 
         title: "مغامرة في أستراليا 🇦🇺", 
-        url: "https://drive.google.com/file/d/1aQM0FyL2WNOO9CJzDrNCQ479a5FM52e1/view?usp=drive_link"
-      }
+        url: "https://player.cloudinary.com/embed/?cloud_name=dwxizyr3l&public_id=0503_xrtoll"
+      },
     ]
   },
   "antarctica": {

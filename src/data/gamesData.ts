@@ -60,7 +60,9 @@ export const gamesData: Record<string, any[]> = {
     { type: "iframe", riddle: "بطل البرازيل 4 🇧🇷", src: "https://wordwall.net/embed/7b2325c87b994021b4f4a00fe70cc0af?themeId=65&templateId=25&fontStackId=0" },
     { type: "iframe", riddle: "مكتشف البرازيل 5 🇧🇷", src: "https://wordwall.net/embed/7b2325c87b994021b4f4a00fe70cc0af?themeId=65&templateId=70&fontStackId=0" },
     { type: "iframe", riddle: "عبقري البرازيل 6 🇧🇷", src: "https://wordwall.net/embed/7b2325c87b994021b4f4a00fe70cc0af?themeId=65&templateId=30&fontStackId=0" },
-    { type: "iframe", riddle: "أسطورة البرازيل 7 🇧🇷", src: "https://wordwall.net/embed/7b2325c87b994021b4f4a00fe70cc0af?themeId=65&templateId=8&fontStackId=0" }
+    { type: "iframe", riddle: "أسطورة البرازيل 7 🇧🇷", src: "https://wordwall.net/embed/7b2325c87b994021b4f4a00fe70cc0af?themeId=65&templateId=8&fontStackId=0" },
+    { type: "iframe", riddle: "أسطورة البرازيل 8 html 🇧🇷", src: "https://afnan13adel7-art.github.io/l-/" },
+
   ],
   "asia": [
     { type: "iframe", riddle: "مغامرة اليابان 1 🇯🇵", src: "https://wordwall.net/embed/ae86ed1087f142c9959c5938ed1e9f2d?themeId=65&templateId=3&fontStackId=0" },
