@@ -162,7 +162,7 @@ export const countryData: Record<string, any> = {
     videos: [
       { 
         title: "عالم الجليد في أنتاركتيكا ❄️", 
-        url: "https://youtu.be/ZzHtQlvnSxU"
+        url: "https://www.youtube.com/embed/ZzHtQlvnSxU"
       }
     ]
   },
