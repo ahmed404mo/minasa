@@ -155,13 +155,13 @@ export const countryData: Record<string, any> = {
         img: "https://res.cloudinary.com/dzmtrldix/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-26_at_1.16.07_AM_olguab", 
         title: "محطات الأبحاث", 
         desc: "مفيش مدن هناك، بس فيه علماء بيدرسوا التلج والطقس." ,
-        audio: "https://collection.cloudinary.com/dupadpkbn/c9a79d48c565130b6ce97ac59d277d61"
+        audio: "https://drive.google.com/file/d/1l0qgSJtfbHj_E-w1eUdLT_CGqHaPrXnh/view?usp=drivesdk"
       }
     ],
     videos: [
       { 
         title: "عالم الجليد في أنتاركتيكا ❄️", 
-        url: "https://drive.google.com/file/d/1l0qgSJtfbHj_E-w1eUdLT_CGqHaPrXnh/view?usp=drive_link"
+        url: "https://drive.google.com/file/d/1l0qgSJtfbHj_E-w1eUdLT_CGqHaPrXnh/view?usp=drivesdk"
       }
     ]
   },
